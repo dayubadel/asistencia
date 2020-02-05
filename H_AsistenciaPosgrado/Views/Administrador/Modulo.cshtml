@@ -1,0 +1,220 @@
+﻿@{
+    Layout = "~/Views/Shared/_Inicio.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Módulos</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Inicio","Administrador")">Inicio</a></li>
+                        <li class="breadcrumb-item active">Módulos</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Formulario del módulo</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="display: block;">
+                            <div id="contenedorFormularioNuevoModulo"></div>
+                            <div id="contenedorMensajes"></div>
+                            <div id="contenedorTablaModulos"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>    
+    function eliminarModulo(_numFila, _idModuloEncriptado) {
+        var _clase = $("#btn" + _numFila).attr("class");
+        $.ajax({
+            url: '@Url.Action("Eliminarmodulo", "Modulo")',
+            type: 'post',
+            data: { _numFila: _numFila, _idModuloEncriptado: _idModuloEncriptado },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#btn" + _numFila).html("<i class='fas fa-spinner'></i>");
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#" + _numFila).remove();
+                } else {
+                    $("#btn" + _numFila).html("<i class='" + _clase + "'></i>");
+                    $("#contenedorTablaModulos").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+ 
+    function guardarModulo() {
+        var _descripcionModulo = $("#inputModulo").val();
+        $.ajax({
+            url: '@Url.Action("Guardarmodulo", "Modulo")',
+            type: 'post',
+            data: { _descripcionModulo: _descripcionModulo},
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    cargarTablaModulos();
+                    $("#inputModulo").val("");
+                    $("#contenedorMensajes").html("");
+                } else {
+                    $("#contenedorMensajes").html(data.mensaje);
+                    setTimeout(function () {
+                        $("#contenedorMensajes").html("");
+                    }, 4000);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+
+      function cargarTablaModulos() {
+        $.ajax({
+            url: '@Url.Action("Cargartablamodulos", "Modulo")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorTablaModulos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#contenedorTablaModulos").html(data.tabla);
+                } else {
+                    $("#contenedorTablaModulos").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorTablaModulos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CargarFormulario();
+        cargarTablaModulos();
+    });
+
+    function CargarFormulario() {
+        $.ajax({
+            url: '@Url.Action("Cargarformulario", "Modulo")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorFormularioNuevoModulo").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#contenedorFormularioNuevoModulo").html(data.tabla);
+                } else {
+                    $("#contenedorFormularioNuevoModulo").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorFormularioNuevoModulo").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+</script>

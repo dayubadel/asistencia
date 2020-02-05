@@ -1,0 +1,221 @@
+﻿@{
+    Layout = "~/Views/Shared/_Inicio.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Semestres</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Inicio","Administrador")">Inicio</a></li>
+                        <li class="breadcrumb-item active">Semestres</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Formulario del semestre</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="display: block;">
+                            <div id="contenedorFormularioNuevoSemestre"></div>
+                            <div id="contenedorMensajes"></div>
+                            <div id="contenedorTablaSemestres"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+      function eliminarSemestre(_numFila, _idSemestreEncriptado) {
+        var _clase = $("#btn" + _numFila).attr("class");
+        $.ajax({
+            url: '@Url.Action("Eliminarsemestre", "Semestre")',
+            type: 'post',
+            data: { _numFila: _numFila, _idSemestreEncriptado: _idSemestreEncriptado },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#btn" + _numFila).html("<i class='fas fa-spinner'></i>");
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#" + _numFila).remove();
+                } else {
+                    $("#btn" + _numFila).html("<i class='" + _clase + "'></i>");
+                    $("#contenedorTablaSemestres").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+ 
+    function guardarSemestre() {
+        var _descripcionSemestre = $("#inputSemestre").val();
+        var _identificadorSemestre = $("#inputIdentificador").val();
+        $.ajax({
+            url: '@Url.Action("Guardarsemestre", "Semestre")',
+            type: 'post',
+            data: { _descripcionSemestre: _descripcionSemestre, _identificadorSemestre: _identificadorSemestre},
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    cargarTablaSemestres();
+                    $("#inputSemestre").val("");
+                    $("#inputIdentificador").val("");
+                    $("#contenedorMensajes").html("");
+                } else {
+                    $("#contenedorMensajes").html(data.mensaje);
+                    setTimeout(function () {
+                        $("#contenedorMensajes").html("");
+                    }, 4000);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+    function cargarTablaSemestres() {
+        $.ajax({
+            url: '@Url.Action("Cargartablasemestres", "Semestre")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorTablaSemestres").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#contenedorTablaSemestres").html(data.tabla);
+                } else {
+                    $("#contenedorTablaSemestres").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorTablaSemestres").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CargarFormulario();
+        cargarTablaSemestres();
+    });
+
+    function CargarFormulario() {
+        $.ajax({
+            url: '@Url.Action("Cargarformulario", "Semestre")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contenedorFormularioNuevoSemestre").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#contenedorFormularioNuevoSemestre").html(data.tabla);
+                } else {
+                    $("#contenedorFormularioNuevoSemestre").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorFormularioNuevoSemestre").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+</script>

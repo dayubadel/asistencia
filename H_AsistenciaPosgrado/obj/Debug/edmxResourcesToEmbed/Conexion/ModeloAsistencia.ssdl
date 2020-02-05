@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="i_posgradoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="Sp_CohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_ConfigurarCohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_ConfigurarCohorteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdConfigurarCohorte" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ConfigurarCohorteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdCohorte" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="date" Mode="In" />
+    <Parameter Name="FechaFin" Type="date" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ConfigurarModuloDocenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ConfigurarModuloDocenteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdModulo" Type="int" Mode="In" />
+    <Parameter Name="IdDocente" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="date" Mode="In" />
+    <Parameter Name="fechaFin" Type="date" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ConfigurarSemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_ConfigurarSemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdConfigurarSemestre" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ConfigurarSemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdConfigurarCohorte" Type="int" Mode="In" />
+    <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_DocenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_MaestriaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_ModuloActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdModulo" Type="int" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="idConfigurarCohorte" Type="int" Mode="In" />
+    <Parameter Name="idSemestre" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ModuloEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdModulo" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ModuloInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_SemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_SemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_SemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Identificador" Type="int" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_SemestreModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Identificador" Type="int" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="i_posgradoModelStoreContainer" />
+</Schema>
