@@ -66,6 +66,18 @@
     </FunctionImport>
     <FunctionImport Name="Sp_ConfigurarSemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result)" />
     <FunctionImport Name="Sp_ConfigurarCohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result)" />
+    <FunctionImport Name="Sp_DiaConsultar" ReturnType="Collection(i_posgradoModel.Sp_DiaConsultar_Result)" />
+    <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
+    <FunctionImport Name="Sp_HorarioEliminar">
+      <Parameter Name="IdHorario" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_HorarioInsertar" ReturnType="Collection(Decimal)">
+      <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
+      <Parameter Name="IdDia" Mode="In" Type="Int32" />
+      <Parameter Name="HoraEntrada" Mode="In" Type="Time" />
+      <Parameter Name="HoraSalida" Mode="In" Type="Time" />
+      <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Sp_MaestriaConsultar_Result">
     <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
@@ -185,5 +197,23 @@
     <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
     <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Sp_DiaConsultar_Result">
+    <Property Type="Int32" Name="Id_Dia" Nullable="false" />
+    <Property Type="Int32" Name="Identificador" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_HorarioConsultar_Result">
+    <Property Type="Int32" Name="Id_Horario" Nullable="false" />
+    <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
+    <Property Type="Time" Name="Hora_Salida" Nullable="false" />
+    <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
+    <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
+    <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="Id_Dia" Nullable="false" />
+    <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
+    <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
   </ComplexType>
 </Schema>

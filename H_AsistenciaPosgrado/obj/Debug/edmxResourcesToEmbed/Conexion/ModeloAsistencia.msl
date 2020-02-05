@@ -164,5 +164,33 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_DiaConsultar" FunctionName="i_posgradoModel.Store.Sp_DiaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_DiaConsultar_Result">
+          <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
+          <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
+          <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
+          <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
+          <ScalarProperty Name="Id_Configurar_Modulo_Docente" ColumnName="Id_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
+          <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
+          <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
+          <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
+          <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
+          <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
+    <FunctionImportMapping FunctionImportName="Sp_HorarioInsertar" FunctionName="i_posgradoModel.Store.Sp_HorarioInsertar" />
   </EntityContainerMapping>
 </Mapping>
