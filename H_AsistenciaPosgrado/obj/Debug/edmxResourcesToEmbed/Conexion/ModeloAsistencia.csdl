@@ -67,12 +67,12 @@
     <FunctionImport Name="Sp_ConfigurarSemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result)" />
     <FunctionImport Name="Sp_ConfigurarCohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result)" />
     <FunctionImport Name="Sp_DiaConsultar" ReturnType="Collection(i_posgradoModel.Sp_DiaConsultar_Result)" />
-    <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
     <FunctionImport Name="Sp_HorarioEliminar">
       <Parameter Name="IdHorario" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
     <FunctionImport Name="Sp_HorarioInsertar" ReturnType="Collection(Decimal)">
-      <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
+      <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
       <Parameter Name="IdDia" Mode="In" Type="Int32" />
       <Parameter Name="HoraEntrada" Mode="In" Type="Time" />
       <Parameter Name="HoraSalida" Mode="In" Type="Time" />
@@ -208,7 +208,7 @@
     <Property Type="Int32" Name="Id_Horario" Nullable="false" />
     <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
     <Property Type="Time" Name="Hora_Salida" Nullable="false" />
-    <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
+    <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
     <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
     <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
     <Property Type="Int32" Name="Id_Dia" Nullable="false" />

@@ -38,7 +38,7 @@
     <Parameter Name="IdHorario" Type="int" Mode="In" />
   </Function>
   <Function Name="Sp_HorarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
-    <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
+    <Parameter Name="IdConfigurarSemestre" Type="int" Mode="In" />
     <Parameter Name="IdDia" Type="int" Mode="In" />
     <Parameter Name="HoraEntrada" Type="time" Mode="In" />
     <Parameter Name="HoraSalida" Type="time" Mode="In" />

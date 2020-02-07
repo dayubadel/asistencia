@@ -16,7 +16,7 @@ namespace H_AsistenciaPosgrado.Conexion
         public int Id_Horario { get; set; }
         public System.TimeSpan Hora_Entrada { get; set; }
         public System.TimeSpan Hora_Salida { get; set; }
-        public int Id_Configurar_Modulo_Docente { get; set; }
+        public int Id_Configurar_Semestre { get; set; }
         public bool Eliminado_Horario { get; set; }
         public string UtilizadoHorario { get; set; }
         public int Id_Dia { get; set; }

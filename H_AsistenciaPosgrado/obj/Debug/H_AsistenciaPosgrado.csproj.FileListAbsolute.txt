@@ -157,3 +157,4 @@ F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_Asisten
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csproj.CopyComplete
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.dll
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.pdb
+F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csprojAssemblyReference.cache

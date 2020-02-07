@@ -18,13 +18,10 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                 _lista.Add(new EntidadHorario()
                 {
                     IdHorario = item.Id_Horario,
-                    HoraEntrada=Convert.ToDateTime(item.Hora_Entrada),
-                    HoraSalida=Convert.ToDateTime(item.Hora_Salida),
-                    Eliminado=item.Eliminado_Horario,
-                    ConfigurarModuloDocente=new EntidadConfigurarModuloDocente()
-                    {
-                        IdConfigurarModuloDocente=item.Id_Configurar_Modulo_Docente
-                    },
+                    HoraEntrada =item.Hora_Entrada,
+                    HoraSalida = item.Hora_Salida,
+                    Eliminado = item.Eliminado_Horario,
+                    ConfigurarSemestre = new EntidadConfigurarSemestre() { IdConfigurarSemestre = item.Id_Configurar_Semestre },
                     Dia= new EntidadDia()
                     {
                         IdDia = item.Id_Dia,
