@@ -262,11 +262,6 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DiaConsultar_Result>("Sp_DiaConsultar");
         }
     
-        public virtual ObjectResult<Sp_HorarioConsultar_Result> Sp_HorarioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_HorarioConsultar_Result>("Sp_HorarioConsultar");
-        }
-    
         public virtual int Sp_HorarioEliminar(Nullable<int> idHorario)
         {
             var idHorarioParameter = idHorario.HasValue ?
@@ -276,11 +271,16 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_HorarioEliminar", idHorarioParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_HorarioInsertar(Nullable<int> idConfigurarModuloDocente, Nullable<int> idDia, Nullable<System.TimeSpan> horaEntrada, Nullable<System.TimeSpan> horaSalida, Nullable<bool> eliminado)
+        public virtual ObjectResult<Sp_HorarioConsultar_Result> Sp_HorarioConsultar()
         {
-            var idConfigurarModuloDocenteParameter = idConfigurarModuloDocente.HasValue ?
-                new ObjectParameter("IdConfigurarModuloDocente", idConfigurarModuloDocente) :
-                new ObjectParameter("IdConfigurarModuloDocente", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_HorarioConsultar_Result>("Sp_HorarioConsultar");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_HorarioInsertar(Nullable<int> idConfigurarSemestre, Nullable<int> idDia, Nullable<System.TimeSpan> horaEntrada, Nullable<System.TimeSpan> horaSalida, Nullable<bool> eliminado)
+        {
+            var idConfigurarSemestreParameter = idConfigurarSemestre.HasValue ?
+                new ObjectParameter("IdConfigurarSemestre", idConfigurarSemestre) :
+                new ObjectParameter("IdConfigurarSemestre", typeof(int));
     
             var idDiaParameter = idDia.HasValue ?
                 new ObjectParameter("IdDia", idDia) :
@@ -298,7 +298,7 @@ namespace H_AsistenciaPosgrado.Conexion
                 new ObjectParameter("Eliminado", eliminado) :
                 new ObjectParameter("Eliminado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_HorarioInsertar", idConfigurarModuloDocenteParameter, idDiaParameter, horaEntradaParameter, horaSalidaParameter, eliminadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_HorarioInsertar", idConfigurarSemestreParameter, idDiaParameter, horaEntradaParameter, horaSalidaParameter, eliminadoParameter);
         }
     }
 }

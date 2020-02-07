@@ -345,7 +345,6 @@
         var _fechaFin = $("#inputFechaFin").val();
         if (_idCohorteEncriptado == "0") {
             $("#contenedorOpcionesFechas").html("");
-            $("#contenedorBotonGuardarConsultarEliminar").html("");
             $("#contenedorTablaConfigurarSemestre").html("");
         }
         else {
@@ -369,7 +368,10 @@
                         $("#contenedorBotonGuardarConsultarEliminar").html(data.boton);   
                         cargarListadoSemestre();
                     } else {
-                        $("#contenedorMensajes").html(data.mensaje);                    
+                        $("#contenedorMensajes").html(data.mensaje);           
+                        setTimeout(function () {
+                            $("#contenedorMensajes").html("");
+                        }, 4000);
                     }
                 },
                 complete: function () {
@@ -404,6 +406,7 @@
             $("#contenedorFormularioModuloDocente").html("");
             $("#contenedorMensajes").html("");
             $("#contenedorTablaConfigurarSemestre").html("");
+            $("#contenedorBotonGuardarConsultarEliminar").html("");
         }
         else {
             $.ajax({
@@ -465,6 +468,7 @@
             $("#contenedorFormularioModuloDocente").html("");
             $("#contenedorMensajes").html("");
             $("#contenedorTablaConfigurarSemestre").html("");
+            $("#contenedorBotonGuardarConsultarEliminar").html("");
         }
         else {
             $.ajax({
@@ -479,6 +483,7 @@
                     $("#contenedorSemestres").html("");
                     $("#contenedorFormularioModuloDocente").html("");
                     $("#contenedorTablaConfigurarSemestre").html("");
+                    $("#contenedorBotonGuardarConsultarEliminar").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -493,6 +498,7 @@
                 complete: function () {
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
                     if (xhr.status === 0) {
                         $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                     } else if (xhr.status == 404) {

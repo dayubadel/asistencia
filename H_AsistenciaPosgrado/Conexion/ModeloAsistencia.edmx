@@ -43,7 +43,7 @@
           <Parameter Name="IdHorario" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_HorarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
-          <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
+          <Parameter Name="IdConfigurarSemestre" Type="int" Mode="In" />
           <Parameter Name="IdDia" Type="int" Mode="In" />
           <Parameter Name="HoraEntrada" Type="time" Mode="In" />
           <Parameter Name="HoraSalida" Type="time" Mode="In" />
@@ -154,12 +154,12 @@
           <FunctionImport Name="Sp_ConfigurarSemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result)" />
           <FunctionImport Name="Sp_ConfigurarCohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result)" />
           <FunctionImport Name="Sp_DiaConsultar" ReturnType="Collection(i_posgradoModel.Sp_DiaConsultar_Result)" />
-          <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
           <FunctionImport Name="Sp_HorarioEliminar">
-            <Parameter Name="IdHorario" Mode="In" Type="Int32" />
+          <Parameter Name="IdHorario" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
           <FunctionImport Name="Sp_HorarioInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
+            <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
             <Parameter Name="IdDia" Mode="In" Type="Int32" />
             <Parameter Name="HoraEntrada" Mode="In" Type="Time" />
             <Parameter Name="HoraSalida" Mode="In" Type="Time" />
@@ -295,7 +295,7 @@
           <Property Type="Int32" Name="Id_Horario" Nullable="false" />
           <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
           <Property Type="Time" Name="Hora_Salida" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
+          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
           <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
           <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="Id_Dia" Nullable="false" />
@@ -482,13 +482,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
                 <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
                 <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
                 <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
-                <ScalarProperty Name="Id_Configurar_Modulo_Docente" ColumnName="Id_Configurar_Modulo_Docente" />
+                <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
                 <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
                 <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
                 <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
@@ -498,7 +499,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_HorarioInsertar" FunctionName="i_posgradoModel.Store.Sp_HorarioInsertar" />
         </EntityContainerMapping>
       </Mapping>
