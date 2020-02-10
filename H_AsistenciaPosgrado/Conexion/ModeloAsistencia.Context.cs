@@ -349,9 +349,9 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsistenciaInsertar", idMatriculaParameter, idTipoAsistenciaParameter, idFechaAsistenciaParameter, eliminadoParameter);
         }
     
-        public virtual ObjectResult<Sp_FechaAsistenciaConsultar_Result> Sp_FechaAsistenciaConsultar()
+        public virtual ObjectResult<Sp_FechaAsistenciaConsultar_Result1> Sp_FechaAsistenciaConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result>("Sp_FechaAsistenciaConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result1>("Sp_FechaAsistenciaConsultar");
         }
     }
 }

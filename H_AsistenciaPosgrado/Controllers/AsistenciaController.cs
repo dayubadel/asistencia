@@ -67,25 +67,68 @@ namespace H_AsistenciaPosgrado.Controllers
                                 }
                                 else
                                 {
-                                    for (var i = _objConfigurarSemestre.ConfigurarModuloDocente.FechaInicio; i <= _objConfigurarSemestre.ConfigurarModuloDocente.FechaFin; i =i.AddDays(1))
+                                    var _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
+                                    if (_listaFechaAsistencia.Count == 0)
                                     {
-                                        DateTime _fechaActual = Convert.ToDateTime(i);
-                                        int _identificadorDia =(int)_fechaActual.DayOfWeek;                                        
-                                        foreach (var itemHorario in _listaHorario)
+                                        for (var i = _objConfigurarSemestre.ConfigurarModuloDocente.FechaInicio; i <= _objConfigurarSemestre.ConfigurarModuloDocente.FechaFin; i = i.AddDays(1))
                                         {
-                                            if(itemHorario.Dia.Identificador== _identificadorDia)
+                                            DateTime _fechaActual = Convert.ToDateTime(i);
+                                            int _identificadorDia = (int)_fechaActual.DayOfWeek;
+                                            foreach (var itemHorario in _listaHorario)
                                             {
-                                                int _idFechaAsistencia = _objCatalogoFechaAsistencia.InsertarFechaAsistencia(new EntidadFechaAsistencia() { Horario = new EntidadHorario() { IdHorario = itemHorario.IdHorario }, Fecha = _fechaActual, Eliminado = false });
-                                                if (_idFechaAsistencia != 0)
+                                                if (itemHorario.Dia.Identificador == _identificadorDia)
                                                 {
-                                                    foreach (var itemMatricula in _listaMatriculados)
+                                                    int _idFechaAsistencia = _objCatalogoFechaAsistencia.InsertarFechaAsistencia(new EntidadFechaAsistencia() { Horario = new EntidadHorario() { IdHorario = itemHorario.IdHorario }, Fecha = _fechaActual, Eliminado = false });
+                                                    if (_idFechaAsistencia != 0)
                                                     {
-                                                        int _idAsistencia = _objCatalogoAsistencia.InsertarAsistencia(new EntidadAsistencia() { FechaAsistencia = new EntidadFechaAsistencia() { IdFechaAsistencia = _idFechaAsistencia }, AsistenciaTipo = new EntidadAsistenciaTipo() { IdAsistenciaTipo = _objAsistenciaTipo.IdAsistenciaTipo }, Matricula = new EntidadMatricula() { IdMatricula = itemMatricula.IdMatricula }, Eliminado = false });
+                                                        foreach (var itemMatricula in _listaMatriculados)
+                                                        {
+                                                            int _idAsistencia = _objCatalogoAsistencia.InsertarAsistencia(new EntidadAsistencia() { FechaAsistencia = new EntidadFechaAsistencia() { IdFechaAsistencia = _idFechaAsistencia }, AsistenciaTipo = new EntidadAsistenciaTipo() { IdAsistenciaTipo = _objAsistenciaTipo.IdAsistenciaTipo }, Matricula = new EntidadMatricula() { IdMatricula = itemMatricula.IdMatricula }, Eliminado = false });
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
+                                         _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
                                     }
+
+                                        string _cabecera = "<thead>" +
+                                                    "<tr>" +
+                                                      "<th>#</th>" +
+                                                      "<th>Fecha de asistencia</th>" +
+                                                      "<th>Hora de entrada</th>" +
+                                                      "<th>Hora de salida</th>" +
+                                                    "</tr>" +
+                                                  "</thead>";
+
+                                        string _filasCuerpo = "";
+                                        int _contador = 1;
+                                        string _buttonEliminar = "";
+                                        foreach (var item in _listaModulos.OrderBy(c => c.Persona.Nombres))
+                                        {
+                                            _filasCuerpo = _filasCuerpo +
+                                                "<tr id='" + _contador + "'>" +
+                                                      "<td>" + _contador + "</td>" +
+                                                      "<td>" + item.Persona.NumeroIdentificacion+ "</td>" +
+                                                      "<td>" + item.Persona.Nombres.ToUpper() + "</td>" +
+                                                "</tr>";
+                                            _contador++;
+                                        }
+
+                                        string _tablaFinal = "<br><div class='card'>" +
+                                              "<div class='card-header'>" +
+                                                "<h3 class='card-title'>Docentes registrados en el sistema</h3>" +
+                                              "</div>" +
+                                              "<div class='card-body p-0'>" +
+                                               "<table id='sd' class='table table-striped'>" +
+                                                _cabecera +
+                                                  "<tbody >" +
+                                                    _filasCuerpo +
+                                                  "</tbody> " +
+                                                "</table> " +
+                                              "</div> " +
+                                            "</div>";
+
                                     _mensaje = "";
                                     _validar = true;
                                     return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);

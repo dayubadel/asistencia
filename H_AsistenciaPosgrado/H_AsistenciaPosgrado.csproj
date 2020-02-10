@@ -176,6 +176,9 @@
     <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result1.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_HorarioConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
