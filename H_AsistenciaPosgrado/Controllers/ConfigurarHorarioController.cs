@@ -22,6 +22,176 @@ namespace H_AsistenciaPosgrado.Controllers
         CatalogoConfigurarModuloDocente _objCatalogoConfigurarModuloDocente = new CatalogoConfigurarModuloDocente();
         CatalogoConfigurarSemestre _objCatalogoConfigurarSemestre = new CatalogoConfigurarSemestre();
         Seguridad _objSeguridad = new Seguridad();
+
+        [HttpPost]
+        public ActionResult Eliminarhorario(string _contador, string _identificadorDia, string _idHorarioEncriptado)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                if (string.IsNullOrEmpty(_contador))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN CONTADOR</div>";
+                }
+                else if (string.IsNullOrEmpty(_identificadorDia))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN DÍA</div>";
+                }
+                else if (string.IsNullOrEmpty(_idHorarioEncriptado) || _idHorarioEncriptado == "0")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN HORARIO PARA ELIMINAR</div>";
+                }
+                else
+                {
+                    int _contadorEntero = Convert.ToInt32(_contador);
+                    int _idHorario = Convert.ToInt32(_objSeguridad.DesEncriptar(_idHorarioEncriptado));
+                    var _objHorario = _objCatalogoHorario.ConsultarHorario().Where(c => c.Eliminado == false && c.IdHorario == _idHorario).FirstOrDefault();
+                    if (_objHorario == null)
+                    {
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>EL HORARIO SELECCIONADO NO EXISTE</div>";
+                    }
+                    else if (_objHorario.Utilizado=="1")
+                    {
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>EL HORARIO YA HA SIDO UTILIZADO POR LO TANTO NO SE PODRÁ ELIMINAR</div>";
+                    }
+                    else
+                    {
+                        _objCatalogoHorario.EliminarHorario(_idHorario);
+                        _mensaje = "";
+                        _validar = true;
+                        return Json(new { mensaje = _mensaje, validar = _validar}, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult Guardarhorario(string _color, string _contador, string _identificadorDia, string _idConfigurarSemestreEncriptado,
+            string _horaEntrada, string _horaSalida)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                if (string.IsNullOrEmpty(_color))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN COLOR</div>";
+                }
+                else if (string.IsNullOrEmpty(_contador))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN CONTADOR</div>";
+                }
+                else if (string.IsNullOrEmpty(_identificadorDia))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN DÍA</div>";
+                }
+                else if (string.IsNullOrEmpty(_idConfigurarSemestreEncriptado))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA CONFIGURACIÓN</div>";
+                }
+                else if (string.IsNullOrEmpty(_horaEntrada))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA HORA DE ENTRADA</div>";
+                }
+                else if (string.IsNullOrEmpty(_horaSalida))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA HORA DE SALIDA</div>";
+                }
+                else
+                {
+                    int _contadorEntero = Convert.ToInt32(_contador);
+                    TimeSpan _horaEntradaTime = TimeSpan.Parse(_horaEntrada);
+                    TimeSpan _horaSalidaTime = TimeSpan.Parse(_horaSalida);
+                    if (TimeSpan.Compare(_horaEntradaTime, _horaSalidaTime) >= 0)
+                    {
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA HORA DE SALIDA DEBE SER MAYOR A LA HORA DE ENTRADA</div>";
+                    }
+                    else
+                    {
+                        int _idConfigurarSemestre = Convert.ToInt32(_objSeguridad.DesEncriptar(_idConfigurarSemestreEncriptado));
+                        var _objConfigurarSemestre = _objCatalogoConfigurarSemestre.ConsultarConfigurarSemestrePorId(_idConfigurarSemestre).Where(c => c.Eliminado == false && c.IdConfigurarSemestre == _idConfigurarSemestre).FirstOrDefault();
+                        if (_objConfigurarSemestre == null)
+                        {
+                            _mensaje = "<div class='alert alert-danger text-center' role='alert'>EL IDENTIFICADOR DE LA CONFIGURACIÓN DEL CURSO NO ES VÁLIDO</div>";
+                        }
+                        else
+                        {
+                            int _identificadorDiaEntero = Convert.ToInt32(_identificadorDia);
+                            var _objDia = _objCatalogoDia.ConsultarDia().Where(c => c.Eliminado == false && c.Identificador == _identificadorDiaEntero).FirstOrDefault();
+                            if (_objDia == null)
+                            {
+                                _mensaje = "<div class='alert alert-danger text-center' role='alert'>EL DÍA INGRESADO NO ES VÁLIDO</div>";
+                            }
+                            else
+                            {
+                                int _idHorario = _objCatalogoHorario.InsertarHorario(new EntidadHorario()
+                                {
+                                    ConfigurarSemestre = new EntidadConfigurarSemestre() { IdConfigurarSemestre = _idConfigurarSemestre },
+                                    Dia = new EntidadDia() { IdDia = _objDia.IdDia },
+                                    HoraEntrada = _horaEntradaTime,
+                                    HoraSalida = _horaSalidaTime,
+                                    Eliminado = false
+                                });
+                                if (_idHorario == 0)
+                                {
+                                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR AL TRATAR DE INGRESAR EL HORARIO</div>";
+                                }
+                                else
+                                {
+                                    var _objHorario = _objCatalogoHorario.ConsultarHorario().Where(c => c.IdHorario == _idHorario && c.Eliminado == false).FirstOrDefault();
+                                    string _btnEliminar = "";
+                                    if (_objHorario.Utilizado != "1")
+                                    {
+                                        string _idHorarioEncriptado = _objSeguridad.Encriptar(_objHorario.IdHorario.ToString());
+                                        _btnEliminar = "<button onclick='eliminarHorario(" + _contadorEntero + "," + _objDia.Identificador + ", \"" + _idHorarioEncriptado + "\");' class='btn btn-danger btn-xs'>Eliminar</button>";
+                                    }
+                                    string _horario = "<i class='fa fa-clock " + _color + "'></i>" +
+                                                        "<div class='timeline-item'>" +
+                                                         "<span class='time'><i class='fa fa-clock-o'></i>"+ _btnEliminar + "</span>" +
+                                                         "<h3 class='timeline-header'>" + _objHorario.HoraEntrada.ToString() + " - " + _objHorario.HoraSalida.ToString() + "</h3>"+
+                                                         "</div>";
+                                    _contadorEntero++;
+                                    string _nuevoHorario = "<div id='div" + _contadorEntero + "dia" + _objDia.Identificador + "'>" +
+                                                "<i class='fa fa-clock " + _color + "'></i>" +
+                                                     "<div  class='timeline-item'>" +
+                                                           "<div class='timeline-body'>" +
+                                                               "<div class='row'>" +
+                                                                   "<div id='mensaje" + _objDia.Identificador + "' class='col-md-12'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                   "<input class='form-control' id='horaEntrada" + _objDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                   "<input class='form-control' id='horaSalida" + _objDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                       "<button onclick='guardarHorario(\"" + _color + "\"," + _contadorEntero + "," + _objDia.Identificador + ",\"" + _idConfigurarSemestreEncriptado + "\")' class='btn btn-sm btn-success form-control btn-block'>GUARDAR</button>" +
+                                                                   "</div>" +
+                                                               "</div>" +
+                                                           "</div>" +
+                                                       "</div>" +
+                                               "</div>";
+                                    _mensaje = "";
+                                    _validar = true;
+                                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _horario, nuevo=_nuevoHorario }, JsonRequestBehavior.AllowGet);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Consultarhorarioporconfigurarsemestre(string _idConfigurarSemestreEncriptado)
         {
@@ -29,7 +199,7 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_idConfigurarSemestreEncriptado))
+                if (string.IsNullOrEmpty(_idConfigurarSemestreEncriptado)|| _idConfigurarSemestreEncriptado=="0")
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN MÓDULO</div>";
                 }
@@ -49,34 +219,76 @@ namespace H_AsistenciaPosgrado.Controllers
                         string _contenidoTimeline = "";
                         foreach (var itemDia in _listaDias)
                         {
-                            _contenidoTimeline = _contenidoTimeline + 
+                            string _color = "bg-blue";
+                            if (itemDia.Identificador == 1)
+                            {
+                                _color = "bg-maroon";
+                            }
+                            if (itemDia.Identificador == 2)
+                            {
+                                _color = "bg-yellow";
+                            }
+                            else if (itemDia.Identificador == 4)
+                            {
+                                _color = "bg-purple";
+                            }
+                            else if (itemDia.Identificador == 6)
+                            {
+                                _color = "bg-green";
+                            }
+                            else if (itemDia.Identificador == 7)
+                            {
+                                _color = "bg-gray";
+                            }
+                            _contenidoTimeline = _contenidoTimeline +
                                                 "<div class='time-label'>" +
-                                                    "<span class='bg-red'>" +
+                                                    "<span class='" + _color + "'>" +
                                                        itemDia.Descripcion.ToUpper() +
                                                     "</span>" +
                                                 "</div>";
                             var _listaHorarioPorDia = _listaHorario.Where(c => c.Dia.IdDia == itemDia.IdDia).ToList();
+                            int _contador = 0;
                             foreach (var itemHorario in _listaHorarioPorDia)
                             {
+                                string _btnEliminar = "";
+                                if(itemHorario.Utilizado!="1")
+                                {
+                                    string _idHorarioEncriptado = _objSeguridad.Encriptar(itemHorario.IdHorario.ToString());
+                                    _btnEliminar= "<button onclick='eliminarHorario(" + _contador + "," + itemDia.Identificador + ", \""+ _idHorarioEncriptado + "\");' class='btn btn-danger btn-xs'>Eliminar</button>";
+                                }
                                 _contenidoTimeline = _contenidoTimeline +
-                                                "<div>" +
-                                                 "<i class='fa fa-envelope bg-blue'></i>" +
-                                                  "<div class='timeline-item'>" +
-                                                    "<span class='time'><i class='fa fa-clock-o'></i> 12:05</span>" +
-                                                    "<h3 class='timeline-header'><a href='#'>Support Team</a> sent you an email</h3>" +
-                                                    "<div class='timeline-body'>" +
-                                                    "</div>" +
-                                                    "<div class='timeline-footer'>" +
-                                                      "<a class='btn btn-primary btn-xs'>Read more</a>" +
-                                                      "<a class='btn btn-danger btn-xs'>Delete</a>" +
-                                                    "</div>"+
-                                                  "</div>"+
-                                                "</div>" +
-                                                "</div>" ;
-                            }          
+                                                "<div id='div" + _contador + "dia" + itemDia.Identificador + "' >" +
+                                                 "<i class='fa fa-clock " + _color + "'></i>" +
+                                                      "<div class='timeline-item'>" +
+                                                        "<span class='time'><i class='fa fa-clock-o'></i>"+_btnEliminar+"</span>" +
+                                                        "<h3 class='timeline-header'>" + itemHorario.HoraEntrada.ToString() + " - " + itemHorario.HoraSalida.ToString() + "</h3>" +
+                                                        "</div>" +
+                                                "</div>";
+                                _contador++;
+                            }
+                            _contenidoTimeline = _contenidoTimeline +
+                                               "<div id='div" + _contador + "dia" + itemDia.Identificador + "'>" +
+                                                "<i class='fa fa-clock " + _color + "'></i>" +
+                                                     "<div  class='timeline-item'>" +
+                                                           "<div class='timeline-body'>" +
+                                                               "<div class='row'>" +
+                                                                    "<div id='mensaje" + itemDia.Identificador + "' class='col-md-12'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                   "<input class='form-control' id='horaEntrada" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                   "<input class='form-control' id='horaSalida" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                   "</div>" +
+                                                                   "<div class='col-md-4'>" +
+                                                                       "<button onclick='guardarHorario(\""+ _color +"\","+_contador+","+itemDia.Identificador+",\""+_idConfigurarSemestreEncriptado+"\")' class='btn btn-sm btn-success form-control btn-block'>GUARDAR</button>" +
+                                                                   "</div>" +
+                                                               "</div>" +
+                                                           "</div>" +
+                                                       "</div>" +
+                                               "</div>";
                         }
-                        string _timeLine = "<div class='timeline'>" + _contenidoTimeline + "</div>";
-                        string _tablaFinal = "<div class='row'><div class='col-md-12'>"+ _timeLine + "</div></div>";
+                        string _tablaFinal = "<div class='row'><div class='col-md-2'></div><div class='col-md-8'><div class='timeline'>" + _contenidoTimeline + "</div></div><div class='col-md-2'></div></div>";
 
                         _mensaje = "";
                         _validar = true;

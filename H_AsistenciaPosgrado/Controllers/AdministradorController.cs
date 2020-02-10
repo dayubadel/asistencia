@@ -38,5 +38,10 @@ namespace H_AsistenciaPosgrado.Controllers
         {
             return View();
         }
+
+        public ActionResult Asistencia()
+        {
+            return View();
+        }
     }
 }

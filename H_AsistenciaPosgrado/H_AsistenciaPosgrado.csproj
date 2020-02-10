@@ -155,6 +155,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Conexion\Sp_AsistenciaTipoConsultar_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CohorteConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -176,6 +179,9 @@
     <Compile Include="Conexion\Sp_MaestriaConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_MatriculaConsultar_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -186,6 +192,7 @@
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\AsistenciaController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ConfigurarHorarioController.cs" />
@@ -196,6 +203,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoAsistencia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsistenciaTipo.cs" />
     <Compile Include="Models\Catalogos\CatalogoCohorte.cs" />
     <Compile Include="Models\Catalogos\CatalogoConfigurarCohorte.cs" />
     <Compile Include="Models\Catalogos\CatalogoConfigurarModuloDocente.cs" />
@@ -204,8 +213,11 @@
     <Compile Include="Models\Catalogos\CatalogoDocente.cs" />
     <Compile Include="Models\Catalogos\CatalogoHorario.cs" />
     <Compile Include="Models\Catalogos\CatalogoMaestria.cs" />
+    <Compile Include="Models\Catalogos\CatalogoMatricula.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoSemestre.cs" />
+    <Compile Include="Models\Entidades\EntidadAsistencia.cs" />
+    <Compile Include="Models\Entidades\EntidadAsistenciaTipo.cs" />
     <Compile Include="Models\Entidades\EntidadConfigurarCohorte.cs" />
     <Compile Include="Models\Entidades\EntidadCohorte.cs" />
     <Compile Include="Models\Entidades\EntidadConfigurarModuloDocente.cs" />
@@ -214,6 +226,7 @@
     <Compile Include="Models\Entidades\EntidadDocente.cs" />
     <Compile Include="Models\Entidades\EntidadHorario.cs" />
     <Compile Include="Models\Entidades\EntidadMaestria.cs" />
+    <Compile Include="Models\Entidades\EntidadMatricula.cs" />
     <Compile Include="Models\Entidades\EntidadModulo.cs" />
     <Compile Include="Conexion\ModeloAsistencia.Context.cs">
       <AutoGen>True</AutoGen>
@@ -231,9 +244,12 @@
       <DependentUpon>ModeloAsistencia.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Entidades\EntidadPersona.cs" />
+    <Compile Include="Models\Entidades\EntidadInscripcion.cs" />
+    <Compile Include="Models\Entidades\EntidadPreseleccionado.cs" />
     <Compile Include="Models\Entidades\EntidadSemestre.cs" />
     <Compile Include="Models\Entidades\EntidadSexo.cs" />
     <Compile Include="Models\Entidades\EntidadTipoIdentificacion.cs" />
+    <Compile Include="Models\Entidades\EntidadTipoMatricula.cs" />
     <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1897,10 +1913,12 @@
     <Content Include="Views\Administrador\Semestre.cshtml" />
     <Content Include="Views\Administrador\Docente.cshtml" />
     <Content Include="Views\Administrador\ConfigurarHorario.cshtml" />
+    <Content Include="Views\Administrador\Asistencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\Asistencia\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -14,5 +14,6 @@ namespace H_AsistenciaPosgrado.Models.Entidades
         public TimeSpan HoraEntrada { get; set; }
         public TimeSpan HoraSalida { get; set; }
         public bool Eliminado { get; set; }
+        public string Utilizado { get; set; }
     }
 }
