@@ -34,10 +34,14 @@
                         </div>
                         <div class="card-body" style="display: block;">
                             <div id="contenedorOpciones"></div>
-                            <div id="contenedorMensajes"></div>
-                            <div id="contenedorHorarios"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="contenedorMensajes"></div>
+                    <div id="contenedorHorarios"></div>
                 </div>
             </div>
         </div>
@@ -45,52 +49,153 @@
 </div>
 
 <script>
-    function consultarHorarioPorConfigurarSemestre() {
-         var _idConfigurarSemestreEncriptado = $('#selectModulo').val();
-         if (_idConfigurarSemestreEncriptado == "0") {
-            $("#contenedorMensajes").html("");
-        }
-        else {
-            $.ajax({
-                url: '@Url.Action("Consultarhorarioporconfigurarsemestre", "ConfigurarHorario")',
-                type: 'post',
-                dataType: 'JSON',
-                data: { _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado},
-                beforeSend: function () {
-                    $("#contenedorHorarios").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-                },
-                uploadProgress: function (event, position, total, percentComplete) {
-                },
-                success: function (data) {
-                    if (data.validar == true) {
-                        $("#contenedorHorarios").html(data.tabla);
-                    } else {
-                        $("#contenedorHorarios").html(data.mensaje);
-                    }
-                },
-                complete: function () {
-                },
-                error: function (xhr, textStatus, errorThrown) {
 
-                    if (xhr.status === 0) {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
-                    } else if (xhr.status == 404) {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
-                    } else if (xhr.status == 500) {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
-                    } else if (errorThrown === 'parsererror') {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
-                    } else if (errorThrown === 'timeout') {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
-                    } else if (errorThrown === 'abort') {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
-                    } else {
-                        $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
-                    }
+    function eliminarHorario(_contador, _identificadorDia, _idHorarioEncriptado) {
+        var _horario = $("#div" + _contador +"dia" + _identificadorDia).html();
+        $.ajax({
+            url: '@Url.Action("Eliminarhorario", "ConfigurarHorario")',
+            type: 'post',
+            dataType: 'JSON',
+            data: {
+                _contador: _contador,
+                _identificadorDia: _identificadorDia, _idHorarioEncriptado: _idHorarioEncriptado
+            },
+            beforeSend: function () {
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#div" + _contador + "dia" + _identificadorDia).html("");
+                } else {
+                    $("#div" + _contador + "dia" + _identificadorDia).html(_horario);
+                    $("#mensajeEliminar" + _identificadorDia).html(data.mensaje);
+                    setTimeout(function () {
+                        $("#mensajeEliminar" + _identificadorDia).html("");
+                    }, 3000);
                 }
-            });
-        }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                $("#div" + _contador + "dia" + _identificadorDia).html(_ingresoHorario);
+                if (xhr.status === 0) {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#mensajeEliminar" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
     }
+
+    function guardarHorario(_color, _contador, _identificadorDia, _idConfigurarSemestreEncriptado) {
+        var _horaEntrada = $("#horaEntrada" + _identificadorDia).val();
+        var _horaSalida = $("#horaSalida" + _identificadorDia).val();
+        var _ingresoHorario = $("#div" + _contador +"dia" + _identificadorDia).html();
+        $.ajax({
+            url: '@Url.Action("Guardarhorario", "ConfigurarHorario")',
+            type: 'post',
+            dataType: 'JSON',
+            data: {
+                _color: _color, _contador: _contador,
+                _identificadorDia: _identificadorDia, _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado,
+                _horaEntrada: _horaEntrada, _horaSalida: _horaSalida
+            },
+            beforeSend: function () {
+           },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#div" + _contador + "dia" + _identificadorDia).html(data.tabla);
+                    $("#div" + _contador + "dia" + _identificadorDia).after(data.nuevo);
+                } else {
+                    $("#div" + _contador + "dia" + _identificadorDia).html(_ingresoHorario);
+                    $("#mensaje" + _identificadorDia).html(data.mensaje);
+                    setTimeout(function () {
+                        $("#mensaje" + _identificadorDia).html("");
+                    }, 3000);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                $("#div" + _contador + "dia" + _identificadorDia).html(_ingresoHorario);
+                if (xhr.status === 0) {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#mensaje" + _identificadorDia).html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+
+
+    function consultarHorarioPorConfigurarSemestre() {
+        var _idConfigurarSemestreEncriptado = $('#selectModulo').val();
+        $.ajax({
+            url: '@Url.Action("Consultarhorarioporconfigurarsemestre", "ConfigurarHorario")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado },
+            beforeSend: function () {
+                $("#contenedorHorarios").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                $("#contenedorMensajes").html("");
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#contenedorHorarios").html(data.tabla);
+                } else {
+                    $("#contenedorHorarios").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+    
 
     function cambiarModulosPorSemestre() {
         var _idMaestriaEncriptado = $('#selectMaestria').val();
@@ -98,6 +203,7 @@
         var _idSemestreEncriptado = $('#selectSemestre').val();
         if (_idMaestriaEncriptado == "0" || _idCohorteEncriptado == "0" || _idSemestreEncriptado=="0") {
             $("#contenedorMensajes").html("");
+            $("#contenedorHorarios").html("");
             $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
         }
         else {
@@ -109,6 +215,7 @@
                 beforeSend: function () {
                     $("#selectModulo").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
+                    $("#contenedorHorarios").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -149,6 +256,7 @@
         var _idCohorteEncriptado = $('#selectCohorte').val();
         if (_idMaestriaEncriptado == "0" || _idCohorteEncriptado == "0") {
             $("#contenedorMensajes").html("");
+            $("#contenedorHorarios").html("");
             $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
         }
         else {
@@ -160,6 +268,7 @@
                 beforeSend: function () {
                     $("#selectSemestre").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
+                    $("#contenedorHorarios").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -199,6 +308,7 @@
         var _idMaestriaEncriptado = $('#selectMaestria').val();
         if (_idMaestriaEncriptado == "0") {
             $("#contenedorMensajes").html("");
+            $("#contenedorHorarios").html("");
             $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
         }
         else {
@@ -210,6 +320,7 @@
                 beforeSend: function () {
                     $("#selectCohorte").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
+                    $("#contenedorHorarios").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },

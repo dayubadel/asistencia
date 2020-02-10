@@ -21,6 +21,7 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                     HoraEntrada =item.Hora_Entrada,
                     HoraSalida = item.Hora_Salida,
                     Eliminado = item.Eliminado_Horario,
+                    Utilizado=item.UtilizadoHorario,
                     ConfigurarSemestre = new EntidadConfigurarSemestre() { IdConfigurarSemestre = item.Id_Configurar_Semestre },
                     Dia= new EntidadDia()
                     {
@@ -32,6 +33,23 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                 });
             }
             return _lista;
+        }
+
+        public int InsertarHorario(EntidadHorario _objHorario)
+        {
+            try
+            {
+                return int.Parse(_entitiesPosgrado.Sp_HorarioInsertar(_objHorario.ConfigurarSemestre.IdConfigurarSemestre,_objHorario.Dia.IdDia,_objHorario.HoraEntrada,_objHorario.HoraSalida,_objHorario.Eliminado).Select(x=>x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public void EliminarHorario(int _idHorario)
+        {
+            _entitiesPosgrado.Sp_HorarioEliminar(_idHorario);
         }
     }
 }
