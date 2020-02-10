@@ -78,6 +78,19 @@
       <Parameter Name="HoraSalida" Mode="In" Type="Time" />
       <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
     </FunctionImport>
+    <FunctionImport Name="Sp_MatriculaConsultar" ReturnType="Collection(i_posgradoModel.Sp_MatriculaConsultar_Result)" />
+    <FunctionImport Name="Sp_AsistenciaTipoConsultar" ReturnType="Collection(i_posgradoModel.Sp_AsistenciaTipoConsultar_Result)" />
+    <FunctionImport Name="Sp_FechaAsistenciaInsertar" ReturnType="Collection(Decimal)">
+      <Parameter Name="IdHorario" Mode="In" Type="Int32" />
+      <Parameter Name="FechaAsistencia" Mode="In" Type="DateTime" />
+      <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_AsistenciaInsertar" ReturnType="Collection(Decimal)">
+      <Parameter Name="IdMatricula" Mode="In" Type="Int32" />
+      <Parameter Name="IdTipoAsistencia" Mode="In" Type="Int32" />
+      <Parameter Name="IdFechaAsistencia" Mode="In" Type="Int32" />
+      <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Sp_MaestriaConsultar_Result">
     <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
@@ -215,5 +228,32 @@
     <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
     <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_MatriculaConsultar_Result">
+    <Property Type="Int32" Name="Id_Matricula" Nullable="false" />
+    <Property Type="DateTime" Name="FechaRegistroMatricula" Nullable="false" />
+    <Property Type="Int32" Name="Id_ConfiguracionCohorte" Nullable="false" />
+    <Property Type="Boolean" Name="Matricula_Vigente" Nullable="false" />
+    <Property Type="Int32" Name="Id_TipoMatricula" Nullable="false" />
+    <Property Type="String" Name="DescripcionTipoMatricula" Nullable="false" MaxLength="250" />
+    <Property Type="Boolean" Name="EliminadoTipoMatricula" Nullable="false" />
+    <Property Type="Int32" Name="IdentificadorTipoMatricula" Nullable="false" />
+    <Property Type="Int32" Name="Id_preseleccionado" Nullable="false" />
+    <Property Type="Decimal" Name="PuntajePreseleccionado" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="Boolean" Name="EliminadoPreseleccionado" Nullable="true" />
+    <Property Type="Int32" Name="IdInscripcion" Nullable="false" />
+    <Property Type="Int32" Name="IdPeriodo" Nullable="true" />
+    <Property Type="Int32" Name="IdPersona" Nullable="false" />
+    <Property Type="String" Name="Nombres" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Cedula" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="Sp_AsistenciaTipoConsultar_Result">
+    <Property Type="Int32" Name="Id_TipoAsistencia" Nullable="false" />
+    <Property Type="Int32" Name="Identificador" Nullable="false" />
+    <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Eliminado" Nullable="false" />
   </ComplexType>
 </Schema>

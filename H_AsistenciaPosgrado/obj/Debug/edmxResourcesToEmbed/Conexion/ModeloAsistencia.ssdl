@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="i_posgradoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="Sp_AsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdMatricula" Type="int" Mode="In" />
+    <Parameter Name="IdTipoAsistencia" Type="int" Mode="In" />
+    <Parameter Name="IdFechaAsistencia" Type="int" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_AsistenciaTipoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_CohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_ConfigurarCohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_ConfigurarCohorteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
@@ -33,6 +40,11 @@
   </Function>
   <Function Name="Sp_DiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_DocenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_FechaAsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+    <Parameter Name="IdHorario" Type="int" Mode="In" />
+    <Parameter Name="FechaAsistencia" Type="date" Mode="In" />
+    <Parameter Name="Eliminado" Type="bit" Mode="In" />
+  </Function>
   <Function Name="Sp_HorarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_HorarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
     <Parameter Name="IdHorario" Type="int" Mode="In" />
@@ -45,6 +57,7 @@
     <Parameter Name="Eliminado" Type="bit" Mode="In" />
   </Function>
   <Function Name="Sp_MaestriaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
+  <Function Name="Sp_MatriculaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
   <Function Name="Sp_ModuloActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
     <Parameter Name="IdModulo" Type="int" Mode="In" />
     <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
