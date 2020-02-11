@@ -301,19 +301,21 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_HorarioInsertar", idConfigurarSemestreParameter, idDiaParameter, horaEntradaParameter, horaSalidaParameter, eliminadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_AsistenciaInsertar(Nullable<int> idHorario, Nullable<int> idMatricula, Nullable<int> idTipoAsistencia, Nullable<System.DateTime> fechaAsistencia, Nullable<bool> eliminado)
+        public virtual ObjectResult<Sp_MatriculaConsultar_Result> Sp_MatriculaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MatriculaConsultar_Result>("Sp_MatriculaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsistenciaTipoConsultar_Result> Sp_AsistenciaTipoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsistenciaTipoConsultar_Result>("Sp_AsistenciaTipoConsultar");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_FechaAsistenciaInsertar(Nullable<int> idHorario, Nullable<System.DateTime> fechaAsistencia, Nullable<bool> eliminado)
         {
             var idHorarioParameter = idHorario.HasValue ?
                 new ObjectParameter("IdHorario", idHorario) :
                 new ObjectParameter("IdHorario", typeof(int));
-    
-            var idMatriculaParameter = idMatricula.HasValue ?
-                new ObjectParameter("IdMatricula", idMatricula) :
-                new ObjectParameter("IdMatricula", typeof(int));
-    
-            var idTipoAsistenciaParameter = idTipoAsistencia.HasValue ?
-                new ObjectParameter("IdTipoAsistencia", idTipoAsistencia) :
-                new ObjectParameter("IdTipoAsistencia", typeof(int));
     
             var fechaAsistenciaParameter = fechaAsistencia.HasValue ?
                 new ObjectParameter("FechaAsistencia", fechaAsistencia) :
@@ -323,17 +325,33 @@ namespace H_AsistenciaPosgrado.Conexion
                 new ObjectParameter("Eliminado", eliminado) :
                 new ObjectParameter("Eliminado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsistenciaInsertar", idHorarioParameter, idMatriculaParameter, idTipoAsistenciaParameter, fechaAsistenciaParameter, eliminadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_FechaAsistenciaInsertar", idHorarioParameter, fechaAsistenciaParameter, eliminadoParameter);
         }
     
-        public virtual ObjectResult<Sp_MatriculaConsultar_Result> Sp_MatriculaConsultar()
+        public virtual ObjectResult<Nullable<decimal>> Sp_AsistenciaInsertar(Nullable<int> idMatricula, Nullable<int> idTipoAsistencia, Nullable<int> idFechaAsistencia, Nullable<bool> eliminado)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MatriculaConsultar_Result>("Sp_MatriculaConsultar");
+            var idMatriculaParameter = idMatricula.HasValue ?
+                new ObjectParameter("IdMatricula", idMatricula) :
+                new ObjectParameter("IdMatricula", typeof(int));
+    
+            var idTipoAsistenciaParameter = idTipoAsistencia.HasValue ?
+                new ObjectParameter("IdTipoAsistencia", idTipoAsistencia) :
+                new ObjectParameter("IdTipoAsistencia", typeof(int));
+    
+            var idFechaAsistenciaParameter = idFechaAsistencia.HasValue ?
+                new ObjectParameter("IdFechaAsistencia", idFechaAsistencia) :
+                new ObjectParameter("IdFechaAsistencia", typeof(int));
+    
+            var eliminadoParameter = eliminado.HasValue ?
+                new ObjectParameter("Eliminado", eliminado) :
+                new ObjectParameter("Eliminado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsistenciaInsertar", idMatriculaParameter, idTipoAsistenciaParameter, idFechaAsistenciaParameter, eliminadoParameter);
         }
     
-        public virtual ObjectResult<Sp_AsistenciaTipoConsultar_Result> Sp_AsistenciaTipoConsultar()
+        public virtual ObjectResult<Sp_FechaAsistenciaConsultar_Result1> Sp_FechaAsistenciaConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsistenciaTipoConsultar_Result>("Sp_AsistenciaTipoConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result1>("Sp_FechaAsistenciaConsultar");
         }
     }
 }

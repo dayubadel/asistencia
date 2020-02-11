@@ -35,6 +35,7 @@
                         <div class="card-body" style="display: block;">
                             <div id="contenedorOpciones"></div>
                             <div id="contenedorMensajes"></div>
+                            <div id="contenedorAsistencia"></div>
                         </div>
                     </div>
                 </div>
@@ -47,21 +48,21 @@
     function generarAsistencia() {
         var _idConfigurarSemestreEncriptado = $('#selectModulo').val();
         $.ajax({
-            url: '@Url.Action("GenerarAsistencia", "ConfigurarHorario")',
+            url: '@Url.Action("GenerarAsistencia", "Asistencia")',
             type: 'post',
             dataType: 'JSON',
             data: { _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado },
             beforeSend: function () {
-                $("#contenedorHorarios").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                $("#contenedorAsistencia").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
                 $("#contenedorMensajes").html("");
             },
             uploadProgress: function (event, position, total, percentComplete) {
             },
             success: function (data) {
                 if (data.validar == true) {
-                    $("#contenedorHorarios").html(data.tabla);
+                    $("#contenedorAsistencia").html(data.tabla);
                 } else {
-                    $("#contenedorHorarios").html(data.mensaje);
+                    $("#contenedorAsistencia").html(data.mensaje);
                 }
             },
             complete: function () {
@@ -69,19 +70,19 @@
             error: function (xhr, textStatus, errorThrown) {
 
                 if (xhr.status === 0) {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                 } else if (xhr.status == 404) {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
                 } else if (xhr.status == 500) {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
                 } else if (errorThrown === 'parsererror') {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
                 } else if (errorThrown === 'timeout') {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
                 } else if (errorThrown === 'abort') {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
                 } else {
-                    $("#contenedorHorarios").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                    $("#contenedorAsistencia").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
                 }
             }
         });

@@ -173,6 +173,12 @@
     <Compile Include="Conexion\Sp_DocenteConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result1.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_HorarioConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -211,6 +217,7 @@
     <Compile Include="Models\Catalogos\CatalogoConfigurarSemestre.cs" />
     <Compile Include="Models\Catalogos\CatalogoDia.cs" />
     <Compile Include="Models\Catalogos\CatalogoDocente.cs" />
+    <Compile Include="Models\Catalogos\CatalogoFechaAsistencia.cs" />
     <Compile Include="Models\Catalogos\CatalogoHorario.cs" />
     <Compile Include="Models\Catalogos\CatalogoMaestria.cs" />
     <Compile Include="Models\Catalogos\CatalogoMatricula.cs" />
@@ -250,6 +257,7 @@
     <Compile Include="Models\Entidades\EntidadSexo.cs" />
     <Compile Include="Models\Entidades\EntidadTipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\EntidadTipoMatricula.cs" />
+    <Compile Include="Models\Entidades\EntidadFechaAsistencia.cs" />
     <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -32,7 +32,6 @@ namespace H_AsistenciaPosgrado.Controllers
 
                 string _filasCuerpo = "";
                 int _contador = 1;
-                string _buttonEliminar = "";
                 foreach (var item in _listaModulos.OrderBy(c => c.Persona.Nombres))
                 {
                     _filasCuerpo = _filasCuerpo +

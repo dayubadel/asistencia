@@ -15,7 +15,7 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
         {
             try
             {
-                return int.Parse(_entitiesPosgrado.Sp_AsistenciaInsertar(_objAsistencia.Horario.IdHorario, _objAsistencia.Matricula.IdMatricula, _objAsistencia.AsistenciaTipo.IdAsistenciaTipo, _objAsistencia.FechaAsistencia, _objAsistencia.Eliminado).Select(x => x.Value.ToString()).FirstOrDefault());
+                return int.Parse(_entitiesPosgrado.Sp_AsistenciaInsertar(_objAsistencia.Matricula.IdMatricula, _objAsistencia.AsistenciaTipo.IdAsistenciaTipo, _objAsistencia.FechaAsistencia.IdFechaAsistencia, _objAsistencia.Eliminado).Select(x => x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
