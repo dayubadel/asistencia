@@ -353,5 +353,10 @@ namespace H_AsistenciaPosgrado.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result1>("Sp_FechaAsistenciaConsultar");
         }
+    
+        public virtual ObjectResult<Sp_AsistenciaConsultar_Result> Sp_AsistenciaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsistenciaConsultar_Result>("Sp_AsistenciaConsultar");
+        }
     }
 }

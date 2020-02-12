@@ -155,6 +155,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Conexion\Sp_AsistenciaConsultar_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsistenciaTipoConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -199,6 +202,7 @@
     </Compile>
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\AsistenciaController.cs" />
+    <Compile Include="Controllers\AsistenciaDiariaController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ConfigurarHorarioController.cs" />
@@ -1922,11 +1926,12 @@
     <Content Include="Views\Administrador\Docente.cshtml" />
     <Content Include="Views\Administrador\ConfigurarHorario.cshtml" />
     <Content Include="Views\Administrador\Asistencia.cshtml" />
+    <Content Include="Views\Administrador\AsistenciaDiaria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\Asistencia\" />
+    <Folder Include="Views\AsistenciaDiaria\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

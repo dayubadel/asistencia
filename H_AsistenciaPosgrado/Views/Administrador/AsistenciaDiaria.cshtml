@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Configurar Asistencia</h1>
+                    <h1 class="m-0 text-dark">Asistencia Diaria</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="@Url.Action("Inicio","Administrador")">Inicio</a></li>
-                        <li class="breadcrumb-item active">Configurar Asistencia</li>
+                        <li class="breadcrumb-item active">Asistencia Diaria</li>
                     </ol>
                 </div>
             </div>
@@ -48,17 +48,18 @@
     </section>
 </div>
 
-<script type="text/javascript">        
-    function generarAsistencia() {
-        var _idConfigurarSemestreEncriptado = $('#selectModulo').val();
+<script type="text/javascript">
+
+    function consultarAsistenciaDiaria() {
+        var _idAsistenciaFechaEncriptado = $('#selectFecha').val();
         $.ajax({
-            url: '@Url.Action("GenerarAsistencia", "Asistencia")',
+            url: '@Url.Action("Consultarasistenciadiaria", "AsistenciaDiaria")',
             type: 'post',
             dataType: 'JSON',
-            data: { _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado },
+            data: { _idAsistenciaFechaEncriptado: _idAsistenciaFechaEncriptado },
             beforeSend: function () {
                 $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-                
+
             },
             uploadProgress: function (event, position, total, percentComplete) {
             },
@@ -96,7 +97,58 @@
 
 
 <script type="text/javascript">
-    
+    function cambiarFechaAsistenciaPorConfigurarSemestre() {
+        var _idConfigurarSemestreEncriptado = $('#selectModulo').val();
+        if (_idConfigurarSemestreEncriptado == "0" ) {
+            $("#contenedorMensajes").html("");
+            $("#contenedorAsistencia").html("");
+            $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA</option");
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("Cambiarfechaasistenciaporconfigurarsemestre", "AsistenciaDiaria")',
+                type: 'post',
+                dataType: 'JSON',
+                data: { _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado },
+                beforeSend: function () {
+                    $("#selectFecha").html("<option value='0'>CARGANDO...</option");
+                    $("#contenedorMensajes").html("");
+                    $("#contenedorAsistencia").html("");
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                },
+                success: function (data) {
+                    if (data.validar == true) {
+                        $("#selectFecha").html(data.tabla);
+                    } else {
+                        $("#contenedorMensajes").html(data.mensaje);
+                        $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA</option");
+                    }
+                },
+                complete: function () {
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA</option");
+                    if (xhr.status === 0) {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                    } else if (xhr.status == 404) {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                    } else if (xhr.status == 500) {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                    } else if (errorThrown === 'parsererror') {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                    } else if (errorThrown === 'timeout') {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                    } else if (errorThrown === 'abort') {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                    } else {
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                    }
+                }
+            });
+        }
+    }
         function cambiarModulosPorSemestre() {
         var _idMaestriaEncriptado = $('#selectMaestria').val();
         var _idCohorteEncriptado = $('#selectCohorte').val();
@@ -257,14 +309,14 @@
     }
 </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         CargarFormulario();
     });
 
     function CargarFormulario() {
         $.ajax({
-            url: '@Url.Action("Cargarformulario", "Asistencia")',
+            url: '@Url.Action("Cargarformulario", "AsistenciaDiaria")',
             type: 'post',
             dataType: 'JSON',
             beforeSend: function () {
@@ -300,4 +352,4 @@
             }
         });
     }
-    </script>
+</script>
