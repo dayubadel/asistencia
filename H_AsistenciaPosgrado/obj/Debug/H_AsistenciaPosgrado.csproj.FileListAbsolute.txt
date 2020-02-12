@@ -77,7 +77,6 @@ C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debu
 C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csproj.CopyComplete
 C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.dll
 C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.pdb
-C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csprojAssemblyReference.cache
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\bin\ApplicationInsights.config
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\bin\H_AsistenciaPosgrado.dll.config
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\bin\H_AsistenciaPosgrado.dll
@@ -158,3 +157,4 @@ F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_Asisten
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csproj.CopyComplete
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.dll
 F:\01 DESARROLLO\04 PERSONAL\asistencia\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.pdb
+C:\Users\HOUSE\Desktop\DAYANA\H_AsistenciaPosgrado\H_AsistenciaPosgrado\obj\Debug\H_AsistenciaPosgrado.csprojAssemblyReference.cache

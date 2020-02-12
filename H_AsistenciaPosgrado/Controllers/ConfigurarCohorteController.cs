@@ -86,7 +86,7 @@ namespace H_AsistenciaPosgrado.Controllers
                     }
                     else
                     {
-                        if (_objConfigurarModuloDocente.Utilizado == "1")
+                        if (_objConfigurarModuloDocente.Utilizado == "1" || _objConfigurarSemestre.Utilizado=="1")
                         {
                             _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA CONFIGURACIÓN YA HA SIDO UTILIZADA, POR LO TANTO NO PUEDE SER ELIMINADA</div>";
                         }
@@ -151,7 +151,7 @@ namespace H_AsistenciaPosgrado.Controllers
                     foreach (var item in _listaConfigurarSemestre)
                     {
                         string _buttonEliminar = "";
-                        if(item.ConfigurarModuloDocente.Utilizado=="0")
+                        if(item.ConfigurarModuloDocente.Utilizado=="0" && item.Utilizado=="0")
                         {
                             string _idConfigurarSemestreEncriptado = _objSeguridad.Encriptar(item.IdConfigurarSemestre.ToString());
                             string _idConfigurarModuloDocenteEncriptado = _objSeguridad.Encriptar(item.ConfigurarModuloDocente.IdConfigurarModuloDocente.ToString());
