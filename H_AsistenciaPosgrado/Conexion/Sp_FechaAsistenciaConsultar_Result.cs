@@ -19,14 +19,13 @@ namespace H_AsistenciaPosgrado.Conexion
         public int Id_Horario { get; set; }
         public System.TimeSpan Hora_Entrada { get; set; }
         public System.TimeSpan Hora_Salida { get; set; }
-        public int Id_Configurar_Semestre { get; set; }
         public bool Eliminado_Horario { get; set; }
         public string UtilizadoHorario { get; set; }
         public int Id_Dia { get; set; }
         public string Descripcion_Dia { get; set; }
         public int Identificador_Dia { get; set; }
         public bool Eliminado_Dia { get; set; }
-        public int Id_Configurar_Semestre1 { get; set; }
+        public int Id_Configurar_Semestre { get; set; }
         public System.DateTime Fecha_Registro_Configurar_Semestre { get; set; }
         public bool Eliminado_Configurar_Semestre { get; set; }
         public string Utilizado_Configurar_Semestre { get; set; }

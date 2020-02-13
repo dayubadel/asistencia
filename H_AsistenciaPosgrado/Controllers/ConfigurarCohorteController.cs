@@ -20,44 +20,7 @@ namespace H_AsistenciaPosgrado.Controllers
         CatalogoConfigurarModuloDocente _objCatalogoConfigurarModuloDocente = new CatalogoConfigurarModuloDocente();
         CatalogoConfigurarSemestre _objCatalogoConfigurarSemestre = new CatalogoConfigurarSemestre();
         Seguridad _objSeguridad = new Seguridad();
-        [HttpPost]
-        public ActionResult Eliminarconfigurarcohorte(string _idConfigurarCohorteEncriptado)
-        {
-            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
-            bool _validar = false;
-            try
-            {
-                if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
-                {
-                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL IDENTIFICADOR DE LA CONFIGURACIÓN DE LA COHORTE</div>";
-                }
-                else
-                {
-                    int _idConfigurarCohorte = Convert.ToInt32(_objSeguridad.DesEncriptar(_idConfigurarCohorteEncriptado));
-                    var _objConfigurarCohorte = _objCatalogoConfigurarCohorte.ConsultarConfigurarCohorte().Where(c => c.IdConfigurarCohorte == _idConfigurarCohorte && c.Eliminado == false).FirstOrDefault();
-                    if (_objConfigurarCohorte == null)
-                    {
-                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ LA CONFIGURACIÓN DE LA COHORTE EN EL SISTEMA</div>";
-                    }
-                    else if (_objConfigurarCohorte.Utilizado == "1")
-                    {
-                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE PUEDE ELIMINAR LA CONFIGURACIÓN DE LA COHORTE PORQUE YA HA SIDO UTILIZADA</div>";
-                    }
-                    {
-                        _objCatalogoConfigurarCohorte.EliminarConfigurarCohorte(_idConfigurarCohorte);
-                        _mensaje = "";
-                        _validar = true;
-                        return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
-            }
-            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
-        }
-
+      
         [HttpPost]
         public ActionResult Eliminarconfigurarsemestreconfigurarmodulodocente(string _idConfigurarSemestreEncriptado,
                 string _idConfigurarModuloDocenteEncriptado)
@@ -431,110 +394,6 @@ namespace H_AsistenciaPosgrado.Controllers
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
 
-
-        [HttpPost]
-        public ActionResult GuardarconfigurarCohorte(string _idMaestriaEncriptado, string _idCohorteEncriptado, string _fechaInicio, string _fechaFin)
-        {
-            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
-            bool _validar = false;
-            try
-            {
-                if (string.IsNullOrEmpty(_idMaestriaEncriptado))
-                {
-                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA MAESTRÍA</div>";
-                }
-                else if (string.IsNullOrEmpty(_idCohorteEncriptado))
-                {
-                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA COHORTE</div>";
-                }
-                else if(string.IsNullOrEmpty(_fechaInicio))
-                {
-                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA FECHA DE INICIO</div>";
-                }
-                else if (string.IsNullOrEmpty(_fechaFin))
-                {
-                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA FECHA FIN</div>";
-                }
-                else
-                {
-                    int _idMaestria = Convert.ToInt32(_objSeguridad.DesEncriptar(_idMaestriaEncriptado));
-                    int _idCohorte = Convert.ToInt32(_objSeguridad.DesEncriptar(_idCohorteEncriptado));
-                    var _objCohorte = _objCatalogoCohorte.ConsultarCohorte().Where(c => c.Eliminado == false && c.Estado == "ACTIVA" && c.Maestria.IdMestria == _idMaestria && c.IdCohorte == _idCohorte).FirstOrDefault();
-                    if (_objCohorte == null)
-                    {
-                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA COHORTE VÁLIDA</div>";
-                    }
-                    else
-                    {
-                        int _idConfigurarCohorte = _objCatalogoConfigurarCohorte.InsertarConfigurarCohorte(
-                            new EntidadConfigurarCohorte()
-                            {
-                                Cohorte = new EntidadCohorte()
-                                {
-                                    IdCohorte = _objCohorte.IdCohorte
-                                },
-                                FechaInicio=Convert.ToDateTime(_fechaInicio),
-                                FechaFin=Convert.ToDateTime(_fechaFin),
-                                Eliminado = false
-                            });
-                        string _inputFechaInicio = "<label id='inputFechaInicio' class='form-control'>" + _fechaInicio + "</label>";
-                        string _inputFechaFin = "<label id='inputFechaFin' class='form-control' >" +_fechaFin + "</label>";
-                        string _inputIdConfigurarCohorte = "<input id='idConfigurarCohorteEncriptado' value='" + _objSeguridad.Encriptar(_idConfigurarCohorte.ToString()) + "' type='hidden' class='form-control' >";
-                        string _formInputFechaInicio = "<div class='form-group'>" +
-                                                "<label>Fecha Inicio:</label>" +
-                                                "<div class='input-group'>" +
-                                                  "<div class='input-group-prepend'>" +
-                                                    "<span class='input-group-text'><i class='far fa-calendar-alt'></i></span>" +
-                                                  "</div>" +
-                                                  _inputFechaInicio +
-                                                "</div>" +
-                                              "</div>";
-                        string _formInputFechaFin = "<div class='form-group'>" +
-                                                     "<label>Fecha Fin:</label>" +
-                                                     "<div class='input-group'>" +
-                                                       "<div class='input-group-prepend'>" +
-                                                         "<span class='input-group-text'><i class='far fa-calendar-alt'></i></span>" +
-                                                       "</div>" +
-                                                       _inputFechaFin +
-                                                       _inputIdConfigurarCohorte+
-                                                     "</div>" +
-                                                   "</div>";
-                        string _contenedorFechas = "<div class='row'><div class='col-md-6'>" + _formInputFechaInicio + "</div>" +
-                                        "<div class='col-md-6'>" + _formInputFechaFin + "</div></div>";
-
-                        string   _fechas =
-                                  "<div class='card' style='background: khaki;'>" +
-                                        "<div class='card-header callout callout-warning'>" +
-                                            "<h3 class='card-title'>Eliminar fechas de configuración</h3>" +
-                                            "<div class='card-tools'>" +
-                                                "<button type='button' onclick='eliminarConfigurarCohorte(\"" + _objSeguridad.Encriptar(_idConfigurarCohorte.ToString()) + "\");' class='btn btn-sm btn-warning'>" +
-                                                    "<i class='fas fa-trash'></i>" +
-                                                "</button>" +
-                                            "</div>" +
-                                        "</div>" +
-                                      "<div class='card-body'>" +
-                                            _contenedorFechas +
-                                      "</div> " +
-                                    "</div>";
-                        
-                        string _buttonConsultar = "<button onclick='consultarConfigurarCohorte();' type='button' class='btn btn-block btn-outline-primary'>Consultar</button>";
-
-                        string _inputFechas = "<div class='col-md-12'>" + _fechas + "</div>";
-                        string _botones = "<div class='col-md-12'>" + _buttonConsultar + "</div>";
-                        
-                        _mensaje = "";
-                        _validar = true;
-                        return Json(new { mensaje = _mensaje, validar = _validar, boton = _botones, fechas = _inputFechas }, JsonRequestBehavior.AllowGet);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
-            }
-            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         public ActionResult Cargarformulariofechasconfigurarcohorte(string _idMaestriaEncriptado, string _idCohorteEncriptado)
         {
@@ -561,64 +420,46 @@ namespace H_AsistenciaPosgrado.Controllers
                     }
                     else
                     {
-                        string _inputIdConfigurarCohorte = "";
-                        string _inputFechaInicio = "<input id='inputFechaInicio' type='date' class='form-control' data-inputmask-alias='datetime' data-inputmask-inputformat='dd/mm/yyyy' data-mask='' im-insert='false'>";
-                        string _inputFechaFin = "<input id='inputFechaFin' type='date' class='form-control' data-inputmask-alias='datetime' data-inputmask-inputformat='dd/mm/yyyy' data-mask='' im-insert='false'>";
-                        string _buttonGuardar = "<button onclick='guardarConfigurarCohorte();' type='button' class='btn btn-block btn-outline-success'>Guardar</button>";
                         var _objConfigurarCohorte = _objCatalogoConfigurarCohorte.ConsultarConfigurarCohorte().Where(c => c.Cohorte.IdCohorte == _idCohorte && c.Eliminado == false).FirstOrDefault();
-
-                        if (_objConfigurarCohorte != null)
+                        if (_objConfigurarCohorte == null)
                         {
-                            _inputIdConfigurarCohorte = "<input id='idConfigurarCohorteEncriptado' value='" + _objSeguridad.Encriptar(_objConfigurarCohorte.IdConfigurarCohorte.ToString()) + "' type='hidden' class='form-control' >";
-                            _inputFechaInicio = "<label id='inputFechaInicio' class='form-control'>" + _objConfigurarCohorte.FechaInicio.ToShortDateString() + "</label>";
-                            _inputFechaFin = "<label id='inputFechaFin' class='form-control' >" + _objConfigurarCohorte.FechaFin.ToShortDateString() + "</label>";
-                            _buttonGuardar = "<button onclick='cargarListadoSemestre();' type='button' class='btn btn-block btn-outline-primary'>Ver listado de semestres</button>";
+                            _mensaje = "<div class='alert alert-danger text-center' role='alert'>ES NECESARIO QUE ASIGNE UNA FECHA DE CONFIGURACIÓN A LA MAESTRÍA Y COHORTE SELECCIONADAS</div>";
                         }
+                        else
+                        {
+                            string _inputIdConfigurarCohorte = "<input id='idConfigurarCohorteEncriptado' value='" + _objSeguridad.Encriptar(_objConfigurarCohorte.IdConfigurarCohorte.ToString()) + "' type='hidden' class='form-control' >";
+                            string _inputFechaInicio = "<label id='inputFechaInicio' class='form-control'>" + _objConfigurarCohorte.FechaInicio.ToShortDateString() + "</label>";
+                            string _inputFechaFin = "<label id='inputFechaFin' class='form-control' >" + _objConfigurarCohorte.FechaFin.ToShortDateString() + "</label>";
 
-                        string _formInputFechaInicio = "<div class='form-group'>" +
-                                                 "<label>Fecha Inicio:</label>" +
-                                                 "<div class='input-group'>" +
-                                                   "<div class='input-group-prepend'>" +
-                                                     "<span class='input-group-text'><i class='far fa-calendar-alt'></i></span>" +
-                                                   "</div>" +
-                                                   _inputFechaInicio +
-                                                 "</div>" +
-                                               "</div>";
-                        string _formInputFechaFin = "<div class='form-group'>" +
-                                                     "<label>Fecha Fin:</label>" +
+
+                            string _formInputFechaInicio = "<div class='form-group'>" +
+                                                     "<label>Fecha Inicio:</label>" +
                                                      "<div class='input-group'>" +
                                                        "<div class='input-group-prepend'>" +
                                                          "<span class='input-group-text'><i class='far fa-calendar-alt'></i></span>" +
                                                        "</div>" +
-                                                       _inputFechaFin +
-                                                       _inputIdConfigurarCohorte +
+                                                       _inputFechaInicio +
                                                      "</div>" +
                                                    "</div>";
-                        string _fechas = "<div class='row'><div class='col-md-6'>" + _formInputFechaInicio + "</div>" +
-                                        "<div class='col-md-6'>" + _formInputFechaFin + "</div></div>";
-                        if (_objConfigurarCohorte != null && _objConfigurarCohorte.Utilizado!="1")
-                        {
-                            _fechas =
-                                  "<div class='card' style='background: khaki;'>" +
-                                        "<div class='card-header callout callout-warning'>" +
-                                            "<h3 class='card-title'>Eliminar fechas de configuración</h3>" +
-                                            "<div class='card-tools'>" +
-                                                "<button onclick='eliminarConfigurarCohorte(\""+_objSeguridad.Encriptar(_objConfigurarCohorte.IdConfigurarCohorte.ToString())+ "\");' type='button' class='btn btn-sm btn-warning'>" +
-                                                    "<i class='fas fa-trash'></i>" +
-                                                "</button>" +
-                                            "</div>" +
-                                        "</div>" +
-                                      "<div class='card-body'>" +
-                                            _fechas +
-                                      "</div> " +
-                                    "</div>";
+                            string _formInputFechaFin = "<div class='form-group'>" +
+                                                         "<label>Fecha Fin:</label>" +
+                                                         "<div class='input-group'>" +
+                                                           "<div class='input-group-prepend'>" +
+                                                             "<span class='input-group-text'><i class='far fa-calendar-alt'></i></span>" +
+                                                           "</div>" +
+                                                           _inputFechaFin +
+                                                           _inputIdConfigurarCohorte +
+                                                         "</div>" +
+                                                       "</div>";
+                            string _fechas = "<div class='row'><div class='col-md-6'>" + _formInputFechaInicio + "</div>" +
+                                            "<div class='col-md-6'>" + _formInputFechaFin + "</div></div>";
+
+                            string _inputFechas = "<div class='col-md-12'>" + _fechas + "</div>";
+
+                            _mensaje = "";
+                            _validar = true;
+                            return Json(new { mensaje = _mensaje, validar = _validar, inputFechas = _inputFechas }, JsonRequestBehavior.AllowGet);
                         }
-                        string _inputFechas = "<div class='col-md-12'>"+  _fechas+ "</div>";
-                        string _botones = "<div class='col-md-12'>" + _buttonGuardar + "</div>";
-                                            
-                        _mensaje = "";
-                        _validar = true;
-                        return Json(new { mensaje = _mensaje, validar = _validar, inputFechas = _inputFechas, botones= _botones }, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
@@ -628,8 +469,6 @@ namespace H_AsistenciaPosgrado.Controllers
             }
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
-
-
 
         [HttpPost]
         public ActionResult Cambiarcohortepormaestria(string _idMaestriaEncriptado)

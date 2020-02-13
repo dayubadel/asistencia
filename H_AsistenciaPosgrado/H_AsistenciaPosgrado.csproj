@@ -179,9 +179,6 @@
     <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_FechaAsistenciaConsultar_Result1.cs">
-      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_HorarioConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -203,6 +200,7 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\AsistenciaController.cs" />
     <Compile Include="Controllers\AsistenciaDiariaController.cs" />
+    <Compile Include="Controllers\ConfigurarFechaCohorteController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ConfigurarHorarioController.cs" />
@@ -1927,11 +1925,12 @@
     <Content Include="Views\Administrador\ConfigurarHorario.cshtml" />
     <Content Include="Views\Administrador\Asistencia.cshtml" />
     <Content Include="Views\Administrador\AsistenciaDiaria.cshtml" />
+    <Content Include="Views\Administrador\ConfigurarFechaCohorte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\AsistenciaDiaria\" />
+    <Folder Include="Views\ConfigurarFechaCohorte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

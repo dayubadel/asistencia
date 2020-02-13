@@ -5,93 +5,93 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="i_posgradoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="Sp_AsistenciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_AsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_AsistenciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_AsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdMatricula" Type="int" Mode="In" />
           <Parameter Name="IdTipoAsistencia" Type="int" Mode="In" />
           <Parameter Name="IdFechaAsistencia" Type="int" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_AsistenciaTipoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_CohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_ConfigurarCohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_ConfigurarCohorteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_AsistenciaTipoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_CohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_ConfigurarCohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_ConfigurarCohorteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdConfigurarCohorte" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_ConfigurarCohorteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ConfigurarCohorteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdCohorte" Type="int" Mode="In" />
           <Parameter Name="FechaInicio" Type="date" Mode="In" />
           <Parameter Name="FechaFin" Type="date" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_ConfigurarModuloDocenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ConfigurarModuloDocenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_ConfigurarModuloDocenteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ConfigurarModuloDocenteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdModulo" Type="int" Mode="In" />
           <Parameter Name="IdDocente" Type="int" Mode="In" />
           <Parameter Name="FechaInicio" Type="date" Mode="In" />
           <Parameter Name="fechaFin" Type="date" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_ConfigurarSemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_ConfigurarSemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ConfigurarSemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_ConfigurarSemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdConfigurarSemestre" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_ConfigurarSemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ConfigurarSemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdConfigurarCohorte" Type="int" Mode="In" />
           <Parameter Name="IdConfigurarModuloDocente" Type="int" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_DiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_DocenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_FechaAsistenciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_FechaAsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_DiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_DocenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_FechaAsistenciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_FechaAsistenciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdHorario" Type="int" Mode="In" />
           <Parameter Name="FechaAsistencia" Type="date" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_HorarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_HorarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_HorarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_HorarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdHorario" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_HorarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_HorarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdConfigurarSemestre" Type="int" Mode="In" />
           <Parameter Name="IdDia" Type="int" Mode="In" />
           <Parameter Name="HoraEntrada" Type="time" Mode="In" />
           <Parameter Name="HoraSalida" Type="time" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_MaestriaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_MatriculaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_ModuloActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_MaestriaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_MatriculaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_ModuloActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdModulo" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="idConfigurarCohorte" Type="int" Mode="In" />
           <Parameter Name="idSemestre" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_ModuloEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ModuloEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdModulo" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_ModuloInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_ModuloInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_SemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia" />
-        <Function Name="Sp_SemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_SemestreConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+        <Function Name="Sp_SemestreEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_SemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_SemestreInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Identificador" Type="int" Mode="In" />
           <Parameter Name="Eliminado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_SemestreModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Asistencia">
+        <Function Name="Sp_SemestreModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Identificador" Type="int" Mode="In" />
@@ -103,28 +103,26 @@
     <edmx:ConceptualModels>
       <Schema Namespace="i_posgradoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="i_posgradoEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Sp_AsistenciaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdMatricula" Mode="In" Type="Int32" />
+            <Parameter Name="IdTipoAsistencia" Mode="In" Type="Int32" />
+            <Parameter Name="IdFechaAsistencia" Mode="In" Type="Int32" />
+            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AsistenciaTipoConsultar" ReturnType="Collection(i_posgradoModel.Sp_AsistenciaTipoConsultar_Result)" />
+          <FunctionImport Name="Sp_CohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_CohorteConsultar_Result)" />
+          <FunctionImport Name="Sp_ConfigurarCohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result)" />
           <FunctionImport Name="Sp_ConfigurarCohorteEliminar">
           <Parameter Name="IdConfigurarCohorte" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_MaestriaConsultar" ReturnType="Collection(i_posgradoModel.Sp_MaestriaConsultar_Result)" />
-          <FunctionImport Name="Sp_ModuloActualizar">
-            <Parameter Name="IdModulo" Mode="In" Type="Int32" />
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ModuloEliminar">
-          <Parameter Name="IdModulo" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ModuloInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="Descripcion" Mode="In" Type="String" />
-            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_CohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_CohorteConsultar_Result)" />
           <FunctionImport Name="Sp_ConfigurarCohorteInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCohorte" Mode="In" Type="Int32" />
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ConfigurarModuloDocenteEliminar">
+          <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConfigurarModuloDocenteInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdModulo" Mode="In" Type="Int32" />
@@ -133,19 +131,53 @@
             <Parameter Name="fechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="Sp_ConfigurarSemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result)" />
+          <FunctionImport Name="Sp_ConfigurarSemestreEliminar">
+          <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Sp_ConfigurarSemestreInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdConfigurarCohorte" Mode="In" Type="Int32" />
             <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
             <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
             <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ConfigurarModuloDocenteEliminar">
-          <Parameter Name="IdConfigurarModuloDocente" Mode="In" Type="Int32" />
+          <FunctionImport Name="Sp_DiaConsultar" ReturnType="Collection(i_posgradoModel.Sp_DiaConsultar_Result)" />
+          <FunctionImport Name="Sp_DocenteConsultar" ReturnType="Collection(i_posgradoModel.Sp_DocenteConsultar_Result)" />
+          <FunctionImport Name="Sp_FechaAsistenciaConsultar" ReturnType="Collection(i_posgradoModel.Sp_FechaAsistenciaConsultar_Result)" />
+          <FunctionImport Name="Sp_FechaAsistenciaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdHorario" Mode="In" Type="Int32" />
+            <Parameter Name="FechaAsistencia" Mode="In" Type="DateTime" />
+            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ConfigurarSemestreEliminar">
-          <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
+          <FunctionImport Name="Sp_HorarioEliminar">
+          <Parameter Name="IdHorario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_HorarioInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
+            <Parameter Name="IdDia" Mode="In" Type="Int32" />
+            <Parameter Name="HoraEntrada" Mode="In" Type="Time" />
+            <Parameter Name="HoraSalida" Mode="In" Type="Time" />
+            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_MaestriaConsultar" ReturnType="Collection(i_posgradoModel.Sp_MaestriaConsultar_Result)" />
+          <FunctionImport Name="Sp_MatriculaConsultar" ReturnType="Collection(i_posgradoModel.Sp_MatriculaConsultar_Result)" />
+          <FunctionImport Name="Sp_ModuloActualizar">
+            <Parameter Name="IdModulo" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_ModuloConsultar" ReturnType="Collection(i_posgradoModel.Sp_ModuloConsultar_Result)" />
+          <FunctionImport Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" ReturnType="Collection(i_posgradoModel.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result)">
+            <Parameter Name="idConfigurarCohorte" Mode="In" Type="Int32" />
+            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ModuloEliminar">
+          <Parameter Name="IdModulo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ModuloInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
           <FunctionImport Name="Sp_SemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_SemestreConsultar_Result)" />
           <FunctionImport Name="Sp_SemestreEliminar">
           <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
@@ -161,46 +193,14 @@
             <Parameter Name="Identificador" Mode="In" Type="Int32" />
             <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_DocenteConsultar" ReturnType="Collection(i_posgradoModel.Sp_DocenteConsultar_Result)" />
-          <FunctionImport Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" ReturnType="Collection(i_posgradoModel.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result)">
-            <Parameter Name="idConfigurarCohorte" Mode="In" Type="Int32" />
-            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ConfigurarSemestreConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result)" />
-          <FunctionImport Name="Sp_ConfigurarCohorteConsultar" ReturnType="Collection(i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result)" />
-          <FunctionImport Name="Sp_DiaConsultar" ReturnType="Collection(i_posgradoModel.Sp_DiaConsultar_Result)" />
-          <FunctionImport Name="Sp_HorarioEliminar">
-          <Parameter Name="IdHorario" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
-          <FunctionImport Name="Sp_HorarioInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdConfigurarSemestre" Mode="In" Type="Int32" />
-            <Parameter Name="IdDia" Mode="In" Type="Int32" />
-            <Parameter Name="HoraEntrada" Mode="In" Type="Time" />
-            <Parameter Name="HoraSalida" Mode="In" Type="Time" />
-            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_MatriculaConsultar" ReturnType="Collection(i_posgradoModel.Sp_MatriculaConsultar_Result)" />
-          <FunctionImport Name="Sp_AsistenciaTipoConsultar" ReturnType="Collection(i_posgradoModel.Sp_AsistenciaTipoConsultar_Result)" />
-          <FunctionImport Name="Sp_FechaAsistenciaInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdHorario" Mode="In" Type="Int32" />
-            <Parameter Name="FechaAsistencia" Mode="In" Type="DateTime" />
-            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_AsistenciaInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdMatricula" Mode="In" Type="Int32" />
-            <Parameter Name="IdTipoAsistencia" Mode="In" Type="Int32" />
-            <Parameter Name="IdFechaAsistencia" Mode="In" Type="Int32" />
-            <Parameter Name="Eliminado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_FechaAsistenciaConsultar" ReturnType="Collection(i_posgradoModel.Sp_FechaAsistenciaConsultar_Result1)" />
           <FunctionImport Name="Sp_AsistenciaConsultar" ReturnType="Collection(i_posgradoModel.Sp_AsistenciaConsultar_Result)" />
+          <FunctionImport Name="Sp_HorarioConsultar" ReturnType="Collection(i_posgradoModel.Sp_HorarioConsultar_Result)" />
         </EntityContainer>
-        <ComplexType Name="Sp_MaestriaConsultar_Result">
-          <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
-          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
+        <ComplexType Name="Sp_AsistenciaTipoConsultar_Result">
+          <Property Type="Int32" Name="Id_TipoAsistencia" Nullable="false" />
+          <Property Type="Int32" Name="Identificador" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Sp_CohorteConsultar_Result">
           <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
@@ -213,52 +213,21 @@
           <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="Sp_ModuloConsultar_Result">
-          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
-          <Property Type="String" Name="UtilizadoModulo" Nullable="false" MaxLength="1" />
-        </ComplexType>
-        <ComplexType Name="Sp_SemestreConsultar_Result">
-          <Property Type="Int32" Name="Id_Semestre" Nullable="false" />
-          <Property Type="Int32" Name="Identificador" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
-          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
-          <Property Type="String" Name="UtilizadoSemestre" Nullable="false" MaxLength="1" />
-        </ComplexType>
-        <ComplexType Name="Sp_DocenteConsultar_Result">
-          <Property Type="Int32" Name="IdPersona" Nullable="false" />
-          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Cedula" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CalleSecundaria" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Numero" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="ReferenciaD" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="TelefonoD" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="TelefonoC" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="ParroquiaNac" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="FechaNac" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
-          <Property Type="Boolean" Name="Eliminado" Nullable="true" />
-          <Property Type="Int32" Name="EtniaId" Nullable="true" />
-          <Property Type="Int32" Name="CantonId" Nullable="true" />
-          <Property Type="Int32" Name="TipoSangreID" Nullable="true" />
-          <Property Type="Int32" Name="EstadoCivilId" Nullable="true" />
-          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="tipoDocumentoId" Nullable="true" />
-          <Property Type="Int32" Name="sexoId" Nullable="true" />
-          <Property Type="Int32" Name="paisNacionalidadId" Nullable="true" />
-          <Property Type="Int32" Name="Id_Docente" Nullable="false" />
-          <Property Type="Boolean" Name="EliminadoDocente" Nullable="false" />
-          <Property Type="String" Name="UtilizadoDocente" Nullable="false" MaxLength="1" />
-        </ComplexType>
-        <ComplexType Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result">
-          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+        <ComplexType Name="Sp_ConfigurarCohorteConsultar_Result">
+          <Property Type="Int32" Name="Id_Configurar_Cohorte" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Inicio" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Fin" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Configurar_Cohorte" Nullable="false" />
+          <Property Type="String" Name="Utilizado_Configurar_Cohorte" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
+          <Property Type="String" Name="Detalle_Cohorte" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Estado_Cohorte" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Fecha_Chohorte" Nullable="true" />
+          <Property Type="Boolean" Name="Eliminado_Cohorte" Nullable="true" />
+          <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
+          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Sp_ConfigurarSemestreConsultar_Result">
           <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
@@ -299,39 +268,97 @@
           <Property Type="String" Name="Apellido_Materno_Persona" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Cedula_Persona" Nullable="true" MaxLength="200" />
         </ComplexType>
-        <ComplexType Name="Sp_ConfigurarCohorteConsultar_Result">
-          <Property Type="Int32" Name="Id_Configurar_Cohorte" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Inicio" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Fin" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Cohorte" Nullable="false" />
-          <Property Type="String" Name="Utilizado_Configurar_Cohorte" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
-          <Property Type="String" Name="Detalle_Cohorte" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Estado_Cohorte" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="Fecha_Chohorte" Nullable="true" />
-          <Property Type="Boolean" Name="Eliminado_Cohorte" Nullable="true" />
-          <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
-          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="Sp_DiaConsultar_Result">
           <Property Type="Int32" Name="Id_Dia" Nullable="false" />
           <Property Type="Int32" Name="Identificador" Nullable="false" />
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="Eliminado" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="Sp_HorarioConsultar_Result">
+        <ComplexType Name="Sp_DocenteConsultar_Result">
+          <Property Type="Int32" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Cedula" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CalleSecundaria" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ReferenciaD" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TelefonoD" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelefonoC" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ParroquiaNac" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="FechaNac" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="true" />
+          <Property Type="Int32" Name="EtniaId" Nullable="true" />
+          <Property Type="Int32" Name="CantonId" Nullable="true" />
+          <Property Type="Int32" Name="TipoSangreID" Nullable="true" />
+          <Property Type="Int32" Name="EstadoCivilId" Nullable="true" />
+          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="tipoDocumentoId" Nullable="true" />
+          <Property Type="Int32" Name="sexoId" Nullable="true" />
+          <Property Type="Int32" Name="paisNacionalidadId" Nullable="true" />
+          <Property Type="Int32" Name="Id_Docente" Nullable="false" />
+          <Property Type="Boolean" Name="EliminadoDocente" Nullable="false" />
+          <Property Type="String" Name="UtilizadoDocente" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="Sp_FechaAsistenciaConsultar_Result">
+          <Property Type="Int32" Name="Id_Fecha_Asistencia" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Asistencia" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_FechaAsistencia" Nullable="false" />
           <Property Type="Int32" Name="Id_Horario" Nullable="false" />
           <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
           <Property Type="Time" Name="Hora_Salida" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
           <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
           <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="Id_Dia" Nullable="false" />
           <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
           <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
+          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Semestre" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Eliminado_Configurar_Semestre" Nullable="false" />
+          <Property Type="String" Name="Utilizado_Configurar_Semestre" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Id_Semestre" Nullable="false" />
+          <Property Type="String" Name="Descripcion_Semestre" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="Identificador_Semestre" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Semestre" Nullable="false" />
+          <Property Type="Int32" Name="Id_Configurar_Cohorte" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Cohorte" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Cohorte" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Configurar_Cohorte" Nullable="false" />
+          <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
+          <Property Type="String" Name="Detalle_Cohorte" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Estado_Cohorte" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Fecha_Cohorte" Nullable="true" />
+          <Property Type="Boolean" Name="Eliminado_Cohorte" Nullable="true" />
+          <Property Type="Int32" Name="IdMaestria" Nullable="false" />
+          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
+          <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Modulo_Docente" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Modulo_Docente" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Modulo_Docente" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Eliminado_Configurar_Modulo_Docente" Nullable="false" />
+          <Property Type="String" Name="Utilizado_Configurar_Modulo_Docente" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
+          <Property Type="String" Name="Descripcion_Modulo" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Modulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Docente" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Docente" Nullable="false" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres_Persona" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Apellido_Paterno_Persona" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Apellido_Materno_Persona" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Cedula_Persona" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="Sp_MaestriaConsultar_Result">
+          <Property Type="Int32" Name="Id_Maestria" Nullable="false" />
+          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Sp_MatriculaConsultar_Result">
           <Property Type="Int32" Name="Id_Matricula" Nullable="false" />
@@ -354,114 +381,23 @@
           <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Cedula" Nullable="true" MaxLength="200" />
         </ComplexType>
-        <ComplexType Name="Sp_AsistenciaTipoConsultar_Result">
-          <Property Type="Int32" Name="Id_TipoAsistencia" Nullable="false" />
-          <Property Type="Int32" Name="Identificador" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+        <ComplexType Name="Sp_ModuloConsultar_Result">
+          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoModulo" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result">
+          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
           <Property Type="Boolean" Name="Eliminado" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="Sp_FechaAsistenciaConsultar_Result">
-          <Property Type="Int32" Name="Id_Fecha_Asistencia" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Asistencia" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_FechaAsistencia" Nullable="false" />
-          <Property Type="Int32" Name="Id_Horario" Nullable="false" />
-          <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
-          <Property Type="Time" Name="Hora_Salida" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
-          <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Dia" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Semestre1" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Semestre" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Semestre" Nullable="false" />
-          <Property Type="String" Name="Utilizado_Configurar_Semestre" Nullable="false" MaxLength="1" />
+        <ComplexType Name="Sp_SemestreConsultar_Result">
           <Property Type="Int32" Name="Id_Semestre" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Semestre" Nullable="false" MaxLength="250" />
-          <Property Type="Int32" Name="Identificador_Semestre" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Semestre" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Cohorte" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Cohorte" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Cohorte" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Cohorte" Nullable="false" />
-          <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
-          <Property Type="String" Name="Detalle_Cohorte" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Estado_Cohorte" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="Fecha_Cohorte" Nullable="true" />
-          <Property Type="Boolean" Name="Eliminado_Cohorte" Nullable="true" />
-          <Property Type="Int32" Name="IdMaestria" Nullable="false" />
-          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
-          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
-          <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Modulo_Docente" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="String" Name="Utilizado_Configurar_Modulo_Docente" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Modulo" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Modulo" Nullable="false" />
-          <Property Type="Int32" Name="Id_Docente" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Docente" Nullable="false" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
-          <Property Type="String" Name="Nombres_Persona" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Apellido_Paterno_Persona" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Apellido_Materno_Persona" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Cedula_Persona" Nullable="true" MaxLength="200" />
-        </ComplexType>
-        <ComplexType Name="Sp_FechaAsistenciaConsultar_Result1">
-          <Property Type="Int32" Name="Id_Fecha_Asistencia" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Asistencia" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_FechaAsistencia" Nullable="false" />
-          <Property Type="Int32" Name="Id_Horario" Nullable="false" />
-          <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
-          <Property Type="Time" Name="Hora_Salida" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
-          <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Dia" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Semestre" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Semestre" Nullable="false" />
-          <Property Type="String" Name="Utilizado_Configurar_Semestre" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Semestre" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Semestre" Nullable="false" MaxLength="250" />
-          <Property Type="Int32" Name="Identificador_Semestre" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Semestre" Nullable="false" />
-          <Property Type="Int32" Name="Id_Configurar_Cohorte" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Cohorte" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Cohorte" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Cohorte" Nullable="false" />
-          <Property Type="Int32" Name="Id_Cohorte" Nullable="false" />
-          <Property Type="String" Name="Detalle_Cohorte" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Estado_Cohorte" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="Fecha_Cohorte" Nullable="true" />
-          <Property Type="Boolean" Name="Eliminado_Cohorte" Nullable="true" />
-          <Property Type="Int32" Name="IdMaestria" Nullable="false" />
-          <Property Type="String" Name="Estado_Maestria" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Nombre_Maestria" Nullable="true" MaxLength="100" />
-          <Property Type="Boolean" Name="Eliminado_Maestria" Nullable="true" />
-          <Property Type="Int32" Name="Id_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Inicio_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Fin_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="DateTime" Name="Fecha_Registro_Configurar_Modulo_Docente" Nullable="false" Precision="23" />
-          <Property Type="Boolean" Name="Eliminado_Configurar_Modulo_Docente" Nullable="false" />
-          <Property Type="String" Name="Utilizado_Configurar_Modulo_Docente" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="Id_Modulo" Nullable="false" />
-          <Property Type="String" Name="Descripcion_Modulo" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Modulo" Nullable="false" />
-          <Property Type="Int32" Name="Id_Docente" Nullable="false" />
-          <Property Type="Boolean" Name="Eliminado_Docente" Nullable="false" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
-          <Property Type="String" Name="Nombres_Persona" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Apellido_Paterno_Persona" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Apellido_Materno_Persona" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Cedula_Persona" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Identificador" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoSemestre" Nullable="false" MaxLength="1" />
         </ComplexType>
         <ComplexType Name="Sp_AsistenciaConsultar_Result">
           <Property Type="Int32" Name="Id_Asistencia" Nullable="false" />
@@ -491,26 +427,35 @@
           <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Cedula" Nullable="true" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="Sp_HorarioConsultar_Result">
+          <Property Type="Int32" Name="Id_Horario" Nullable="false" />
+          <Property Type="Time" Name="Hora_Entrada" Nullable="false" />
+          <Property Type="Time" Name="Hora_Salida" Nullable="false" />
+          <Property Type="Int32" Name="Id_Configurar_Semestre" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Horario" Nullable="false" />
+          <Property Type="String" Name="UtilizadoHorario" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Id_Dia" Nullable="false" />
+          <Property Type="String" Name="Descripcion_Dia" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Identificador_Dia" Nullable="false" />
+          <Property Type="Boolean" Name="Eliminado_Dia" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="i_posgradoModelStoreContainer" CdmEntityContainer="i_posgradoEntities" >
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarCohorteEliminar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarCohorteEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_MaestriaConsultar" FunctionName="i_posgradoModel.Store.Sp_MaestriaConsultar">
+          <FunctionImportMapping FunctionImportName="Sp_AsistenciaInsertar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_AsistenciaTipoConsultar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaTipoConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MaestriaConsultar_Result">
-                <ScalarProperty Name="Id_Maestria" ColumnName="Id_Maestria" />
-                <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
-                <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
-                <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_AsistenciaTipoConsultar_Result">
+                <ScalarProperty Name="Id_TipoAsistencia" ColumnName="Id_TipoAsistencia" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ModuloActualizar" FunctionName="i_posgradoModel.Store.Sp_ModuloActualizar" />
-          <FunctionImportMapping FunctionImportName="Sp_ModuloEliminar" FunctionName="i_posgradoModel.Store.Sp_ModuloEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_ModuloInsertar" FunctionName="i_posgradoModel.Store.Sp_ModuloInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_CohorteConsultar" FunctionName="i_posgradoModel.Store.Sp_CohorteConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="i_posgradoModel.Sp_CohorteConsultar_Result">
@@ -526,77 +471,30 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarCohorteConsultar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarCohorteConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result">
+                <ScalarProperty Name="Id_Configurar_Cohorte" ColumnName="Id_Configurar_Cohorte" />
+                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha_Inicio" />
+                <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha_Fin" />
+                <ScalarProperty Name="Eliminado_Configurar_Cohorte" ColumnName="Eliminado_Configurar_Cohorte" />
+                <ScalarProperty Name="Utilizado_Configurar_Cohorte" ColumnName="Utilizado_Configurar_Cohorte" />
+                <ScalarProperty Name="Id_Cohorte" ColumnName="Id_Cohorte" />
+                <ScalarProperty Name="Detalle_Cohorte" ColumnName="Detalle_Cohorte" />
+                <ScalarProperty Name="Estado_Cohorte" ColumnName="Estado_Cohorte" />
+                <ScalarProperty Name="Fecha_Chohorte" ColumnName="Fecha_Chohorte" />
+                <ScalarProperty Name="Eliminado_Cohorte" ColumnName="Eliminado_Cohorte" />
+                <ScalarProperty Name="Id_Maestria" ColumnName="Id_Maestria" />
+                <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
+                <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
+                <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarCohorteEliminar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarCohorteEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_ConfigurarCohorteInsertar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarCohorteInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarModuloDocenteInsertar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarModuloDocenteInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarSemestreInsertar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarSemestreInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_ConfigurarModuloDocenteEliminar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarModuloDocenteEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarSemestreEliminar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarSemestreEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_ModuloConsultar" FunctionName="i_posgradoModel.Store.Sp_ModuloConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ModuloConsultar_Result">
-                <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
-                <ScalarProperty Name="UtilizadoModulo" ColumnName="UtilizadoModulo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_SemestreConsultar" FunctionName="i_posgradoModel.Store.Sp_SemestreConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_SemestreConsultar_Result">
-                <ScalarProperty Name="Id_Semestre" ColumnName="Id_Semestre" />
-                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
-                <ScalarProperty Name="UtilizadoSemestre" ColumnName="UtilizadoSemestre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_SemestreEliminar" FunctionName="i_posgradoModel.Store.Sp_SemestreEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_SemestreInsertar" FunctionName="i_posgradoModel.Store.Sp_SemestreInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_SemestreModificar" FunctionName="i_posgradoModel.Store.Sp_SemestreModificar" />
-          <FunctionImportMapping FunctionImportName="Sp_DocenteConsultar" FunctionName="i_posgradoModel.Store.Sp_DocenteConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_DocenteConsultar_Result">
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
-                <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
-                <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
-                <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
-                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
-                <ScalarProperty Name="EtniaId" ColumnName="EtniaId" />
-                <ScalarProperty Name="CantonId" ColumnName="CantonId" />
-                <ScalarProperty Name="TipoSangreID" ColumnName="TipoSangreID" />
-                <ScalarProperty Name="EstadoCivilId" ColumnName="EstadoCivilId" />
-                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
-                <ScalarProperty Name="tipoDocumentoId" ColumnName="tipoDocumentoId" />
-                <ScalarProperty Name="sexoId" ColumnName="sexoId" />
-                <ScalarProperty Name="paisNacionalidadId" ColumnName="paisNacionalidadId" />
-                <ScalarProperty Name="Id_Docente" ColumnName="Id_Docente" />
-                <ScalarProperty Name="EliminadoDocente" ColumnName="EliminadoDocente" />
-                <ScalarProperty Name="UtilizadoDocente" ColumnName="UtilizadoDocente" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" FunctionName="i_posgradoModel.Store.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result">
-                <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarModuloDocenteInsertar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarModuloDocenteInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_ConfigurarSemestreConsultar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarSemestreConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ConfigurarSemestreConsultar_Result">
@@ -640,26 +538,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarCohorteConsultar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarCohorteConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ConfigurarCohorteConsultar_Result">
-                <ScalarProperty Name="Id_Configurar_Cohorte" ColumnName="Id_Configurar_Cohorte" />
-                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha_Inicio" />
-                <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha_Fin" />
-                <ScalarProperty Name="Eliminado_Configurar_Cohorte" ColumnName="Eliminado_Configurar_Cohorte" />
-                <ScalarProperty Name="Utilizado_Configurar_Cohorte" ColumnName="Utilizado_Configurar_Cohorte" />
-                <ScalarProperty Name="Id_Cohorte" ColumnName="Id_Cohorte" />
-                <ScalarProperty Name="Detalle_Cohorte" ColumnName="Detalle_Cohorte" />
-                <ScalarProperty Name="Estado_Cohorte" ColumnName="Estado_Cohorte" />
-                <ScalarProperty Name="Fecha_Chohorte" ColumnName="Fecha_Chohorte" />
-                <ScalarProperty Name="Eliminado_Cohorte" ColumnName="Eliminado_Cohorte" />
-                <ScalarProperty Name="Id_Maestria" ColumnName="Id_Maestria" />
-                <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
-                <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
-                <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarSemestreEliminar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarSemestreEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarSemestreInsertar" FunctionName="i_posgradoModel.Store.Sp_ConfigurarSemestreInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_DiaConsultar" FunctionName="i_posgradoModel.Store.Sp_DiaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="i_posgradoModel.Sp_DiaConsultar_Result">
@@ -670,64 +550,42 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
+          <FunctionImportMapping FunctionImportName="Sp_DocenteConsultar" FunctionName="i_posgradoModel.Store.Sp_DocenteConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
-                <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
-                <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
-                <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
-                <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
-                <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
-                <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
-                <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
-                <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
-                <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
-                <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_HorarioInsertar" FunctionName="i_posgradoModel.Store.Sp_HorarioInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_MatriculaConsultar" FunctionName="i_posgradoModel.Store.Sp_MatriculaConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MatriculaConsultar_Result">
-                <ScalarProperty Name="Id_Matricula" ColumnName="Id_Matricula" />
-                <ScalarProperty Name="FechaRegistroMatricula" ColumnName="FechaRegistroMatricula" />
-                <ScalarProperty Name="Id_ConfiguracionCohorte" ColumnName="Id_ConfiguracionCohorte" />
-                <ScalarProperty Name="Matricula_Vigente" ColumnName="Matricula_Vigente" />
-                <ScalarProperty Name="Id_TipoMatricula" ColumnName="Id_TipoMatricula" />
-                <ScalarProperty Name="DescripcionTipoMatricula" ColumnName="DescripcionTipoMatricula" />
-                <ScalarProperty Name="EliminadoTipoMatricula" ColumnName="EliminadoTipoMatricula" />
-                <ScalarProperty Name="IdentificadorTipoMatricula" ColumnName="IdentificadorTipoMatricula" />
-                <ScalarProperty Name="Id_preseleccionado" ColumnName="Id_preseleccionado" />
-                <ScalarProperty Name="PuntajePreseleccionado" ColumnName="PuntajePreseleccionado" />
-                <ScalarProperty Name="EliminadoPreseleccionado" ColumnName="EliminadoPreseleccionado" />
-                <ScalarProperty Name="IdInscripcion" ColumnName="IdInscripcion" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_DocenteConsultar_Result">
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
                 <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
                 <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
                 <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AsistenciaTipoConsultar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaTipoConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_AsistenciaTipoConsultar_Result">
-                <ScalarProperty Name="Id_TipoAsistencia" ColumnName="Id_TipoAsistencia" />
-                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
+                <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+                <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+                <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+                <ScalarProperty Name="EtniaId" ColumnName="EtniaId" />
+                <ScalarProperty Name="CantonId" ColumnName="CantonId" />
+                <ScalarProperty Name="TipoSangreID" ColumnName="TipoSangreID" />
+                <ScalarProperty Name="EstadoCivilId" ColumnName="EstadoCivilId" />
+                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+                <ScalarProperty Name="tipoDocumentoId" ColumnName="tipoDocumentoId" />
+                <ScalarProperty Name="sexoId" ColumnName="sexoId" />
+                <ScalarProperty Name="paisNacionalidadId" ColumnName="paisNacionalidadId" />
+                <ScalarProperty Name="Id_Docente" ColumnName="Id_Docente" />
+                <ScalarProperty Name="EliminadoDocente" ColumnName="EliminadoDocente" />
+                <ScalarProperty Name="UtilizadoDocente" ColumnName="UtilizadoDocente" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaInsertar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_AsistenciaInsertar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaConsultar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_FechaAsistenciaConsultar_Result1">
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_FechaAsistenciaConsultar_Result">
                 <ScalarProperty Name="Id_Fecha_Asistencia" ColumnName="Id_Fecha_Asistencia" />
                 <ScalarProperty Name="Fecha_Asistencia" ColumnName="Fecha_Asistencia" />
                 <ScalarProperty Name="Eliminado_FechaAsistencia" ColumnName="Eliminado_FechaAsistencia" />
@@ -780,6 +638,80 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaInsertar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_HorarioInsertar" FunctionName="i_posgradoModel.Store.Sp_HorarioInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_MaestriaConsultar" FunctionName="i_posgradoModel.Store.Sp_MaestriaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MaestriaConsultar_Result">
+                <ScalarProperty Name="Id_Maestria" ColumnName="Id_Maestria" />
+                <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
+                <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
+                <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_MatriculaConsultar" FunctionName="i_posgradoModel.Store.Sp_MatriculaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MatriculaConsultar_Result">
+                <ScalarProperty Name="Id_Matricula" ColumnName="Id_Matricula" />
+                <ScalarProperty Name="FechaRegistroMatricula" ColumnName="FechaRegistroMatricula" />
+                <ScalarProperty Name="Id_ConfiguracionCohorte" ColumnName="Id_ConfiguracionCohorte" />
+                <ScalarProperty Name="Matricula_Vigente" ColumnName="Matricula_Vigente" />
+                <ScalarProperty Name="Id_TipoMatricula" ColumnName="Id_TipoMatricula" />
+                <ScalarProperty Name="DescripcionTipoMatricula" ColumnName="DescripcionTipoMatricula" />
+                <ScalarProperty Name="EliminadoTipoMatricula" ColumnName="EliminadoTipoMatricula" />
+                <ScalarProperty Name="IdentificadorTipoMatricula" ColumnName="IdentificadorTipoMatricula" />
+                <ScalarProperty Name="Id_preseleccionado" ColumnName="Id_preseleccionado" />
+                <ScalarProperty Name="PuntajePreseleccionado" ColumnName="PuntajePreseleccionado" />
+                <ScalarProperty Name="EliminadoPreseleccionado" ColumnName="EliminadoPreseleccionado" />
+                <ScalarProperty Name="IdInscripcion" ColumnName="IdInscripcion" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModuloActualizar" FunctionName="i_posgradoModel.Store.Sp_ModuloActualizar" />
+          <FunctionImportMapping FunctionImportName="Sp_ModuloConsultar" FunctionName="i_posgradoModel.Store.Sp_ModuloConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ModuloConsultar_Result">
+                <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+                <ScalarProperty Name="UtilizadoModulo" ColumnName="UtilizadoModulo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre" FunctionName="i_posgradoModel.Store.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result">
+                <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModuloEliminar" FunctionName="i_posgradoModel.Store.Sp_ModuloEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ModuloInsertar" FunctionName="i_posgradoModel.Store.Sp_ModuloInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_SemestreConsultar" FunctionName="i_posgradoModel.Store.Sp_SemestreConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_SemestreConsultar_Result">
+                <ScalarProperty Name="Id_Semestre" ColumnName="Id_Semestre" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+                <ScalarProperty Name="UtilizadoSemestre" ColumnName="UtilizadoSemestre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_SemestreEliminar" FunctionName="i_posgradoModel.Store.Sp_SemestreEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_SemestreInsertar" FunctionName="i_posgradoModel.Store.Sp_SemestreInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_SemestreModificar" FunctionName="i_posgradoModel.Store.Sp_SemestreModificar" />
           <FunctionImportMapping FunctionImportName="Sp_AsistenciaConsultar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="i_posgradoModel.Sp_AsistenciaConsultar_Result">
@@ -809,6 +741,22 @@
                 <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
                 <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
+                <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
+                <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
+                <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
+                <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
+                <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
+                <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
+                <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
+                <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
+                <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
+                <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

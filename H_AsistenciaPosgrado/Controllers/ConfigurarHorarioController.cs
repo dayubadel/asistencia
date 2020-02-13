@@ -215,6 +215,7 @@ namespace H_AsistenciaPosgrado.Controllers
                     {
 
                         var _listaHorario = _objCatalogoHorario.ConsultarHorario().Where(c => c.ConfigurarSemestre.IdConfigurarSemestre == _idConfigurarSemestre && c.Eliminado == false).ToList();
+                        var _HorarioUtilizado = _listaHorario.Where(c => c.Utilizado == "1").FirstOrDefault();
                         var _listaDias = _objCatalogoDia.ConsultarDia().Where(c => c.Eliminado == false).ToList();
                         string _contenidoTimeline = "";
                         foreach (var itemDia in _listaDias)
@@ -240,13 +241,25 @@ namespace H_AsistenciaPosgrado.Controllers
                             {
                                 _color = "bg-gray";
                             }
-                            _contenidoTimeline = _contenidoTimeline +
-                                                "<div class='time-label'>" +
-                                                    "<span class='" + _color + "'>" +
-                                                       itemDia.Descripcion.ToUpper() +
-                                                    "</span>" +
-                                                "</div>";
                             var _listaHorarioPorDia = _listaHorario.Where(c => c.Dia.IdDia == itemDia.IdDia).ToList();
+                            if(_HorarioUtilizado==null)
+                            {
+                                _contenidoTimeline = _contenidoTimeline +
+                                                   "<div class='time-label'>" +
+                                                       "<span class='" + _color + "'>" +
+                                                          itemDia.Descripcion.ToUpper() +
+                                                       "</span>" +
+                                                   "</div>";
+                            }
+                            else if (_listaHorarioPorDia.Count > 0)
+                            {
+                                _contenidoTimeline = _contenidoTimeline +
+                                                    "<div class='time-label'>" +
+                                                        "<span class='" + _color + "'>" +
+                                                           itemDia.Descripcion.ToUpper() +
+                                                        "</span>" +
+                                                    "</div>";
+                            }
                             int _contador = 0;
                             foreach (var itemHorario in _listaHorarioPorDia)
                             {
@@ -266,28 +279,33 @@ namespace H_AsistenciaPosgrado.Controllers
                                                 "</div>";
                                 _contador++;
                             }
-                            _contenidoTimeline = _contenidoTimeline +
-                                               "<div id='div" + _contador + "dia" + itemDia.Identificador + "'>" +
-                                                "<i class='fa fa-clock " + _color + "'></i>" +
-                                                     "<div  class='timeline-item'>" +
-                                                           "<div class='timeline-body'>" +
-                                                               "<div class='row'>" +
-                                                                    "<div id='mensaje" + itemDia.Identificador + "' class='col-md-12'>" +
-                                                                   "</div>" +
-                                                                   "<div class='col-md-4'>" +
-                                                                   "<input class='form-control' id='horaEntrada" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
-                                                                   "</div>" +
-                                                                   "<div class='col-md-4'>" +
-                                                                   "<input class='form-control' id='horaSalida" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
-                                                                   "</div>" +
-                                                                   "<div class='col-md-4'>" +
-                                                                       "<button onclick='guardarHorario(\""+ _color +"\","+_contador+","+itemDia.Identificador+",\""+_idConfigurarSemestreEncriptado+"\")' class='btn btn-sm btn-success form-control btn-block'>GUARDAR</button>" +
+
+                            if (_HorarioUtilizado == null)
+                            {
+                                _contenidoTimeline = _contenidoTimeline +
+                                                   "<div id='div" + _contador + "dia" + itemDia.Identificador + "'>" +
+                                                    "<i class='fa fa-clock " + _color + "'></i>" +
+                                                         "<div  class='timeline-item'>" +
+                                                               "<div class='timeline-body'>" +
+                                                                   "<div class='row'>" +
+                                                                        "<div id='mensaje" + itemDia.Identificador + "' class='col-md-12'>" +
+                                                                       "</div>" +
+                                                                       "<div class='col-md-4'>" +
+                                                                       "<input class='form-control' id='horaEntrada" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                       "</div>" +
+                                                                       "<div class='col-md-4'>" +
+                                                                       "<input class='form-control' id='horaSalida" + itemDia.Identificador + "' type='time' min='00:01' max='23:59'>" +
+                                                                       "</div>" +
+                                                                       "<div class='col-md-4'>" +
+                                                                           "<button onclick='guardarHorario(\"" + _color + "\"," + _contador + "," + itemDia.Identificador + ",\"" + _idConfigurarSemestreEncriptado + "\")' class='btn btn-sm btn-success form-control btn-block'>GUARDAR</button>" +
+                                                                       "</div>" +
                                                                    "</div>" +
                                                                "</div>" +
                                                            "</div>" +
-                                                       "</div>" +
-                                               "</div>";
+                                                   "</div>";
+                            }
                         }
+                        _contenidoTimeline = _contenidoTimeline + "<div><i class='fas fa-feather-alt bg-gray'></i></div>";
                         string _tablaFinal = "<div class='row'><div class='col-md-2'></div><div class='col-md-8'><div class='timeline'>" + _contenidoTimeline + "</div></div><div class='col-md-2'></div></div>";
 
                         _mensaje = "";

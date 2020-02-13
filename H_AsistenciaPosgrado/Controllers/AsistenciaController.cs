@@ -26,6 +26,96 @@ namespace H_AsistenciaPosgrado.Controllers
         CatalogoFechaAsistencia _objCatalogoFechaAsistencia = new CatalogoFechaAsistencia();
         Seguridad _objSeguridad = new Seguridad();
         [HttpPost]
+        public ActionResult GenerarAsistenciaPrevia(string _idConfigurarSemestreEncriptado)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                if (string.IsNullOrEmpty(_idConfigurarSemestreEncriptado) || _idConfigurarSemestreEncriptado == "0")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN MÓDULO</div>";
+                }
+                else
+                {
+                    int _idConfigurarSemestre = Convert.ToInt32(_objSeguridad.DesEncriptar(_idConfigurarSemestreEncriptado));
+                    var _objConfigurarSemestre = _objCatalogoConfigurarSemestre.ConsultarConfigurarSemestrePorId(_idConfigurarSemestre).Where(c => c.Eliminado == false).FirstOrDefault();
+                    if (_objConfigurarSemestre == null)
+                    {
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL OBJETO CONFIGURAR SEMETRE</div>";
+                    }
+                    else
+                    {
+                        var _listaHorario = _objCatalogoHorario.ConsultarHorario().Where(c => c.ConfigurarSemestre.IdConfigurarSemestre == _idConfigurarSemestre && c.Eliminado == false).ToList();
+                        if (_listaHorario.Count == 0)
+                        {
+                            _mensaje = "<div class='alert alert-danger text-center' role='alert'>ES NECESARIO QUE CONFIGURE UN HORARIO PARA ESTE MÓDULO</div>";
+                        }
+                        else
+                        {
+                            var _listaMatriculados = _objCatalogoMatricula.ConsultarMatricula().Where(c => c.MatriculaVigente == true && c.ConfigurarCohorte.IdConfigurarCohorte == _objConfigurarSemestre.ConfigurarCohorte.IdConfigurarCohorte).ToList();
+                            if (_listaMatriculados.Count == 0)
+                            {
+                                _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE HAN REGISTRADO MATRÍCULAS EN LA MAESTRÍA Y COHORTE SELECCIONADOS</div>";
+                            }
+                            else
+                            {
+                                var _objAsistenciaTipo = _objCatalogoAsistenciaTipo.ConsultarAsistenciaTipo().Where(c => c.Eliminado == false && c.Identificador == 1).FirstOrDefault();
+                                if (_objAsistenciaTipo == null)
+                                {
+                                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>ES NECESARIO QUE SE REGISTRE EL TIPO DE ASISTENCIA AUTOMÁTICO. CONTÁCTESE CON EL ADMINISTRADOR.</div>";
+                                }
+                                else
+                                {
+                                    bool _asistenciaGenerada = true;
+                                    string _tablaFinal = "";
+                                    var _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
+                                    if (_listaFechaAsistencia.Count ==0)
+                                    {
+                                        _asistenciaGenerada = false;
+                                        _tablaFinal = "<div id='contenedorAsistencia' class='row'>" +
+                                               "<div class='info-box col-md-4'>" +
+                                                  "<span class='info-box-icon bg-danger'><i class='fa fa-info'></i></span>" +
+                                                  "<div class='info-box-content'>" +
+                                                    "<span class='info-box-text'>Una vez que se genere la asistencia</span>" +
+                                                    "<span class='info-box-text'>no se podrá revertir el proceso</span>" +
+                                                  "</div>" +
+                                                "</div>" +
+                                               "<div class='info-box col-md-4'>" +
+                                                  "<span class='info-box-icon bg-purple'><i class='fa fa-info'></i></span>" +
+                                                  "<div class='info-box-content'>" +
+                                                    "<span class='info-box-text'>La configuración del horario</span>" +
+                                                    "<span class='info-box-text'>debe estar lista</span>" +
+                                                  "</div>" +
+                                                "</div>" +
+                                                "<div class='info-box col-md-4'>" +
+                                                  "<span class='info-box-icon bg-primary'><i class='fa fa-info'></i></span>" +
+                                                  "<div class='info-box-content'>" +
+                                                    "<span class='info-box-text'>Los estudiantes deben</span>" +
+                                                    "<span class='info-box-text'>estar matriculados</span>" +
+                                                  "</div>" +
+                                                "</div>" +
+                                                "<button onclick='generarAsistencia();' class='btn btn-warning btn-block'>Generar Asistencia</button>" +
+                                            "</div>";
+                                    }                                
+
+                                    _mensaje = "";
+                                    _validar = true;
+                                    return Json(new { mensaje = _mensaje, validar = _validar, tabla =_tablaFinal, asistenciaGenerada = _asistenciaGenerada }, JsonRequestBehavior.AllowGet);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult GenerarAsistencia(string _idConfigurarSemestreEncriptado)
         {
             string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
@@ -70,6 +160,7 @@ namespace H_AsistenciaPosgrado.Controllers
                                     var _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
                                     if (_listaFechaAsistencia.Count == 0)
                                     {
+
                                         for (var i = _objConfigurarSemestre.ConfigurarModuloDocente.FechaInicio; i <= _objConfigurarSemestre.ConfigurarModuloDocente.FechaFin; i = i.AddDays(1))
                                         {
                                             DateTime _fechaActual = Convert.ToDateTime(i);
@@ -89,49 +180,49 @@ namespace H_AsistenciaPosgrado.Controllers
                                                 }
                                             }
                                         }
-                                         _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
+                                        _listaFechaAsistencia = _objCatalogoFechaAsistencia.ConsultarFechaAsistenciaPorIConfigurarSemestre(_idConfigurarSemestre).Where(c => c.Eliminado == false).ToList();
                                     }
 
-                                        string _cabecera = "<thead>" +
-                                                    "<tr>" +
-                                                      "<th>#</th>" +
-                                                      "<th>Fecha de asistencia</th>" +
-                                                      "<th>Hora de entrada</th>" +
-                                                      "<th>Hora de salida</th>" +
-                                                    "</tr>" +
-                                                  "</thead>";
+                                    string _cabecera = "<thead>" +
+                                                "<tr>" +
+                                                  "<th>#</th>" +
+                                                  "<th>Fecha de asistencia</th>" +
+                                                  "<th>Hora de entrada</th>" +
+                                                  "<th>Hora de salida</th>" +
+                                                "</tr>" +
+                                              "</thead>";
 
-                                        string _filasCuerpo = "";
-                                        int _contador = 1;
-                                        foreach (var item in _listaFechaAsistencia.OrderBy(c => c.Fecha))
-                                        {
-                                            _filasCuerpo = _filasCuerpo +
-                                                "<tr id='" + _contador + "'>" +
-                                                      "<td>" + _contador + "</td>" +
-                                                      "<td>" + item.Fecha.ToShortDateString()+ "</td>" +
-                                                      "<td><span class='badge bg-primary' style='font-size:14px;'>" + item.Horario.HoraEntrada.ToString() + "</span></td>" +
-                                                      "<td><span class='badge bg-warning' style='font-size:14px;'>" + item.Horario.HoraSalida.ToString() + "</span></td>" +
-                                                "</tr>";
-                                            _contador++;
-                                        }
+                                    string _filasCuerpo = "";
+                                    int _contador = 1;
+                                    foreach (var item in _listaFechaAsistencia.OrderBy(c => c.Fecha))
+                                    {
+                                        _filasCuerpo = _filasCuerpo +
+                                            "<tr id='" + _contador + "'>" +
+                                                  "<td>" + _contador + "</td>" +
+                                                  "<td>" + item.Fecha.ToShortDateString() + "</td>" +
+                                                  "<td><span class='badge bg-primary' style='font-size:14px;'>" + item.Horario.HoraEntrada.ToString() + "</span></td>" +
+                                                  "<td><span class='badge bg-warning' style='font-size:14px;'>" + item.Horario.HoraSalida.ToString() + "</span></td>" +
+                                            "</tr>";
+                                        _contador++;
+                                    }
 
-                                        string _tablaFinal = "<div class='card'>" +
-                                              "<div class='card-header'>" +
-                                                "<h3 class='card-title text-center'>Fechas generadas por el sistema</h3>" +
-                                              "</div>" +
-                                              "<div class='card-body table-responsive p-0'>" +
-                                               "<table id='sd' class='table table-hover text-nowrap'>" +
-                                                _cabecera +
-                                                  "<tbody >" +
-                                                    _filasCuerpo +
-                                                  "</tbody> " +
-                                                "</table> " +
-                                              "</div> " +
-                                            "</div>";
+                                    string _tablaFinal = "<div class='card'>" +
+                                          "<div class='card-header'>" +
+                                            "<h3 class='card-title text-center'>Fechas generadas por el sistema</h3>" +
+                                          "</div>" +
+                                          "<div class='card-body table-responsive p-0'>" +
+                                           "<table id='sd' class='table table-hover text-nowrap'>" +
+                                            _cabecera +
+                                              "<tbody >" +
+                                                _filasCuerpo +
+                                              "</tbody> " +
+                                            "</table> " +
+                                          "</div> " +
+                                        "</div>";
 
                                     _mensaje = "";
                                     _validar = true;
-                                    return Json(new { mensaje = _mensaje, validar = _validar, tabla =_tablaFinal }, JsonRequestBehavior.AllowGet);
+                                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
                                 }
                             }
                         }
@@ -144,6 +235,7 @@ namespace H_AsistenciaPosgrado.Controllers
             }
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult Cargarformulario()
         {
             string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
@@ -199,7 +291,7 @@ namespace H_AsistenciaPosgrado.Controllers
                                                     _selectModulo +
                                                   "</div>" +
                                                 "</div>";
-                string _buttonConsultar = "<button onclick='generarAsistencia();' type='button' class='btn btn-block btn-outline-primary'>Consultar</button>";
+                string _buttonConsultar = "<button onclick='generarAsistenciaPrevia();' type='button' class='btn btn-block btn-outline-primary'>Consultar</button>";
 
 
                 string _tabla = "<div class='row'>" +

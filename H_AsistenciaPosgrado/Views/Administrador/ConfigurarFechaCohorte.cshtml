@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Configurar Módulos y Cohortes</h1>
+                    <h1 class="m-0 text-dark">Configurar Fechas Cohorte</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="@Url.Action("Inicio","Administrador")">Inicio</a></li>
-                        <li class="breadcrumb-item active">Configurar Cohorte</li>
+                        <li class="breadcrumb-item active">Configurar Fechas Cohorte</li>
                     </ol>
                 </div>
             </div>
@@ -35,10 +35,25 @@
                         <div class="card-body" style="display: block;">
                             <div id="contenedorOpciones"></div>
                             <div id="contenedorOpcionesFechas"></div>
-                            <div id="contenedorSemestres"></div>
-                            <div id="contenedorFormularioModuloDocente"></div>
+                            <div id="contenedorBotonGuardarConsultarEliminar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Configuración registrada en el sistema</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="display: block;">
                             <div id="contenedorMensajes"></div>
-                            <div id="contenedorTablaConfigurarSemestre"></div>
+                            <div id="contenedorTablaConfigurarCohorte"></div>
                         </div>
                     </div>
                 </div>
@@ -49,33 +64,74 @@
 
 <script>
 
-
-    function eliminarConfigurarSemestreConfigurarModuloDocente(_idConfigurarSemestreEncriptado, _idConfigurarModuloDocenteEncriptado) {
+     function cargarTablaFechaConfigurarCohorte() {
         $.ajax({
-            url: '@Url.Action("Eliminarconfigurarsemestreconfigurarmodulodocente", "ConfigurarCohorte")',
+            url: '@Url.Action("Cargartablaconfigurarfechacohorte", "ConfigurarFechaCohorte")',
             type: 'post',
             dataType: 'JSON',
-            data: {
-                _idConfigurarSemestreEncriptado: _idConfigurarSemestreEncriptado,
-                _idConfigurarModuloDocenteEncriptado: _idConfigurarModuloDocenteEncriptado
-            },
             beforeSend: function () {
-                $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                $("#contenedorTablaConfigurarCohorte").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
             },
             uploadProgress: function (event, position, total, percentComplete) {
             },
             success: function (data) {
                 if (data.validar == true) {
-                    consultarModulosDocentes();
-                    cargarTablaConfigurarSemestre();
-                    $("#contenedorMensajes").html("");
+                    $("#contenedorTablaConfigurarCohorte").html(data.tabla);
                 } else {
+                    $("#contenedorTablaConfigurarCohorte").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                if (xhr.status === 0) {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (errorThrown === 'timeout') {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorTablaConfigurarCohorte").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+
+    function eliminarConfigurarCohorte(_numFila, _idConfigurarCohorteEncriptado) {
+        var _clase = $("#btn" + _numFila).attr("class");
+        $.ajax({
+            url: '@Url.Action("Eliminarconfigurarcohorte", "ConfigurarFechaCohorte")',
+            type: 'post',
+            dataType: 'JSON',
+            data: {
+                _idConfigurarCohorteEncriptado: _idConfigurarCohorteEncriptado
+            },
+            beforeSend: function () {
+                $("#btn" + _numFila).html("<i class='fas fa-spinner'></i>");
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.validar == true) {
+                    $("#" + _numFila).remove();
+                    $("#contenedorMensajes").html("");
+                    cambiarCohortePorMaestria();
+                    cargarFormularioFechasConfigurarCohorte();
+                } else {
+                    $("#btn" + _numFila).html("<i class='" + _clase + "'></i>");
                     $("#contenedorMensajes").html(data.mensaje);
                 }
             },
             complete: function () {
             },
             error: function (xhr, textStatus, errorThrown) {
+                $("#btn" + _numFila).html("<i class='" + _clase + "'></i>");
                 if (xhr.status === 0) {
                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                 } else if (xhr.status == 404) {
@@ -95,207 +151,64 @@
         });
     }
 
-      function cargarTablaConfigurarSemestre() {
-        var _idConfigurarCohorteEncriptado = $("#idConfigurarCohorteEncriptado").val();
-        var _idSemestreEncriptado = $("#selectSemestre").val();
-        $.ajax({
-            url: '@Url.Action("Cargartablaconfigurarsemestre", "ConfigurarCohorte")',
-            type: 'post',
-            dataType: 'JSON',
-            data: {
-                _idConfigurarCohorteEncriptado: _idConfigurarCohorteEncriptado,
-                _idSemestreEncriptado: _idSemestreEncriptado
-            },
-            beforeSend: function () {
-                $("#contenedorTablaConfigurarSemestre").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-            },
-            uploadProgress: function (event, position, total, percentComplete) {
-            },
-            success: function (data) {
-                if (data.validar == true) {
-                    $("#contenedorTablaConfigurarSemestre").html(data.tabla);
-                } else {
-                    $("#contenedorTablaConfigurarSemestre").html(data.mensaje);
-                }
-            },
-            complete: function () {
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 0) {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
-                } else if (xhr.status == 404) {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
-                } else if (xhr.status == 500) {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
-                } else if (errorThrown === 'parsererror') {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
-                } else if (errorThrown === 'timeout') {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
-                } else if (errorThrown === 'abort') {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
-                } else {
-                    $("#contenedorTablaConfigurarSemestre").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
-                }
-            }
-        });
-    }
 
-    function asignarModuloDocenteConfigurarSemestre() {
-        var _idConfigurarCohorteEncriptado = $("#idConfigurarCohorteEncriptado").val();
-        var _idSemestreEncriptado = $("#selectSemestre").val();
-        var _idModuloEncriptado = $("#selectModulo").val();
-        var _idDocenteEncriptado = $("#selectDocente").val();
-        var _fechaInicioModulo = $("#inputFechaInicioModulo").val();
-        var _fechaFinModulo = $("#inputFechaFinModulo").val();
-        $.ajax({
-            url: '@Url.Action("Asignarmodulodocenteconfigurarsemestre", "ConfigurarCohorte")',
-            type: 'post',
-            dataType: 'JSON',
-            data: {
-                _idConfigurarCohorteEncriptado: _idConfigurarCohorteEncriptado,
-                _idSemestreEncriptado: _idSemestreEncriptado,
-                _idModuloEncriptado: _idModuloEncriptado,
-                _idDocenteEncriptado: _idDocenteEncriptado,
-                _fechaInicioModulo: _fechaInicioModulo,
-                _fechaFinModulo: _fechaFinModulo
-            },
-            beforeSend: function () {
-                $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-            },
-            uploadProgress: function (event, position, total, percentComplete) {
-            },
-            success: function (data) {
-                if (data.validar == true) {
-                    $("#contenedorMensajes").html("");
-                    consultarModulosDocentes();
-                    cargarTablaConfigurarSemestre();
-                } else {
-                    $("#contenedorMensajes").html(data.mensaje);
-                    setTimeout(function () {
-                        $("#contenedorMensajes").html("");
-                    }, 4000);
-                }
-            },
-            complete: function () {
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                if (xhr.status === 0) {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
-                } else if (xhr.status == 404) {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
-                } else if (xhr.status == 500) {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
-                } else if (errorThrown === 'parsererror') {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
-                } else if (errorThrown === 'timeout') {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
-                } else if (errorThrown === 'abort') {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
-                } else {
-                    $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
-                }
-            }
-        });
-    }
-    function consultarModulosDocentes() {
-        var _idConfigurarCohorteEncriptado = $("#idConfigurarCohorteEncriptado").val();
-        var _idSemestreEncriptado = $("#selectSemestre").val();
-        if (_idSemestreEncriptado == "0") {
-            $("#contenedorFormularioModuloDocente").html("");
-            $("#contenedorMensajes").html("");
-            $("#contenedorTablaConfigurarSemestre").html("");
+
+    function guardarConfigurarCohorte() {
+        var _idMaestriaEncriptado = $('#selectMaestria').val();
+        var _idCohorteEncriptado = $('#selectCohorte').val();
+        var _fechaInicio = $("#inputFechaInicio").val();
+        var _fechaFin = $("#inputFechaFin").val();
+        if (_idCohorteEncriptado == "0") {
+            $("#contenedorOpcionesFechas").html("");
         }
         else {
             $.ajax({
-                url: '@Url.Action("ConsultarModulosDocentes", "ConfigurarCohorte")',
+                url: '@Url.Action("GuardarconfigurarCohorte", "ConfigurarFechaCohorte")',
                 type: 'post',
                 dataType: 'JSON',
-                data: { _idConfigurarCohorteEncriptado: _idConfigurarCohorteEncriptado, _idSemestreEncriptado: _idSemestreEncriptado },
+                data: { _idMaestriaEncriptado: _idMaestriaEncriptado, _idCohorteEncriptado: _idCohorteEncriptado, _fechaInicio: _fechaInicio, _fechaFin: _fechaFin},
                 beforeSend: function () {
-                    $("#contenedorFormularioModuloDocente").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-                    $("#contenedorMensajes").html("");
+                    $("#contenedorMensajes").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
                 success: function (data) {
                     if (data.validar == true) {
-                        $("#contenedorFormularioModuloDocente").html(data.tabla);
-                        cargarTablaConfigurarSemestre();
+                        $("#contenedorMensajes").html("");
+                        $("#contenedorOpcionesFechas").html(data.fechas);
+                        $("#contenedorBotonGuardarConsultarEliminar").html("");
+                        cargarTablaFechaConfigurarCohorte();
                     } else {
-                        $("#contenedorFormularioModuloDocente").html(data.mensaje);
+                        $("#contenedorMensajes").html(data.mensaje);
+                        setTimeout(function () {
+                            $("#contenedorMensajes").html("");
+                        }, 4000);
                     }
                 },
                 complete: function () {
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     if (xhr.status === 0) {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                     } else if (xhr.status == 404) {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
                     } else if (xhr.status == 500) {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
                     } else if (errorThrown === 'parsererror') {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
                     } else if (errorThrown === 'timeout') {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
                     } else if (errorThrown === 'abort') {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
                     } else {
-                        $("#contenedorFormularioModuloDocente").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                        $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
                     }
                 }
             });
         }
     }
 
-
-
-
-    function cargarListadoSemestre() {
-         $.ajax({
-             url: '@Url.Action("Cargarlistadosemestre", "ConfigurarCohorte")',
-             type: 'post',
-             dataType: 'JSON',
-             beforeSend: function () {
-                 $("#contenedorSemestres").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
-                 $("#contenedorFormularioModuloDocente").html("");
-                 $("#contenedorMensajes").html("");
-                 $("#contenedorTablaConfigurarSemestre").html("");
-             },
-             uploadProgress: function (event, position, total, percentComplete) {
-             },
-             success: function (data) {
-                 if (data.validar == true) {
-                     $("#contenedorSemestres").html(data.tabla);
-                 } else {
-                     $("#contenedorMensajes").html(data.mensaje);
-                     $("#contenedorSemestres").html("");
-                 }
-             },
-             complete: function () {
-             },
-             error: function (xhr, textStatus, errorThrown) {
-                 if (xhr.status === 0) {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
-                 } else if (xhr.status == 404) {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
-                 } else if (xhr.status == 500) {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
-                 } else if (errorThrown === 'parsererror') {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
-                 } else if (errorThrown === 'timeout') {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
-                 } else if (errorThrown === 'abort') {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
-                 } else {
-                     $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
-                 }
-             }
-         });        
-    }
-
-
-      function cargarFormularioFechasConfigurarCohorte() {
+    function cargarFormularioFechasConfigurarCohorte() {
         var _idMaestriaEncriptado = $('#selectMaestria').val();
         var _idCohorteEncriptado = $('#selectCohorte').val();
         if (_idCohorteEncriptado == "0") {
@@ -304,12 +217,13 @@
         }
         else {
             $.ajax({
-                url: '@Url.Action("Cargarformulariofechasconfigurarcohorte", "ConfigurarCohorte")',
+                url: '@Url.Action("Cargarformulariofechasconfigurarcohorte", "ConfigurarFechaCohorte")',
                 type: 'post',
                 dataType: 'JSON',
                 data: { _idMaestriaEncriptado: _idMaestriaEncriptado, _idCohorteEncriptado: _idCohorteEncriptado},
                 beforeSend: function () {
                     $("#contenedorOpcionesFechas").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                    $("#contenedorBotonGuardarConsultarEliminar").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
                     $("#contenedorMensajes").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
@@ -317,14 +231,16 @@
                 success: function (data) {
                     if (data.validar == true) {
                         $("#contenedorOpcionesFechas").html(data.inputFechas);
-                        cargarListadoSemestre();
+                        $("#contenedorBotonGuardarConsultarEliminar").html(data.botones);
                     } else {
                         $("#contenedorOpcionesFechas").html(data.mensaje);
+                        $("#contenedorBotonGuardarConsultarEliminar").html(data.mensaje);
                     }
                 },
                 complete: function () {
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    $("#contenedorBotonGuardarConsultarEliminar").html("");
                     if (xhr.status === 0) {
                         $("#contenedorOpcionesFechas").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                     } else if (xhr.status == 404) {
@@ -345,16 +261,14 @@
         }
     }
 
+
     function cambiarCohortePorMaestria() {
         var _idMaestriaEncriptado = $('#selectMaestria').val();
         if (_idMaestriaEncriptado == "0") {
             $("#contenedorMensajes").html("");
             $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
             $("#contenedorOpcionesFechas").html("");
-            $("#contenedorSemestres").html("");
-            $("#contenedorFormularioModuloDocente").html("");
-            $("#contenedorMensajes").html("");
-            $("#contenedorTablaConfigurarSemestre").html("");
+            $("#contenedorBotonGuardarConsultarEliminar").html("");
         }
         else {
             $.ajax({
@@ -366,9 +280,7 @@
                     $("#selectCohorte").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
                     $("#contenedorOpcionesFechas").html("");
-                    $("#contenedorSemestres").html("");
-                    $("#contenedorFormularioModuloDocente").html("");
-                    $("#contenedorTablaConfigurarSemestre").html("");
+                    $("#contenedorBotonGuardarConsultarEliminar").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -408,11 +320,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         CargarFormulario();
+        cargarTablaFechaConfigurarCohorte();
     });
 
     function CargarFormulario() {
         $.ajax({
-            url: '@Url.Action("Cargarformulario", "ConfigurarCohorte")',
+            url: '@Url.Action("Cargarformulario", "ConfigurarFechaCohorte")',
             type: 'post',
             dataType: 'JSON',
             beforeSend: function () {
