@@ -155,6 +155,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Conexion\spPersonaConsultarXIDNSMIT_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\spValidarIngresoNSMIED_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsistenciaConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
@@ -221,9 +227,11 @@
     <Compile Include="Models\Catalogos\CatalogoDocente.cs" />
     <Compile Include="Models\Catalogos\CatalogoFechaAsistencia.cs" />
     <Compile Include="Models\Catalogos\CatalogoHorario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoLogin.cs" />
     <Compile Include="Models\Catalogos\CatalogoMaestria.cs" />
     <Compile Include="Models\Catalogos\CatalogoMatricula.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoSemestre.cs" />
     <Compile Include="Models\Entidades\EntidadAsistencia.cs" />
     <Compile Include="Models\Entidades\EntidadAsistenciaTipo.cs" />
@@ -257,9 +265,12 @@
     <Compile Include="Models\Entidades\EntidadPreseleccionado.cs" />
     <Compile Include="Models\Entidades\EntidadSemestre.cs" />
     <Compile Include="Models\Entidades\EntidadSexo.cs" />
+    <Compile Include="Models\Entidades\EntidadTipo.cs" />
     <Compile Include="Models\Entidades\EntidadTipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\EntidadTipoMatricula.cs" />
     <Compile Include="Models\Entidades\EntidadFechaAsistencia.cs" />
+    <Compile Include="Models\Entidades\EntidadUsuario.cs" />
+    <Compile Include="Models\Entidades\EntidadUsuarioTipo.cs" />
     <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1926,11 +1937,14 @@
     <Content Include="Views\Administrador\Asistencia.cshtml" />
     <Content Include="Views\Administrador\AsistenciaDiaria.cshtml" />
     <Content Include="Views\Administrador\ConfigurarFechaCohorte.cshtml" />
+    <Content Include="Views\Shared\_Administrador.cshtml" />
+    <Content Include="Views\Shared\_Estudiante.cshtml" />
+    <Content Include="Views\Shared\_Docente.cshtml" />
+    <Content Include="Views\Inicio\Salir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\ConfigurarFechaCohorte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

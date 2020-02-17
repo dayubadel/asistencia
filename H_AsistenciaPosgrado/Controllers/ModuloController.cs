@@ -20,7 +20,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_numFila))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (string.IsNullOrEmpty(_numFila))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>INGRESE EL NUMERO DE LA FILA</div>";
                 }
@@ -63,7 +71,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if(string.IsNullOrEmpty(_descripcionModulo))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (string.IsNullOrEmpty(_descripcionModulo))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>INGRESE EL NOMBRE DEL MÓDULO</div>";
                 }
@@ -99,53 +115,61 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                var _listaModulos = _objCatalogoModulo.ConsultarModulos().Where(c => c.Eliminado == false).ToList();
-
-
-                string _cabecera = "<thead>" +
-                            "<tr>" +
-                              "<th>#</th>" +
-                              "<th>Modulo</th>" +
-                              "<th>Acciones</th>" +
-                            "</tr>" +
-                          "</thead>";
-
-                string _filasCuerpo = "";
-                int _contador = 1;
-                string _buttonEliminar = "";
-                foreach (var item in _listaModulos.OrderBy(c => c.Descripcion))
+                if (Session["roll"] == null)
                 {
-                    _buttonEliminar = "";
-                    if (item.Utilizado == "0")
-                    {
-                        string _idModuloEncriptado = _objSeguridad.Encriptar(item.IdModulo.ToString());
-                        _buttonEliminar = "<button id='btn"+_contador+"' onclick='eliminarModulo("+_contador+ ", \""+_idModuloEncriptado+"\");' type='button' class='btn btn-outline-danger'><i class='fas fa-times'></i></button>";
-                    }
-                    _filasCuerpo = _filasCuerpo +
-                        "<tr id='"+_contador+"'>" +
-                              "<td>" + _contador + "</td>" +
-                              "<td>" + item.Descripcion.ToUpper() + "</td>" +
-                              "<td>"+ _buttonEliminar + "</td>" +
-                        "</tr>";
-                    _contador++;
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
                 }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else
+                {
+                    var _listaModulos = _objCatalogoModulo.ConsultarModulos().Where(c => c.Eliminado == false).ToList();
+                    string _cabecera = "<thead>" +
+                                        "<tr>" +
+                                        "<th>#</th>" +
+                                        "<th>Modulo</th>" +
+                                        "<th>Acciones</th>" +
+                                        "</tr>" +
+                                        "</thead>";
+                    string _filasCuerpo = "";
+                    int _contador = 1;
+                    string _buttonEliminar = "";
+                    foreach (var item in _listaModulos.OrderBy(c => c.Descripcion))
+                    {
+                        _buttonEliminar = "";
+                        if (item.Utilizado == "0")
+                        {
+                            string _idModuloEncriptado = _objSeguridad.Encriptar(item.IdModulo.ToString());
+                            _buttonEliminar = "<button id='btn" + _contador + "' onclick='eliminarModulo(" + _contador + ", \"" + _idModuloEncriptado + "\");' type='button' class='btn btn-outline-danger'><i class='fas fa-times'></i></button>";
+                        }
+                        _filasCuerpo = _filasCuerpo +
+                            "<tr id='" + _contador + "'>" +
+                                  "<td>" + _contador + "</td>" +
+                                  "<td>" + item.Descripcion.ToUpper() + "</td>" +
+                                  "<td>" + _buttonEliminar + "</td>" +
+                            "</tr>";
+                        _contador++;
+                    }
 
-                string _tablaFinal = "<br><div class='card'>" +
-                      "<div class='card-header'>" +
-                        "<h3 class='card-title'>Módulos registrados en el sistema</h3>" +
-                      "</div>" +
-                      "<div class='card-body p-0'>" +
-                       "<table id='sd' class='table table-striped'>" +
-                        _cabecera +
-                          "<tbody >" +
-                            _filasCuerpo +
-                          "</tbody> " +
-                        "</table> " +
-                      "</div> " +
-                    "</div>";
-                _mensaje = "";
-                _validar = true;
-                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
+                    string _tablaFinal = "<br><div class='card'>" +
+                          "<div class='card-header'>" +
+                            "<h3 class='card-title'>Módulos registrados en el sistema</h3>" +
+                          "</div>" +
+                          "<div class='card-body p-0'>" +
+                           "<table id='sd' class='table table-striped'>" +
+                            _cabecera +
+                              "<tbody >" +
+                                _filasCuerpo +
+                              "</tbody> " +
+                            "</table> " +
+                          "</div> " +
+                        "</div>";
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
@@ -162,25 +186,36 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                string _inputDescripcion = "<input id='inputModulo' type='text' class='form-control'>";
-                string _buttonGuardar = "<button onclick='guardarModulo();' type='button' class='btn btn-block btn-outline-success'>Guardar</button>";
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else
+                {
+                    string _inputDescripcion = "<input id='inputModulo' type='text' class='form-control'>";
+                    string _buttonGuardar = "<button onclick='guardarModulo();' type='button' class='btn btn-block btn-outline-success'>Guardar</button>";
 
-                string _formInputDescripcion = "<div class='form-group'>" +
-                                                     "<label>Módulo:</label>" +
-                                                     "<div class='input-group'>" +
-                                                       "<div class='input-group-prepend'>" +
-                                                         "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                       "</div>" +
-                                                       _inputDescripcion +
-                                                     "</div>" +
-                                                   "</div>";
-                string _tabla = "<div class='row'>" +
-                                "<div class='col-md-12'>" + _formInputDescripcion + "</div>" +
-                                "<div class='col-md-12'>" + _buttonGuardar + "</div>" +
-                                "</div>";
-                _mensaje = "";
-                _validar = true;
-                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                    string _formInputDescripcion = "<div class='form-group'>" +
+                                                         "<label>Módulo:</label>" +
+                                                         "<div class='input-group'>" +
+                                                           "<div class='input-group-prepend'>" +
+                                                             "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                           "</div>" +
+                                                           _inputDescripcion +
+                                                         "</div>" +
+                                                       "</div>";
+                    string _tabla = "<div class='row'>" +
+                                    "<div class='col-md-12'>" + _formInputDescripcion + "</div>" +
+                                    "<div class='col-md-12'>" + _buttonGuardar + "</div>" +
+                                    "</div>";
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {

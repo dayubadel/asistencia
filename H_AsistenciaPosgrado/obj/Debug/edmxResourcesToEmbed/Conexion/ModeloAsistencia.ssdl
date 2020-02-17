@@ -92,5 +92,12 @@
     <Parameter Name="Identificador" Type="int" Mode="In" />
     <Parameter Name="Eliminado" Type="bit" Mode="In" />
   </Function>
+  <Function Name="spValidarIngresoNSMIED" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="evaluacion">
+    <Parameter Name="Usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Clave" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spPersonaConsultarXIDNSMIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="talentoHumano">
+    <Parameter Name="Id_Persona" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="i_posgradoModelStoreContainer" />
 </Schema>

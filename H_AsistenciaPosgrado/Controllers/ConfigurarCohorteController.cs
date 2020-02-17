@@ -29,7 +29,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (_idConfigurarSemestreEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarSemestreEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (_idConfigurarSemestreEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarSemestreEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL IDENTIFICADOR DE LA CONFIGURACIÓN DEL SEMESTRE</div>";
                 }
@@ -83,7 +91,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL IDENTIFICADOR DE LA CONFIGURACIÓN</div>";
                 }
@@ -168,7 +184,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL IDENTIFICADOR DE LA CONFIGURACIÓN</div>";
                 }
@@ -271,7 +295,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (_idConfigurarCohorteEncriptado == "0" || string.IsNullOrEmpty(_idConfigurarCohorteEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ EL IDENTIFICADOR DE LA CONFIGURACIÓN</div>";
                 }
@@ -362,30 +394,40 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                var _listaSemestre = _objCatalogoSemestre.ConsultarSemestre().Where(c=>c.Eliminado==false).ToList();
-                string _optionSemestre = "<option value='0'>SELECCIONE UN SEMESTRE</option>";
-                foreach (var item in _listaSemestre)
+                if (Session["roll"] == null)
                 {
-                    _optionSemestre = _optionSemestre + "<option value='" + _objSeguridad.Encriptar(item.IdSemestre.ToString()) + "'>" + item.Descripcion.ToUpper() + "</option>";
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
                 }
-                string _selectSemestre = "<select onchange='consultarModulosDocentes();' id='selectSemestre' class='form-control'>" + _optionSemestre + "</select>";
-                string _formSelectSemestre = "<div class='form-group'>" +
-                                                  "<label>Semestre:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectSemestre +
-                                                  "</div>" +
-                                                "</div>";
-               
-                string _tabla = "<div class='row'>" +
-                                   "<div class='col-md-12'>" + _formSelectSemestre + "</div>" +
-                                   "</div>";
-                _mensaje = "";
-                _validar = true;
-                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else
+                {
+                    var _listaSemestre = _objCatalogoSemestre.ConsultarSemestre().Where(c => c.Eliminado == false).ToList();
+                    string _optionSemestre = "<option value='0'>SELECCIONE UN SEMESTRE</option>";
+                    foreach (var item in _listaSemestre)
+                    {
+                        _optionSemestre = _optionSemestre + "<option value='" + _objSeguridad.Encriptar(item.IdSemestre.ToString()) + "'>" + item.Descripcion.ToUpper() + "</option>";
+                    }
+                    string _selectSemestre = "<select onchange='consultarModulosDocentes();' id='selectSemestre' class='form-control'>" + _optionSemestre + "</select>";
+                    string _formSelectSemestre = "<div class='form-group'>" +
+                                                      "<label>Semestre:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectSemestre +
+                                                      "</div>" +
+                                                    "</div>";
 
+                    string _tabla = "<div class='row'>" +
+                                       "<div class='col-md-12'>" + _formSelectSemestre + "</div>" +
+                                       "</div>";
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
@@ -401,7 +443,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_idMaestriaEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if(string.IsNullOrEmpty(_idMaestriaEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA MAESTRÍA</div>";
                 }
@@ -477,7 +527,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_idMaestriaEncriptado))
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if (string.IsNullOrEmpty(_idMaestriaEncriptado))
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA MAESTRÍA</div>";
                 }
@@ -509,40 +567,51 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                var _listaMaestria = _objCatalogoMaestria.ConsultarMaestria().Where(c => c.Eliminado == false && c.Estado == "ACTIVA").ToList();
-                string _optionMaestria = "<option value='0'>SELECCIONE UNA MAESTRÍA</option>";
-                foreach (var item in _listaMaestria)
+                if (Session["roll"] == null)
                 {
-                    _optionMaestria = _optionMaestria + "<option value='" + _objSeguridad.Encriptar(item.IdMestria.ToString()) + "'>" + item.Nombre.ToUpper() + "</option>";
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
                 }
-                string _selectMaestria = "<select id='selectMaestria' onchange='cambiarCohortePorMaestria();' class='form-control'>" + _optionMaestria + "</select>";
-                string _formSelectMaestria = "<div class='form-group'>" +
-                                                  "<label>Maestría:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectMaestria +
-                                                  "</div>" +
-                                                "</div>";
-                string _optionCohorte = "<option value='0'>SELECCIONE UNA COHORTE</option>";
-                string _selectCohorte = "<select onchange='cargarFormularioFechasConfigurarCohorte();' id='selectCohorte' class='form-control'>" + _optionCohorte + "</select>";
-                string _formSelectCohorte = "<div class='form-group'>" +
-                                                  "<label>Cohorte:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectCohorte +
-                                                  "</div>" +
-                                                "</div>";
-                string _tabla = "<div class='row'>" +
-                                "<div class='col-md-6'>" + _formSelectMaestria + "</div>" +
-                                "<div class='col-md-6'>" + _formSelectCohorte + "</div>" +
-                                "</div>";
-                _mensaje = "";
-                _validar = true;
-                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else
+                {
+                    var _listaMaestria = _objCatalogoMaestria.ConsultarMaestria().Where(c => c.Eliminado == false && c.Estado == "ACTIVA").ToList();
+                    string _optionMaestria = "<option value='0'>SELECCIONE UNA MAESTRÍA</option>";
+                    foreach (var item in _listaMaestria)
+                    {
+                        _optionMaestria = _optionMaestria + "<option value='" + _objSeguridad.Encriptar(item.IdMestria.ToString()) + "'>" + item.Nombre.ToUpper() + "</option>";
+                    }
+                    string _selectMaestria = "<select id='selectMaestria' onchange='cambiarCohortePorMaestria();' class='form-control'>" + _optionMaestria + "</select>";
+                    string _formSelectMaestria = "<div class='form-group'>" +
+                                                      "<label>Maestría:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectMaestria +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _optionCohorte = "<option value='0'>SELECCIONE UNA COHORTE</option>";
+                    string _selectCohorte = "<select onchange='cargarFormularioFechasConfigurarCohorte();' id='selectCohorte' class='form-control'>" + _optionCohorte + "</select>";
+                    string _formSelectCohorte = "<div class='form-group'>" +
+                                                      "<label>Cohorte:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectCohorte +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _tabla = "<div class='row'>" +
+                                    "<div class='col-md-6'>" + _formSelectMaestria + "</div>" +
+                                    "<div class='col-md-6'>" + _formSelectCohorte + "</div>" +
+                                    "</div>";
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {

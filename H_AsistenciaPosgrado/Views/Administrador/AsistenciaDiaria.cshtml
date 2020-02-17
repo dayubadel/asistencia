@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Inicio.cshtml";
+    Layout = "~/Views/Shared/_Administrador.cshtml";
 }
 
 <div class="content-wrapper">
@@ -102,7 +102,7 @@
         if (_idConfigurarSemestreEncriptado == "0" ) {
             $("#contenedorMensajes").html("");
             $("#contenedorAsistencia").html("");
-            $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA</option");
+            $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA Y HORARIO</option");
         }
         else {
             $.ajax({
@@ -122,7 +122,7 @@
                         $("#selectFecha").html(data.tabla);
                     } else {
                         $("#contenedorMensajes").html(data.mensaje);
-                        $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA</option");
+                        $("#selectFecha").html("<option value='0'>SELECCIONE UNA FECHA Y HORARIO</option");
                     }
                 },
                 complete: function () {
@@ -156,7 +156,9 @@
         if (_idMaestriaEncriptado == "0" || _idCohorteEncriptado == "0" || _idSemestreEncriptado=="0") {
             $("#contenedorMensajes").html("");
             $("#contenedorHorarios").html("");
+            $("#contenedorAsistencia").html("");
             $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+            $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
         }
         else {
             $.ajax({
@@ -168,6 +170,7 @@
                     $("#selectModulo").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
                     $("#contenedorHorarios").html("");
+                    $("#contenedorAsistencia").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -177,6 +180,7 @@
                     } else {
                         $("#contenedorMensajes").html(data.mensaje);
                         $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+                        $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
                     }
                 },
                 complete: function () {
@@ -209,7 +213,10 @@
         if (_idMaestriaEncriptado == "0" || _idCohorteEncriptado == "0") {
             $("#contenedorMensajes").html("");
             $("#contenedorHorarios").html("");
+            $("#contenedorAsistencia").html("");
             $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
+            $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+            $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
         }
         else {
             $.ajax({
@@ -221,6 +228,7 @@
                     $("#selectSemestre").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
                     $("#contenedorHorarios").html("");
+                    $("#contenedorAsistencia").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -230,6 +238,8 @@
                     } else {
                         $("#contenedorMensajes").html(data.mensaje);
                         $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
+                        $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+                        $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
                     }
                 },
                 complete: function () {
@@ -261,7 +271,11 @@
         if (_idMaestriaEncriptado == "0") {
             $("#contenedorMensajes").html("");
             $("#contenedorHorarios").html("");
+            $("#contenedorAsistencia").html("");
             $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
+            $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
+            $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+            $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
         }
         else {
             $.ajax({
@@ -273,6 +287,7 @@
                     $("#selectCohorte").html("<option value='0'>CARGANDO...</option");
                     $("#contenedorMensajes").html("");
                     $("#contenedorHorarios").html("");
+                    $("#contenedorAsistencia").html("");
                 },
                 uploadProgress: function (event, position, total, percentComplete) {
                 },
@@ -282,12 +297,18 @@
                     } else {
                         $("#contenedorMensajes").html(data.mensaje);
                         $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
+                        $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
+                        $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+                        $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
                     }
                 },
                 complete: function () {
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     $("#selectCohorte").html("<option value='0'>SELECCIONE UNA COHORTE</option");
+                    $("#selectSemestre").html("<option value='0'>SELECCIONE UN SEMESTRE</option");
+                    $("#selectModulo").html("<option value='0'>SELECCIONE UN MÓDULO</option");
+                    $("#selectFecha").html("<option value='0'>SELECCIONE FECHA Y HORARIO</option");
                     if (xhr.status === 0) {
                         $("#contenedorMensajes").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                     } else if (xhr.status == 404) {

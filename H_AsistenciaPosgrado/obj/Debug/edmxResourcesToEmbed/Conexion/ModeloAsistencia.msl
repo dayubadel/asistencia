@@ -139,61 +139,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaConsultar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaConsultar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_FechaAsistenciaConsultar_Result">
-          <ScalarProperty Name="Id_Fecha_Asistencia" ColumnName="Id_Fecha_Asistencia" />
-          <ScalarProperty Name="Fecha_Asistencia" ColumnName="Fecha_Asistencia" />
-          <ScalarProperty Name="Eliminado_FechaAsistencia" ColumnName="Eliminado_FechaAsistencia" />
-          <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
-          <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
-          <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
-          <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
-          <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
-          <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
-          <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
-          <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
-          <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
-          <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
-          <ScalarProperty Name="Fecha_Registro_Configurar_Semestre" ColumnName="Fecha_Registro_Configurar_Semestre" />
-          <ScalarProperty Name="Eliminado_Configurar_Semestre" ColumnName="Eliminado_Configurar_Semestre" />
-          <ScalarProperty Name="Utilizado_Configurar_Semestre" ColumnName="Utilizado_Configurar_Semestre" />
-          <ScalarProperty Name="Id_Semestre" ColumnName="Id_Semestre" />
-          <ScalarProperty Name="Descripcion_Semestre" ColumnName="Descripcion_Semestre" />
-          <ScalarProperty Name="Identificador_Semestre" ColumnName="Identificador_Semestre" />
-          <ScalarProperty Name="Eliminado_Semestre" ColumnName="Eliminado_Semestre" />
-          <ScalarProperty Name="Id_Configurar_Cohorte" ColumnName="Id_Configurar_Cohorte" />
-          <ScalarProperty Name="Fecha_Inicio_Configurar_Cohorte" ColumnName="Fecha_Inicio_Configurar_Cohorte" />
-          <ScalarProperty Name="Fecha_Fin_Configurar_Cohorte" ColumnName="Fecha_Fin_Configurar_Cohorte" />
-          <ScalarProperty Name="Eliminado_Configurar_Cohorte" ColumnName="Eliminado_Configurar_Cohorte" />
-          <ScalarProperty Name="Id_Cohorte" ColumnName="Id_Cohorte" />
-          <ScalarProperty Name="Detalle_Cohorte" ColumnName="Detalle_Cohorte" />
-          <ScalarProperty Name="Estado_Cohorte" ColumnName="Estado_Cohorte" />
-          <ScalarProperty Name="Fecha_Cohorte" ColumnName="Fecha_Cohorte" />
-          <ScalarProperty Name="Eliminado_Cohorte" ColumnName="Eliminado_Cohorte" />
-          <ScalarProperty Name="IdMaestria" ColumnName="IdMaestria" />
-          <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
-          <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
-          <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
-          <ScalarProperty Name="Id_Configurar_Modulo_Docente" ColumnName="Id_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Fecha_Inicio_Configurar_Modulo_Docente" ColumnName="Fecha_Inicio_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Fecha_Fin_Configurar_Modulo_Docente" ColumnName="Fecha_Fin_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Fecha_Registro_Configurar_Modulo_Docente" ColumnName="Fecha_Registro_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Eliminado_Configurar_Modulo_Docente" ColumnName="Eliminado_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Utilizado_Configurar_Modulo_Docente" ColumnName="Utilizado_Configurar_Modulo_Docente" />
-          <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
-          <ScalarProperty Name="Descripcion_Modulo" ColumnName="Descripcion_Modulo" />
-          <ScalarProperty Name="Eliminado_Modulo" ColumnName="Eliminado_Modulo" />
-          <ScalarProperty Name="Id_Docente" ColumnName="Id_Docente" />
-          <ScalarProperty Name="Eliminado_Docente" ColumnName="Eliminado_Docente" />
-          <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-          <ScalarProperty Name="Nombres_Persona" ColumnName="Nombres_Persona" />
-          <ScalarProperty Name="Apellido_Paterno_Persona" ColumnName="Apellido_Paterno_Persona" />
-          <ScalarProperty Name="Apellido_Materno_Persona" ColumnName="Apellido_Materno_Persona" />
-          <ScalarProperty Name="Cedula_Persona" ColumnName="Cedula_Persona" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaInsertar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaInsertar" />
     <FunctionImportMapping FunctionImportName="Sp_HorarioEliminar" FunctionName="i_posgradoModel.Store.Sp_HorarioEliminar" />
     <FunctionImportMapping FunctionImportName="Sp_HorarioInsertar" FunctionName="i_posgradoModel.Store.Sp_HorarioInsertar" />
@@ -268,6 +213,75 @@
     <FunctionImportMapping FunctionImportName="Sp_SemestreEliminar" FunctionName="i_posgradoModel.Store.Sp_SemestreEliminar" />
     <FunctionImportMapping FunctionImportName="Sp_SemestreInsertar" FunctionName="i_posgradoModel.Store.Sp_SemestreInsertar" />
     <FunctionImportMapping FunctionImportName="Sp_SemestreModificar" FunctionName="i_posgradoModel.Store.Sp_SemestreModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
+          <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
+          <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
+          <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
+          <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
+          <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
+          <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
+          <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
+          <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
+          <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
+          <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spValidarIngresoNSMIED" FunctionName="i_posgradoModel.Store.spValidarIngresoNSMIED">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.spValidarIngresoNSMIED_Result">
+          <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Clave" ColumnName="Clave" />
+          <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+          <ScalarProperty Name="Roll" ColumnName="Roll" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spPersonaConsultarXIDNSMIT" FunctionName="i_posgradoModel.Store.spPersonaConsultarXIDNSMIT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.spPersonaConsultarXIDNSMIT_Result">
+          <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
+          <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+          <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+          <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
+          <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+          <ScalarProperty Name="etniaId" ColumnName="etniaId" />
+          <ScalarProperty Name="CantonId" ColumnName="CantonId" />
+          <ScalarProperty Name="TipoSangreID" ColumnName="TipoSangreID" />
+          <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
+          <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+          <ScalarProperty Name="tipoDocumentoId" ColumnName="tipoDocumentoId" />
+          <ScalarProperty Name="sexoId" ColumnName="sexoId" />
+          <ScalarProperty Name="paisNacionalidadId" ColumnName="paisNacionalidadId" />
+          <ScalarProperty Name="descEtnia" ColumnName="descEtnia" />
+          <ScalarProperty Name="descCanton" ColumnName="descCanton" />
+          <ScalarProperty Name="descTipoSangre" ColumnName="descTipoSangre" />
+          <ScalarProperty Name="descEstadoCivil" ColumnName="descEstadoCivil" />
+          <ScalarProperty Name="descTipoDocumento" ColumnName="descTipoDocumento" />
+          <ScalarProperty Name="descSexo" ColumnName="descSexo" />
+          <ScalarProperty Name="descPaisNacinalidad" ColumnName="descPaisNacinalidad" />
+          <ScalarProperty Name="descProvincia" ColumnName="descProvincia" />
+          <ScalarProperty Name="descPaisDireccion" ColumnName="descPaisDireccion" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_AsistenciaConsultar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaConsultar">
       <ResultMapping>
         <ComplexTypeMapping TypeName="i_posgradoModel.Sp_AsistenciaConsultar_Result">
@@ -300,19 +314,58 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Sp_HorarioConsultar" FunctionName="i_posgradoModel.Store.Sp_HorarioConsultar">
+    <FunctionImportMapping FunctionImportName="Sp_FechaAsistenciaConsultar" FunctionName="i_posgradoModel.Store.Sp_FechaAsistenciaConsultar">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_HorarioConsultar_Result">
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_FechaAsistenciaConsultar_Result">
+          <ScalarProperty Name="Id_Fecha_Asistencia" ColumnName="Id_Fecha_Asistencia" />
+          <ScalarProperty Name="Fecha_Asistencia" ColumnName="Fecha_Asistencia" />
+          <ScalarProperty Name="Eliminado_FechaAsistencia" ColumnName="Eliminado_FechaAsistencia" />
           <ScalarProperty Name="Id_Horario" ColumnName="Id_Horario" />
           <ScalarProperty Name="Hora_Entrada" ColumnName="Hora_Entrada" />
           <ScalarProperty Name="Hora_Salida" ColumnName="Hora_Salida" />
-          <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
           <ScalarProperty Name="Eliminado_Horario" ColumnName="Eliminado_Horario" />
           <ScalarProperty Name="UtilizadoHorario" ColumnName="UtilizadoHorario" />
           <ScalarProperty Name="Id_Dia" ColumnName="Id_Dia" />
           <ScalarProperty Name="Descripcion_Dia" ColumnName="Descripcion_Dia" />
           <ScalarProperty Name="Identificador_Dia" ColumnName="Identificador_Dia" />
           <ScalarProperty Name="Eliminado_Dia" ColumnName="Eliminado_Dia" />
+          <ScalarProperty Name="Id_Configurar_Semestre" ColumnName="Id_Configurar_Semestre" />
+          <ScalarProperty Name="Fecha_Registro_Configurar_Semestre" ColumnName="Fecha_Registro_Configurar_Semestre" />
+          <ScalarProperty Name="Eliminado_Configurar_Semestre" ColumnName="Eliminado_Configurar_Semestre" />
+          <ScalarProperty Name="Utilizado_Configurar_Semestre" ColumnName="Utilizado_Configurar_Semestre" />
+          <ScalarProperty Name="Id_Semestre" ColumnName="Id_Semestre" />
+          <ScalarProperty Name="Descripcion_Semestre" ColumnName="Descripcion_Semestre" />
+          <ScalarProperty Name="Identificador_Semestre" ColumnName="Identificador_Semestre" />
+          <ScalarProperty Name="Eliminado_Semestre" ColumnName="Eliminado_Semestre" />
+          <ScalarProperty Name="Id_Configurar_Cohorte" ColumnName="Id_Configurar_Cohorte" />
+          <ScalarProperty Name="Fecha_Inicio_Configurar_Cohorte" ColumnName="Fecha_Inicio_Configurar_Cohorte" />
+          <ScalarProperty Name="Fecha_Fin_Configurar_Cohorte" ColumnName="Fecha_Fin_Configurar_Cohorte" />
+          <ScalarProperty Name="Eliminado_Configurar_Cohorte" ColumnName="Eliminado_Configurar_Cohorte" />
+          <ScalarProperty Name="Id_Cohorte" ColumnName="Id_Cohorte" />
+          <ScalarProperty Name="Detalle_Cohorte" ColumnName="Detalle_Cohorte" />
+          <ScalarProperty Name="Estado_Cohorte" ColumnName="Estado_Cohorte" />
+          <ScalarProperty Name="Fecha_Cohorte" ColumnName="Fecha_Cohorte" />
+          <ScalarProperty Name="Eliminado_Cohorte" ColumnName="Eliminado_Cohorte" />
+          <ScalarProperty Name="IdMaestria" ColumnName="IdMaestria" />
+          <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
+          <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
+          <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
+          <ScalarProperty Name="Id_Configurar_Modulo_Docente" ColumnName="Id_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Fecha_Inicio_Configurar_Modulo_Docente" ColumnName="Fecha_Inicio_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Fecha_Fin_Configurar_Modulo_Docente" ColumnName="Fecha_Fin_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Fecha_Registro_Configurar_Modulo_Docente" ColumnName="Fecha_Registro_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Eliminado_Configurar_Modulo_Docente" ColumnName="Eliminado_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Utilizado_Configurar_Modulo_Docente" ColumnName="Utilizado_Configurar_Modulo_Docente" />
+          <ScalarProperty Name="Id_Modulo" ColumnName="Id_Modulo" />
+          <ScalarProperty Name="Descripcion_Modulo" ColumnName="Descripcion_Modulo" />
+          <ScalarProperty Name="Eliminado_Modulo" ColumnName="Eliminado_Modulo" />
+          <ScalarProperty Name="Id_Docente" ColumnName="Id_Docente" />
+          <ScalarProperty Name="Eliminado_Docente" ColumnName="Eliminado_Docente" />
+          <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+          <ScalarProperty Name="Nombres_Persona" ColumnName="Nombres_Persona" />
+          <ScalarProperty Name="Apellido_Paterno_Persona" ColumnName="Apellido_Paterno_Persona" />
+          <ScalarProperty Name="Apellido_Materno_Persona" ColumnName="Apellido_Materno_Persona" />
+          <ScalarProperty Name="Cedula_Persona" ColumnName="Cedula_Persona" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

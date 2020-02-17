@@ -174,11 +174,6 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DocenteConsultar_Result>("Sp_DocenteConsultar");
         }
     
-        public virtual ObjectResult<Sp_FechaAsistenciaConsultar_Result> Sp_FechaAsistenciaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result>("Sp_FechaAsistenciaConsultar");
-        }
-    
         public virtual ObjectResult<Nullable<decimal>> Sp_FechaAsistenciaInsertar(Nullable<int> idHorario, Nullable<System.DateTime> fechaAsistencia, Nullable<bool> eliminado)
         {
             var idHorarioParameter = idHorario.HasValue ?
@@ -349,14 +344,41 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SemestreModificar", idSemestreParameter, descripcionParameter, identificadorParameter, eliminadoParameter);
         }
     
+        public virtual ObjectResult<Sp_HorarioConsultar_Result> Sp_HorarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_HorarioConsultar_Result>("Sp_HorarioConsultar");
+        }
+    
+        public virtual ObjectResult<spValidarIngresoNSMIED_Result> spValidarIngresoNSMIED(string usuario, string clave)
+        {
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(string));
+    
+            var claveParameter = clave != null ?
+                new ObjectParameter("Clave", clave) :
+                new ObjectParameter("Clave", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spValidarIngresoNSMIED_Result>("spValidarIngresoNSMIED", usuarioParameter, claveParameter);
+        }
+    
+        public virtual ObjectResult<spPersonaConsultarXIDNSMIT_Result> spPersonaConsultarXIDNSMIT(Nullable<int> id_Persona)
+        {
+            var id_PersonaParameter = id_Persona.HasValue ?
+                new ObjectParameter("Id_Persona", id_Persona) :
+                new ObjectParameter("Id_Persona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spPersonaConsultarXIDNSMIT_Result>("spPersonaConsultarXIDNSMIT", id_PersonaParameter);
+        }
+    
         public virtual ObjectResult<Sp_AsistenciaConsultar_Result> Sp_AsistenciaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsistenciaConsultar_Result>("Sp_AsistenciaConsultar");
         }
     
-        public virtual ObjectResult<Sp_HorarioConsultar_Result> Sp_HorarioConsultar()
+        public virtual ObjectResult<Sp_FechaAsistenciaConsultar_Result> Sp_FechaAsistenciaConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_HorarioConsultar_Result>("Sp_HorarioConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result>("Sp_FechaAsistenciaConsultar");
         }
     }
 }

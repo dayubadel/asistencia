@@ -33,7 +33,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_idAsistenciaFechaEncriptado) || _idAsistenciaFechaEncriptado == "0")
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if(string.IsNullOrEmpty(_idAsistenciaFechaEncriptado) || _idAsistenciaFechaEncriptado == "0")
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UNA FECHA ASISTENCIA</div>";
                 }
@@ -102,7 +110,15 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                if (string.IsNullOrEmpty(_idConfigurarSemestreEncriptado) || _idConfigurarSemestreEncriptado == "0")
+                if (Session["roll"] == null)
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
+                }
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else if(string.IsNullOrEmpty(_idConfigurarSemestreEncriptado) || _idConfigurarSemestreEncriptado == "0")
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>SELECCIONE UN MÓDULO</div>";
                 }
@@ -141,81 +157,92 @@ namespace H_AsistenciaPosgrado.Controllers
             bool _validar = false;
             try
             {
-                var _listaMaestria = _objCatalogoMaestria.ConsultarMaestria().Where(c => c.Eliminado == false && c.Estado == "ACTIVA").ToList();
-                string _optionMaestria = "<option value='0'>SELECCIONE UNA MAESTRÍA</option>";
-                foreach (var item in _listaMaestria)
+                if (Session["roll"] == null)
                 {
-                    _optionMaestria = _optionMaestria + "<option value='" + _objSeguridad.Encriptar(item.IdMestria.ToString()) + "'>" + item.Nombre.ToUpper() + "</option>";
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>LA SESIÓN HA EXPIRADO, POR FAVOR RECARGUE LA PÁGINA</div>";
                 }
-                string _selectMaestria = "<select id='selectMaestria' onchange='cambiarCohortePorMaestria();' class='form-control'>" + _optionMaestria + "</select>";
-                string _formSelectMaestria = "<div class='form-group'>" +
-                                                  "<label>Maestría:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectMaestria +
-                                                  "</div>" +
-                                                "</div>";
-                string _optionCohorte = "<option value='0'>SELECCIONE UNA COHORTE</option>";
-                string _selectCohorte = "<select onchange='cambiarSemestrePorCohorte();' id='selectCohorte' class='form-control'>" + _optionCohorte + "</select>";
-                string _formSelectCohorte = "<div class='form-group'>" +
-                                                  "<label>Cohorte:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectCohorte +
-                                                  "</div>" +
-                                                "</div>";
-                string _optionSemestre = "<option value='0'>SELECCIONE UN SEMESTRE</option>";
-                string _selectSemestre = "<select onchange='cambiarModulosPorSemestre();' id='selectSemestre' class='form-control'>" + _optionSemestre + "</select>";
-                string _formSelectSemestre = "<div class='form-group'>" +
-                                                  "<label>Semestre:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectSemestre +
-                                                  "</div>" +
-                                                "</div>";
-                string _optionModulo = "<option value='0'>SELECCIONE UN MÓDULO</option>";
-                string _selectModulo = "<select onchange='cambiarFechaAsistenciaPorConfigurarSemestre();'  id='selectModulo' class='form-control'>" + _optionModulo + "</select>";
-                string _formSelectModulo = "<div class='form-group'>" +
-                                                  "<label>Módulo:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
-                                                    "</div>" +
-                                                    _selectModulo +
-                                                  "</div>" +
-                                                "</div>";
+                else if (Session["roll"].ToString() != "28")
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO TIENE ACCESO A ESTA PARTE DEL SISTEMA</div>";
+                }
+                else
+                {
+                    var _listaMaestria = _objCatalogoMaestria.ConsultarMaestria().Where(c => c.Eliminado == false && c.Estado == "ACTIVA").ToList();
+                    string _optionMaestria = "<option value='0'>SELECCIONE UNA MAESTRÍA</option>";
+                    foreach (var item in _listaMaestria)
+                    {
+                        _optionMaestria = _optionMaestria + "<option value='" + _objSeguridad.Encriptar(item.IdMestria.ToString()) + "'>" + item.Nombre.ToUpper() + "</option>";
+                    }
+                    string _selectMaestria = "<select id='selectMaestria' onchange='cambiarCohortePorMaestria();' class='form-control'>" + _optionMaestria + "</select>";
+                    string _formSelectMaestria = "<div class='form-group'>" +
+                                                      "<label>Maestría:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectMaestria +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _optionCohorte = "<option value='0'>SELECCIONE UNA COHORTE</option>";
+                    string _selectCohorte = "<select onchange='cambiarSemestrePorCohorte();' id='selectCohorte' class='form-control'>" + _optionCohorte + "</select>";
+                    string _formSelectCohorte = "<div class='form-group'>" +
+                                                      "<label>Cohorte:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectCohorte +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _optionSemestre = "<option value='0'>SELECCIONE UN SEMESTRE</option>";
+                    string _selectSemestre = "<select onchange='cambiarModulosPorSemestre();' id='selectSemestre' class='form-control'>" + _optionSemestre + "</select>";
+                    string _formSelectSemestre = "<div class='form-group'>" +
+                                                      "<label>Semestre:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectSemestre +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _optionModulo = "<option value='0'>SELECCIONE UN MÓDULO</option>";
+                    string _selectModulo = "<select onchange='cambiarFechaAsistenciaPorConfigurarSemestre();'  id='selectModulo' class='form-control'>" + _optionModulo + "</select>";
+                    string _formSelectModulo = "<div class='form-group'>" +
+                                                      "<label>Módulo:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-book'></i></span>" +
+                                                        "</div>" +
+                                                        _selectModulo +
+                                                      "</div>" +
+                                                    "</div>";
 
-                string _optionFecha = "<option value='0'>SELECCIONE FECHA Y HORARIO</option>";
-                string _selectFecha = "<select  id='selectFecha' onchange='cambiarHorarioPorFechaAsistencia();' class='form-control'>" + _optionFecha + "</select>";
-                string _formSelectFecha = "<div class='form-group'>" +
-                                                  "<label>Fecha:</label>" +
-                                                  "<div class='input-group'>" +
-                                                    "<div class='input-group-prepend'>" +
-                                                      "<span class='input-group-text'><i class='fa fa-calendar'></i></span>" +
-                                                    "</div>" +
-                                                    _selectFecha +
-                                                  "</div>" +
-                                                "</div>";
-                string _buttonConsultar = "<button onclick='consultarAsistenciaDiaria();' type='button' class='btn btn-block btn-outline-primary'>Consultar</button>";
+                    string _optionFecha = "<option value='0'>SELECCIONE FECHA Y HORARIO</option>";
+                    string _selectFecha = "<select  id='selectFecha' onchange='cambiarHorarioPorFechaAsistencia();' class='form-control'>" + _optionFecha + "</select>";
+                    string _formSelectFecha = "<div class='form-group'>" +
+                                                      "<label>Fecha:</label>" +
+                                                      "<div class='input-group'>" +
+                                                        "<div class='input-group-prepend'>" +
+                                                          "<span class='input-group-text'><i class='fa fa-calendar'></i></span>" +
+                                                        "</div>" +
+                                                        _selectFecha +
+                                                      "</div>" +
+                                                    "</div>";
+                    string _buttonConsultar = "<button onclick='consultarAsistenciaDiaria();' type='button' class='btn btn-block btn-outline-primary'>Consultar</button>";
 
 
-                string _tabla = "<div class='row'>" +
-                                "<div class='col-md-6'>" + _formSelectMaestria + "</div>" +
-                                "<div class='col-md-6'>" + _formSelectCohorte + "</div>" +
-                                "<div class='col-md-6'>" + _formSelectSemestre + "</div>" +
-                                "<div class='col-md-6'>" + _formSelectModulo + "</div>" +
-                                "<div class='col-md-12'>" + _formSelectFecha + "</div>" +
-                                "<div class='col-md-12'>" + _buttonConsultar + "</div>" +
-                                "</div>";
-                _mensaje = "";
-                _validar = true;
-                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                    string _tabla = "<div class='row'>" +
+                                    "<div class='col-md-6'>" + _formSelectMaestria + "</div>" +
+                                    "<div class='col-md-6'>" + _formSelectCohorte + "</div>" +
+                                    "<div class='col-md-6'>" + _formSelectSemestre + "</div>" +
+                                    "<div class='col-md-6'>" + _formSelectModulo + "</div>" +
+                                    "<div class='col-md-12'>" + _formSelectFecha + "</div>" +
+                                    "<div class='col-md-12'>" + _buttonConsultar + "</div>" +
+                                    "</div>";
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tabla }, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception ex)
             {
