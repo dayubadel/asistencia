@@ -39,19 +39,28 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                         Identificador=item.Identificador_Semestre,
                         Eliminado=item.Eliminado_Semestre
                     },
-                    ConfigurarCohorte=new EntidadConfigurarCohorte()
+                    ConfigurarCohorte = new EntidadConfigurarCohorte()
                     {
-                        IdConfigurarCohorte=item.Id_Configurar_Cohorte,
-                        Eliminado=item.Eliminado_Configurar_Cohorte,
-                        Cohorte=new EntidadCohorte()
+                        IdConfigurarCohorte = item.Id_Configurar_Cohorte,
+                        Eliminado = item.Eliminado_Configurar_Cohorte,
+                        FechaInicio = item.Fecha_Inicio_Configurar_Cohorte,
+                        FechaFin = item.Fecha_Fin_Configurar_Cohorte,
+                        Cohorte = new EntidadCohorte()
                         {
-                            IdCohorte=item.Id_Cohorte,
-                            Fecha=Convert.ToDateTime(item.Fecha_Cohorte),
+                            IdCohorte = item.Id_Cohorte,
+                            Fecha = Convert.ToDateTime(item.Fecha_Cohorte),
                             Eliminado = Convert.ToBoolean(item.Eliminado_Cohorte),
-                            Detalle=item.Detalle_Cohorte
+                            Detalle = item.Detalle_Cohorte,
+                            Maestria = new EntidadMaestria()
+                            {
+                                IdMestria = item.IdMaestria,
+                                Nombre = item.Nombre_Maestria,
+                                Eliminado = Convert.ToBoolean(item.Eliminado_Maestria),
+                                Estado = item.Estado_Maestria
+                            }
                         }
                     },
-                    ConfigurarModuloDocente=new EntidadConfigurarModuloDocente()
+                    ConfigurarModuloDocente =new EntidadConfigurarModuloDocente()
                     {
                         IdConfigurarModuloDocente=item.Id_Configurar_Modulo_Docente,
                         Eliminado=item.Eliminado_Configurar_Modulo_Docente,
@@ -107,12 +116,21 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                     {
                         IdConfigurarCohorte = item.Id_Configurar_Cohorte,
                         Eliminado = item.Eliminado_Configurar_Cohorte,
+                        FechaInicio = item.Fecha_Inicio_Configurar_Cohorte,
+                        FechaFin = item.Fecha_Fin_Configurar_Cohorte,
                         Cohorte = new EntidadCohorte()
                         {
                             IdCohorte = item.Id_Cohorte,
                             Fecha = Convert.ToDateTime(item.Fecha_Cohorte),
                             Eliminado = Convert.ToBoolean(item.Eliminado_Cohorte),
-                            Detalle = item.Detalle_Cohorte
+                            Detalle = item.Detalle_Cohorte,
+                            Maestria = new EntidadMaestria()
+                            {
+                                IdMestria = item.IdMaestria,
+                                Nombre = item.Nombre_Maestria,
+                                Eliminado = Convert.ToBoolean(item.Eliminado_Maestria),
+                                Estado = item.Estado_Maestria
+                            }
                         }
                     },
                     ConfigurarModuloDocente = new EntidadConfigurarModuloDocente()

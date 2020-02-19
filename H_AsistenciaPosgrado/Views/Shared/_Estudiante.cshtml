@@ -1,4 +1,4 @@
-﻿@if (Session["roll"] != null && Session["roll"].ToString() == "28")
+﻿@if (Session["roll"] != null && Session["roll"].ToString() == "39")
 {
     <!DOCTYPE html>
 
@@ -84,9 +84,9 @@
     </body>
 </html>
 }
-else if (Session["roll"] != null && Session["roll"].ToString() == "39")
+else if (Session["roll"] != null && Session["roll"].ToString() == "28")
 {
-Response.Redirect(@Url.Action("Inicio", "Estudiante"));
+Response.Redirect(@Url.Action("Inicio", "Administrador"));
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "40")
 {
