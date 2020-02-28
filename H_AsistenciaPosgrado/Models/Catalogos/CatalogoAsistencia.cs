@@ -22,6 +22,18 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
                 return 0;
             }
         }
+        public int ModificarAsistencia(int _idAsistencia, int _idNuevoTipoAsistencia)
+        {
+            try
+            {
+               _entitiesPosgrado.Sp_AsistenciaModificar(_idAsistencia, _idNuevoTipoAsistencia);
+                return _idAsistencia;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         public List<EntidadAsistencia> ConsultarAsistencia()
         {
             List<EntidadAsistencia> _lista = new List<EntidadAsistencia>();

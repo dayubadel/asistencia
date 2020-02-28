@@ -369,5 +369,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_AsistenciaModificar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaModificar" />
   </EntityContainerMapping>
 </Mapping>

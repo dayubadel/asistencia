@@ -117,7 +117,7 @@ namespace H_AsistenciaPosgrado.Controllers
                                                    "<table class='table'>" +
                                                         "<tr>" +
                                                             "<td colspan='2'><b>SEMESTRE: </b>" + _listaConfigurarSemestre.FirstOrDefault().Semestre.Descripcion.ToUpper() + " ( " + _fechaInicioSemestre.ToShortDateString() + " - " + _fechaFinSemestre.ToShortDateString() + " ) " + "</td>" +
-                                                            "<td colspan='2'><b>MÓDULO: </b>" + _listaConfigurarSemestre.FirstOrDefault().Semestre.Descripcion.ToUpper() + " ( " + _fechasModulo.ConfigurarModuloDocente.FechaInicio.ToShortDateString() + " - " + _fechasModulo.ConfigurarModuloDocente.FechaFin.ToShortDateString() + " ) " + "</td>" +
+                                                            "<td colspan='2'><b>MÓDULO: </b>" + _fechasModulo.ConfigurarModuloDocente.Modulo.Descripcion.ToUpper() + " ( " + _fechasModulo.ConfigurarModuloDocente.FechaInicio.ToShortDateString() + " - " + _fechasModulo.ConfigurarModuloDocente.FechaFin.ToShortDateString() + " ) " + "</td>" +
                                                             "<td colspan='2'><b>DOCENTE:</b> " + _objDocente.Persona.Nombres.ToUpper() + "</td>" +
                                                         "</tr>" +
                                                    "</table>" +

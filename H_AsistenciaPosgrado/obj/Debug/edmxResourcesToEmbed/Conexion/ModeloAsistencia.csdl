@@ -100,6 +100,10 @@
     </FunctionImport>
     <FunctionImport Name="Sp_AsistenciaConsultar" ReturnType="Collection(i_posgradoModel.Sp_AsistenciaConsultar_Result)" />
     <FunctionImport Name="Sp_FechaAsistenciaConsultar" ReturnType="Collection(i_posgradoModel.Sp_FechaAsistenciaConsultar_Result)" />
+    <FunctionImport Name="Sp_AsistenciaModificar">
+      <Parameter Name="IdAsistencia" Mode="In" Type="Int32" />
+      <Parameter Name="IdNuevoTipoAsistencia" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Sp_AsistenciaTipoConsultar_Result">
     <Property Type="Int32" Name="Id_TipoAsistencia" Nullable="false" />

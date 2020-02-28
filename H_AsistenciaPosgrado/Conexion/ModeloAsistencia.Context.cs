@@ -380,5 +380,18 @@ namespace H_AsistenciaPosgrado.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_FechaAsistenciaConsultar_Result>("Sp_FechaAsistenciaConsultar");
         }
+    
+        public virtual int Sp_AsistenciaModificar(Nullable<int> idAsistencia, Nullable<int> idNuevoTipoAsistencia)
+        {
+            var idAsistenciaParameter = idAsistencia.HasValue ?
+                new ObjectParameter("IdAsistencia", idAsistencia) :
+                new ObjectParameter("IdAsistencia", typeof(int));
+    
+            var idNuevoTipoAsistenciaParameter = idNuevoTipoAsistencia.HasValue ?
+                new ObjectParameter("IdNuevoTipoAsistencia", idNuevoTipoAsistencia) :
+                new ObjectParameter("IdNuevoTipoAsistencia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsistenciaModificar", idAsistenciaParameter, idNuevoTipoAsistenciaParameter);
+        }
     }
 }

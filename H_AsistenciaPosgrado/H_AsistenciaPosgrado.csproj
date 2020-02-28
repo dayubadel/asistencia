@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ConfigurarCohorteController.cs" />
     <Compile Include="Controllers\ModuloController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
+    <Compile Include="Controllers\TomarAsistenciaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1946,11 +1947,13 @@
     <Content Include="Views\DocentePosgrado\Inicio.cshtml" />
     <Content Include="Views\DocentePosgrado\ModulosPorDocente.cshtml" />
     <Content Include="Views\DocentePosgrado\EstudiantesPorModulos.cshtml" />
+    <Content Include="Views\DocentePosgrado\Asistencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
     <Folder Include="Views\Estudiante\" />
+    <Folder Include="Views\TomarAsistencia\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

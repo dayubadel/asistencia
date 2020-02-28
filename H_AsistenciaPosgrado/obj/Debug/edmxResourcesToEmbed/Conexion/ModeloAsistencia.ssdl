@@ -7,6 +7,10 @@
     <Parameter Name="IdFechaAsistencia" Type="int" Mode="In" />
     <Parameter Name="Eliminado" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Sp_AsistenciaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
+    <Parameter Name="IdAsistencia" Type="int" Mode="In" />
+    <Parameter Name="IdNuevoTipoAsistencia" Type="int" Mode="In" />
+  </Function>
   <Function Name="Sp_AsistenciaTipoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
   <Function Name="Sp_CohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
   <Function Name="Sp_ConfigurarCohorteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
