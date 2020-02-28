@@ -58,12 +58,15 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-item">
-                                <a href="pages/calendar.html" class="nav-link">
-                                    <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>
-                                        Reportes
-                                        <span class="badge badge-info right">2</span>
-                                    </p>
+                                <a href="@Url.Action("ModulosPorDocente", "DocentePosgrado")" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Módulos</p>
+                                </a>
+                            </li> 
+                            <li class="nav-item">
+                                <a href="@Url.Action("EstudiantesPorModulos", "DocentePosgrado")" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Estudiantes</p>
                                 </a>
                             </li>
                         </ul>

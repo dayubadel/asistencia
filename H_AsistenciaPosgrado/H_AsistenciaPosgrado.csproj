@@ -208,6 +208,8 @@
     <Compile Include="Controllers\AsistenciaDiariaController.cs" />
     <Compile Include="Controllers\ConfigurarFechaCohorteController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\DocentePosgradoController.cs" />
+    <Compile Include="Controllers\EstudianteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ConfigurarHorarioController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
@@ -1939,12 +1941,16 @@
     <Content Include="Views\Administrador\ConfigurarFechaCohorte.cshtml" />
     <Content Include="Views\Shared\_Administrador.cshtml" />
     <Content Include="Views\Shared\_Estudiante.cshtml" />
-    <Content Include="Views\Shared\_Docente.cshtml" />
+    <Content Include="Views\Shared\_DocentePosgrado.cshtml" />
     <Content Include="Views\Inicio\Salir.cshtml" />
+    <Content Include="Views\DocentePosgrado\Inicio.cshtml" />
+    <Content Include="Views\DocentePosgrado\ModulosPorDocente.cshtml" />
+    <Content Include="Views\DocentePosgrado\EstudiantesPorModulos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\Estudiante\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

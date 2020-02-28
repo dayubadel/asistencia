@@ -90,7 +90,7 @@ Response.Redirect(@Url.Action("Inicio", "Administrador"));
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "40")
 {
-Response.Redirect(@Url.Action("Inicio", "Docente"));
+Response.Redirect(@Url.Action("Inicio", "DocentePosgrado"));
 }
 else
 {
