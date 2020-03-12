@@ -1,4 +1,4 @@
-﻿@if (Session["roll"] == null)
+﻿@if (Session["roll"] != null && Session["roll"].ToString() == "39")
 {
     <!DOCTYPE html>
 
@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </nav>
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">               
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <a href="@Url.Action("Inicio","Inicio")" class="brand-link">
                     <img src="@Url.Content("~/Content/dist/img/AdminLTELogo.png")" alt="Logo Espam" class="text-center"
                          style="opacity: .8; width:95%">
@@ -57,13 +57,10 @@
                     </div>
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                             <li class="nav-item">
-                                <a href="@Url.Action("Inicio","Inicio")" class="nav-link">
-                                    <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>
-                                        Validar Credenciales
-                                        <span class="badge badge-info right">2</span>
-                                    </p>
+                            <li class="nav-item has-treeview menu-open">
+                                <a href="@Url.Action("Horario", "EstudiantePosgrado")" class="nav-link">
+                                    <i class="fa fa-clock nav-icon"></i>
+                                    <p>Información General</p>
                                 </a>
                             </li>
                         </ul>
@@ -86,17 +83,13 @@
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "28")
 {
-    Response.Redirect(@Url.Action("Inicio", "Administrador"));
-}
-else if (Session["roll"] != null && Session["roll"].ToString() == "39")
-{
-    Response.Redirect(@Url.Action("Inicio", "EstudiantePosgrado"));
+Response.Redirect(@Url.Action("Inicio", "Administrador"));
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "40")
 {
-    Response.Redirect(@Url.Action("Inicio", "DocentePosgrado"));
+Response.Redirect(@Url.Action("Inicio", "DocentePosgrado"));
 }
 else
 {
-    Response.Redirect(@Url.Action("Salir", "Inicio"));
+Response.Redirect(@Url.Action("Inicio", "Inicio"));
 }

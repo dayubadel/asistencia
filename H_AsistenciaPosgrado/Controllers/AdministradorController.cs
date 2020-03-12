@@ -47,6 +47,10 @@ namespace H_AsistenciaPosgrado.Controllers
         {
             return View();
         }
+        public ActionResult AsistenciaGeneral()
+        {
+            return View();
+        }
         public ActionResult ConfigurarFechaCohorte()
         {
             return View();

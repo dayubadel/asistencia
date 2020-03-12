@@ -191,7 +191,13 @@
     <Compile Include="Conexion\Sp_MaestriaConsultar_Result.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_MatriculaConsultarPorPersona_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_MatriculaConsultar_Result.cs">
+      <DependentUpon>ModeloAsistencia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_MatriculaConsultar_Result1.cs">
       <DependentUpon>ModeloAsistencia.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultarNoConfiguradosPorConfigurarCohortePorSemestre_Result.cs">
@@ -206,12 +212,15 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\AsistenciaController.cs" />
     <Compile Include="Controllers\AsistenciaDiariaController.cs" />
+    <Compile Include="Controllers\AsistenciaGeneralController.cs" />
     <Compile Include="Controllers\ConfigurarFechaCohorteController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\DocentePosgradoController.cs" />
     <Compile Include="Controllers\EstudianteController.cs" />
+    <Compile Include="Controllers\EstudiantePosgradoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ConfigurarHorarioController.cs" />
+    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\ConfigurarCohorteController.cs" />
     <Compile Include="Controllers\ModuloController.cs" />
@@ -274,6 +283,7 @@
     <Compile Include="Models\Entidades\EntidadFechaAsistencia.cs" />
     <Compile Include="Models\Entidades\EntidadUsuario.cs" />
     <Compile Include="Models\Entidades\EntidadUsuarioTipo.cs" />
+    <Compile Include="Models\Metodos\Correo.cs" />
     <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1948,11 +1958,17 @@
     <Content Include="Views\DocentePosgrado\ModulosPorDocente.cshtml" />
     <Content Include="Views\DocentePosgrado\EstudiantesPorModulos.cshtml" />
     <Content Include="Views\DocentePosgrado\Asistencia.cshtml" />
+    <Content Include="Views\EstudiantePosgrado\Horario.cshtml" />
+    <Content Include="Views\EstudiantePosgrado\Inicio.cshtml" />
+    <Content Include="Views\Shared\_EstudiantePosgrado.cshtml" />
+    <Content Include="Views\Administrador\AsistenciaGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\Estudiante\" />
+    <Folder Include="Views\AsistenciaGeneral\" />
+    <Folder Include="Views\Correo\" />
+    <Folder Include="Views\Horario\" />
     <Folder Include="Views\TomarAsistencia\" />
   </ItemGroup>
   <ItemGroup>

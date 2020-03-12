@@ -152,31 +152,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Sp_MatriculaConsultar" FunctionName="i_posgradoModel.Store.Sp_MatriculaConsultar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MatriculaConsultar_Result">
-          <ScalarProperty Name="Id_Matricula" ColumnName="Id_Matricula" />
-          <ScalarProperty Name="FechaRegistroMatricula" ColumnName="FechaRegistroMatricula" />
-          <ScalarProperty Name="Id_ConfiguracionCohorte" ColumnName="Id_ConfiguracionCohorte" />
-          <ScalarProperty Name="Matricula_Vigente" ColumnName="Matricula_Vigente" />
-          <ScalarProperty Name="Id_TipoMatricula" ColumnName="Id_TipoMatricula" />
-          <ScalarProperty Name="DescripcionTipoMatricula" ColumnName="DescripcionTipoMatricula" />
-          <ScalarProperty Name="EliminadoTipoMatricula" ColumnName="EliminadoTipoMatricula" />
-          <ScalarProperty Name="IdentificadorTipoMatricula" ColumnName="IdentificadorTipoMatricula" />
-          <ScalarProperty Name="Id_preseleccionado" ColumnName="Id_preseleccionado" />
-          <ScalarProperty Name="PuntajePreseleccionado" ColumnName="PuntajePreseleccionado" />
-          <ScalarProperty Name="EliminadoPreseleccionado" ColumnName="EliminadoPreseleccionado" />
-          <ScalarProperty Name="IdInscripcion" ColumnName="IdInscripcion" />
-          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
-          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_ModuloActualizar" FunctionName="i_posgradoModel.Store.Sp_ModuloActualizar" />
     <FunctionImportMapping FunctionImportName="Sp_ModuloConsultar" FunctionName="i_posgradoModel.Store.Sp_ModuloConsultar">
       <ResultMapping>
@@ -370,5 +345,72 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_AsistenciaModificar" FunctionName="i_posgradoModel.Store.Sp_AsistenciaModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_MatriculaConsultarPorPersona" FunctionName="i_posgradoModel.Store.Sp_MatriculaConsultarPorPersona">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MatriculaConsultarPorPersona_Result">
+          <ScalarProperty Name="Id_Matricula" ColumnName="Id_Matricula" />
+          <ScalarProperty Name="FechaRegistroMatricula" ColumnName="FechaRegistroMatricula" />
+          <ScalarProperty Name="Id_ConfiguracionCohorte" ColumnName="Id_ConfiguracionCohorte" />
+          <ScalarProperty Name="Matricula_Vigente" ColumnName="Matricula_Vigente" />
+          <ScalarProperty Name="Id_Configurar_Cohorte" ColumnName="Id_Configurar_Cohorte" />
+          <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha_Inicio" />
+          <ScalarProperty Name="Fecha_Fin" ColumnName="Fecha_Fin" />
+          <ScalarProperty Name="Eliminado_Configurar_Cohorte" ColumnName="Eliminado_Configurar_Cohorte" />
+          <ScalarProperty Name="Id_Cohorte" ColumnName="Id_Cohorte" />
+          <ScalarProperty Name="Detalle_Cohorte" ColumnName="Detalle_Cohorte" />
+          <ScalarProperty Name="Estado_Cohorte" ColumnName="Estado_Cohorte" />
+          <ScalarProperty Name="Fecha_Chohorte" ColumnName="Fecha_Chohorte" />
+          <ScalarProperty Name="Eliminado_Cohorte" ColumnName="Eliminado_Cohorte" />
+          <ScalarProperty Name="Id_Maestria" ColumnName="Id_Maestria" />
+          <ScalarProperty Name="Nombre_Maestria" ColumnName="Nombre_Maestria" />
+          <ScalarProperty Name="Estado_Maestria" ColumnName="Estado_Maestria" />
+          <ScalarProperty Name="Eliminado_Maestria" ColumnName="Eliminado_Maestria" />
+          <ScalarProperty Name="Id_TipoMatricula" ColumnName="Id_TipoMatricula" />
+          <ScalarProperty Name="DescripcionTipoMatricula" ColumnName="DescripcionTipoMatricula" />
+          <ScalarProperty Name="EliminadoTipoMatricula" ColumnName="EliminadoTipoMatricula" />
+          <ScalarProperty Name="IdentificadorTipoMatricula" ColumnName="IdentificadorTipoMatricula" />
+          <ScalarProperty Name="Id_preseleccionado" ColumnName="Id_preseleccionado" />
+          <ScalarProperty Name="PuntajePreseleccionado" ColumnName="PuntajePreseleccionado" />
+          <ScalarProperty Name="EliminadoPreseleccionado" ColumnName="EliminadoPreseleccionado" />
+          <ScalarProperty Name="IdInscripcion" ColumnName="IdInscripcion" />
+          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_MatriculaConsultar" FunctionName="i_posgradoModel.Store.Sp_MatriculaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="i_posgradoModel.Sp_MatriculaConsultar_Result1">
+          <ScalarProperty Name="Id_Matricula" ColumnName="Id_Matricula" />
+          <ScalarProperty Name="FechaRegistroMatricula" ColumnName="FechaRegistroMatricula" />
+          <ScalarProperty Name="Id_ConfiguracionCohorte" ColumnName="Id_ConfiguracionCohorte" />
+          <ScalarProperty Name="Matricula_Vigente" ColumnName="Matricula_Vigente" />
+          <ScalarProperty Name="Id_TipoMatricula" ColumnName="Id_TipoMatricula" />
+          <ScalarProperty Name="DescripcionTipoMatricula" ColumnName="DescripcionTipoMatricula" />
+          <ScalarProperty Name="EliminadoTipoMatricula" ColumnName="EliminadoTipoMatricula" />
+          <ScalarProperty Name="IdentificadorTipoMatricula" ColumnName="IdentificadorTipoMatricula" />
+          <ScalarProperty Name="Id_preseleccionado" ColumnName="Id_preseleccionado" />
+          <ScalarProperty Name="PuntajePreseleccionado" ColumnName="PuntajePreseleccionado" />
+          <ScalarProperty Name="EliminadoPreseleccionado" ColumnName="EliminadoPreseleccionado" />
+          <ScalarProperty Name="IdInscripcion" ColumnName="IdInscripcion" />
+          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+          <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+          <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+          <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+          <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

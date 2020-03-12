@@ -64,6 +64,9 @@
   </Function>
   <Function Name="Sp_MaestriaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
   <Function Name="Sp_MatriculaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado" />
+  <Function Name="Sp_MatriculaConsultarPorPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
+    <Parameter Name="IdPersona" Type="int" Mode="In" />
+  </Function>
   <Function Name="Sp_ModuloActualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="asistenciaposgrado">
     <Parameter Name="IdModulo" Type="int" Mode="In" />
     <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />

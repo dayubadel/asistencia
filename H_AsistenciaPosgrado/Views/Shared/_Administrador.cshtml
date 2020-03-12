@@ -135,19 +135,18 @@
                                     <li class="nav-item">
                                         <a href="@Url.Action("AsistenciaDiaria", "Administrador")" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Consultar Asistencia</p>
+                                            <p>Asistencia Diaria</p>
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/calendar.html" class="nav-link">
-                                    <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>
-                                        Reportes
-                                        <span class="badge badge-info right">2</span>
-                                    </p>
-                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AsistenciaGeneral", "Administrador")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Asistencia General</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>
@@ -169,7 +168,7 @@
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "39")
 {
-Response.Redirect(@Url.Action("Inicio", "Estudiante"));
+Response.Redirect(@Url.Action("Inicio", "EstudiantePosgrado"));
 }
 else if (Session["roll"] != null && Session["roll"].ToString() == "40")
 {

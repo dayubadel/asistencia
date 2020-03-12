@@ -88,7 +88,7 @@ namespace H_AsistenciaPosgrado.Controllers
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>INGRESE EL IDENTIFICADOR DEL SEMESTRE</div>";
                 }
-                else if (_objCatalogoSemestre.ConsultarSemestre().Where(c => c.Eliminado == false && c.Descripcion == _descripcionSemestre.Trim()).ToList().Count != 0)
+                else if (_objCatalogoSemestre.ConsultarSemestre().Where(c => c.Eliminado == false && c.Descripcion.ToUpper() == _descripcionSemestre.ToUpper().Trim()).ToList().Count != 0)
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>ESE SEMESTRE YA EXISTE, REVISE EN LA LISTA</div>";
                 }

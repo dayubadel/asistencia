@@ -230,11 +230,6 @@ namespace H_AsistenciaPosgrado.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MaestriaConsultar_Result>("Sp_MaestriaConsultar");
         }
     
-        public virtual ObjectResult<Sp_MatriculaConsultar_Result> Sp_MatriculaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MatriculaConsultar_Result>("Sp_MatriculaConsultar");
-        }
-    
         public virtual int Sp_ModuloActualizar(Nullable<int> idModulo, string descripcion, Nullable<bool> eliminado)
         {
             var idModuloParameter = idModulo.HasValue ?
@@ -392,6 +387,20 @@ namespace H_AsistenciaPosgrado.Conexion
                 new ObjectParameter("IdNuevoTipoAsistencia", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsistenciaModificar", idAsistenciaParameter, idNuevoTipoAsistenciaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_MatriculaConsultarPorPersona_Result> Sp_MatriculaConsultarPorPersona(Nullable<int> idPersona)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MatriculaConsultarPorPersona_Result>("Sp_MatriculaConsultarPorPersona", idPersonaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_MatriculaConsultar_Result1> Sp_MatriculaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_MatriculaConsultar_Result1>("Sp_MatriculaConsultar");
         }
     }
 }

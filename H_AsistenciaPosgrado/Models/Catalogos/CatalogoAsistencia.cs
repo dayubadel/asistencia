@@ -92,6 +92,64 @@ namespace H_AsistenciaPosgrado.Models.Catalogos
             return _lista;
         }
 
+        public List<EntidadAsistencia> ConsultarAsistenciaPorIdMatricula(int _idMatricula)
+        {
+            List<EntidadAsistencia> _lista = new List<EntidadAsistencia>();
+            foreach (var item in _entitiesPosgrado.Sp_AsistenciaConsultar().Where(c=>c.Id_Matricula==_idMatricula))
+            {
+                _lista.Add(new EntidadAsistencia()
+                {
+                    IdAsistencia = item.Id_Asistencia,
+                    Eliminado = item.EliminadoAsistencia,
+                    AsistenciaTipo = new EntidadAsistenciaTipo()
+                    {
+                        IdAsistenciaTipo = item.Id_TipoAsistencia,
+                        Identificador = item.IdentificadorAsistenciaTipo,
+                        Descripcion = item.DescripcionAsistenciaTipo,
+                        Eliminado = item.EliminadoAsistenciaTipo
+                    },
+                    FechaAsistencia = new EntidadFechaAsistencia()
+                    {
+                        IdFechaAsistencia = item.Id_Fecha_Asistencia
+                    },
+                    Matricula = new EntidadMatricula()
+                    {
+
+                        IdMatricula = item.Id_Matricula,
+                        FechaRegistro = item.FechaRegistroMatricula,
+                        MatriculaVigente = item.Matricula_Vigente,
+                        Preseleccionado = new EntidadPreseleccionado()
+                        {
+                            IdPreseleccionado = item.Id_preseleccionado,
+                            Inscripcion = new EntidadInscripcion()
+                            {
+                                IdInscripcion = item.IdInscripcion,
+                                Persona = new EntidadPersona()
+                                {
+                                    IdPersona = item.IdPersona,
+                                    Nombres = item.ApellidoPaterno + " " + item.ApellidoMaterno + " " + item.Nombres + " " + item.SegundoNombre,
+                                    NumeroIdentificacion = item.Cedula
+
+                                }
+                            }
+                        },
+                        TipoMatricula = new EntidadTipoMatricula()
+                        {
+                            IdTipoMatricula = item.Id_TipoMatricula,
+                            Descripcion = item.DescripcionTipoMatricula,
+                            Identificador = item.IdentificadorTipoMatricula,
+                            Eliminado = item.EliminadoTipoMatricula
+                        },
+                        ConfigurarCohorte = new EntidadConfigurarCohorte()
+                        {
+                            IdConfigurarCohorte = item.Id_ConfiguracionCohorte
+                        }
+                    }
+                });
+            }
+            return _lista;
+        }
+
         public List<EntidadAsistencia> ConsultarAsistenciaPorIdFechaAsistencia(int _idFechaAsistencia)
         {
             List<EntidadAsistencia> _lista = new List<EntidadAsistencia>();

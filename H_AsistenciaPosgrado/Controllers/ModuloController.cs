@@ -83,7 +83,7 @@ namespace H_AsistenciaPosgrado.Controllers
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>INGRESE EL NOMBRE DEL MÓDULO</div>";
                 }
-                else if(_objCatalogoModulo.ConsultarModulos().Where(c=>c.Eliminado==false && c.Descripcion == _descripcionModulo.Trim()).ToList().Count!=0)
+                else if(_objCatalogoModulo.ConsultarModulos().Where(c=>c.Eliminado==false && c.Descripcion.ToUpper() == _descripcionModulo.ToUpper().Trim()).ToList().Count!=0)
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>ESE MÓDULO YA EXISTE, REVISE EN LA LISTA</div>";
                 }

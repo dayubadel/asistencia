@@ -58,7 +58,7 @@ namespace H_AsistenciaPosgrado.Controllers
                     int _idMaestria = Convert.ToInt32(_objSeguridad.DesEncriptar(_idMaestriaEncriptado));
                     int _idCohorte = Convert.ToInt32(_objSeguridad.DesEncriptar(_idCohorteEncriptado));
                     int _idSemestre = Convert.ToInt32(_objSeguridad.DesEncriptar(_idSemestreEncriptado));
-                    int _idModulo = Convert.ToInt32(_objSeguridad.DesEncriptar(_idModuloEncriptado));
+                    int _idConfigurarSemestre = Convert.ToInt32(_objSeguridad.DesEncriptar(_idModuloEncriptado));
 
                     var _objConfigurarCohorte = _objCatalogoConfigurarCohorte.ConsultarConfigurarCohorte().Where(c => c.Cohorte.IdCohorte == _idCohorte && c.Cohorte.Maestria.IdMestria == _idMaestria && c.Eliminado == false).FirstOrDefault();
                     if (_objConfigurarCohorte != null)
@@ -71,71 +71,78 @@ namespace H_AsistenciaPosgrado.Controllers
                         else
                         {
                             var _objSemestre = _objCatalogoSemestre.ConsultarSemestre().Where(c => c.IdSemestre == _idSemestre && c.Eliminado == false).FirstOrDefault();
-                            var _objModulo = _objCatalogoModulo.ConsultarModulos().Where(c => c.IdModulo == _idModulo && c.Eliminado == false).FirstOrDefault();
-                            int _idPersona = Convert.ToInt32(Session["idPersona"]);
-                            var _objDocente = _objCatalogoDocente.ConsultarDocente().Where(c => c.Persona.IdPersona == _idPersona && c.Eliminado == false).FirstOrDefault();
-
-                            if (_objSemestre != null && _objModulo != null && _objDocente != null)
+                            var _objConfigurarSemestre = _objCatalogoConfigurarSemestre.ConsultarConfigurarSemestrePorId(_idConfigurarSemestre).Where(c => c.Eliminado == false).FirstOrDefault();
+                            if (_objConfigurarSemestre == null)
                             {
-                                string _cabecera = "<thead>" +
-                                          "<tr>" +
-                                            "<th style='width: 10px' >#</th>" +
-                                            "<th>Nombres</th>" +
-                                            "<th>Cédula</th>" +
-                                          "</tr>" +
-                                        "</thead>";
+                                _mensaje = "<div class='alert alert-danger text-center' role='alert'>NO SE ENCONTRÓ LA CONFIGURACIÓN DEL SEMESTRE</div>";
+                            }
+                            else
+                            {
+                                int _idPersona = Convert.ToInt32(Session["idPersona"]);
+                                var _objDocente = _objCatalogoDocente.ConsultarDocente().Where(c => c.Persona.IdPersona == _idPersona && c.Eliminado == false).FirstOrDefault();
 
-                                string _filasCuerpo = "";
-                                int _contador = 1;
-                                foreach (var item in _listaMatriculados)
+                                if (_objSemestre != null && _objDocente != null)
                                 {
-                                    _filasCuerpo = _filasCuerpo +
-                                        "<tr>" +
-                                              "<td>" + _contador + "</td>" +
-                                              "<td>" + item.Preseleccionado.Inscripcion.Persona.Nombres.ToUpper() + "</td>" +
-                                              "<td>" + item.Preseleccionado.Inscripcion.Persona.NumeroIdentificacion.ToUpper() + "</td>" +
-                                        "</tr>";
-                                    _contador++;
+                                    string _cabecera = "<thead>" +
+                                              "<tr>" +
+                                                "<th style='width: 10px' >#</th>" +
+                                                "<th>Nombres</th>" +
+                                                "<th>Cédula</th>" +
+                                              "</tr>" +
+                                            "</thead>";
+
+                                    string _filasCuerpo = "";
+                                    int _contador = 1;
+                                    foreach (var item in _listaMatriculados)
+                                    {
+                                        _filasCuerpo = _filasCuerpo +
+                                            "<tr>" +
+                                                  "<td>" + _contador + "</td>" +
+                                                  "<td>" + item.Preseleccionado.Inscripcion.Persona.Nombres.ToUpper() + "</td>" +
+                                                  "<td>" + item.Preseleccionado.Inscripcion.Persona.NumeroIdentificacion.ToUpper() + "</td>" +
+                                            "</tr>";
+                                        _contador++;
+                                    }
+                                    var _listaConfigurarSemestre = _objCatalogoConfigurarSemestre.ConsultarConfigurarSemestre().Where(c => c.ConfigurarCohorte.IdConfigurarCohorte == _objConfigurarCohorte.IdConfigurarCohorte && c.ConfigurarModuloDocente.Docente.IdDocente == _objDocente.IdDocente && c.Semestre.IdSemestre == _idSemestre && c.Eliminado == false && c.ConfigurarModuloDocente.Eliminado == false).ToList();
+
+                                    DateTime _fechaInicioSemestre = _listaConfigurarSemestre.OrderBy(c => c.ConfigurarModuloDocente.FechaInicio).FirstOrDefault().ConfigurarModuloDocente.FechaInicio;
+                                    DateTime _fechaFinSemestre = _listaConfigurarSemestre.OrderByDescending(c => c.ConfigurarModuloDocente.FechaFin).FirstOrDefault().ConfigurarModuloDocente.FechaFin;
+
+                                    var _fechasModulo = _listaConfigurarSemestre.Where(c => c.IdConfigurarSemestre==_idConfigurarSemestre).FirstOrDefault();
+
+                                    string _tablaFinal = "<br>" +
+
+                                                   "<div class='col-lg-12 row'>" +
+                                                        "<div class='col-lg-12 text-center'><h4>MAESTRÍA DE " + _objConfigurarCohorte.Cohorte.Maestria.Nombre.ToUpper() + "</h4></div>" +
+                                                     "</div>" +
+                                                     "<div class='col-lg-12 row'>" +
+                                                        "<div class='col-lg-12 text-center'><h5>" + _objConfigurarCohorte.Cohorte.Detalle.ToUpper() + " (" + _objConfigurarCohorte.FechaInicio.ToShortDateString() + " - " + _objConfigurarCohorte.FechaFin.ToShortDateString() + " ) " + "</h5></div>" +
+                                                     "</div>" +
+                                                    "<div class='card'>" +
+                                                      "<div class='card-header'>" +
+                                                       "<table class='table'>" +
+                                                            "<tr>" +
+                                                                "<td colspan='2'><b>SEMESTRE: </b>" + _listaConfigurarSemestre.FirstOrDefault().Semestre.Descripcion.ToUpper() + " ( " + _fechaInicioSemestre.ToShortDateString() + " - " + _fechaFinSemestre.ToShortDateString() + " ) " + "</td>" +
+                                                                "<td colspan='2'><b>MÓDULO: </b>" + _fechasModulo.ConfigurarModuloDocente.Modulo.Descripcion.ToUpper() + " ( " + _fechasModulo.ConfigurarModuloDocente.FechaInicio.ToShortDateString() + " - " + _fechasModulo.ConfigurarModuloDocente.FechaFin.ToShortDateString() + " ) " + "</td>" +
+                                                                "<td colspan='2'><b>DOCENTE:</b> " + _objDocente.Persona.Nombres.ToUpper() + "</td>" +
+                                                            "</tr>" +
+                                                       "</table>" +
+                                                    "</div>" +
+                                                      "<div class='card-body p-0'>" +
+
+                                                       "<table class='table table-striped'>" +
+                                                        _cabecera +
+                                                          "<tbody>" +
+                                                            _filasCuerpo +
+                                                          "</tbody> " +
+                                                        "</table> " +
+                                                      "</div> " +
+                                                    "</div>";
+
+                                    _mensaje = "";
+                                    _validar = true;
+                                    return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
                                 }
-                                var _listaConfigurarSemestre = _objCatalogoConfigurarSemestre.ConsultarConfigurarSemestre().Where(c => c.ConfigurarCohorte.IdConfigurarCohorte == _objConfigurarCohorte.IdConfigurarCohorte && c.ConfigurarModuloDocente.Docente.IdDocente == _objDocente.IdDocente && c.Semestre.IdSemestre == _idSemestre && c.Eliminado == false && c.ConfigurarModuloDocente.Eliminado == false).ToList();
-
-                                DateTime _fechaInicioSemestre = _listaConfigurarSemestre.OrderBy(c => c.ConfigurarModuloDocente.FechaInicio).FirstOrDefault().ConfigurarModuloDocente.FechaInicio;
-                                DateTime _fechaFinSemestre = _listaConfigurarSemestre.OrderByDescending(c => c.ConfigurarModuloDocente.FechaFin).FirstOrDefault().ConfigurarModuloDocente.FechaFin;
-
-                                var _fechasModulo = _listaConfigurarSemestre.Where(c => c.ConfigurarModuloDocente.Modulo.IdModulo == _idModulo).FirstOrDefault();
-
-                                string _tablaFinal = "<br>" +
-
-                                               "<div class='col-lg-12 row'>" +
-                                                    "<div class='col-lg-12 text-center'><h4>MAESTRÍA DE " + _objConfigurarCohorte.Cohorte.Maestria.Nombre.ToUpper() + "</h4></div>" +
-                                                 "</div>" +
-                                                 "<div class='col-lg-12 row'>" +
-                                                    "<div class='col-lg-12 text-center'><h5>" + _objConfigurarCohorte.Cohorte.Detalle.ToUpper() + " (" + _objConfigurarCohorte.FechaInicio.ToShortDateString() + " - " + _objConfigurarCohorte.FechaFin.ToShortDateString() + " ) " + "</h5></div>" +
-                                                 "</div>" +
-                                                "<div class='card'>" +
-                                                  "<div class='card-header'>" +
-                                                   "<table class='table'>" +
-                                                        "<tr>" +
-                                                            "<td colspan='2'><b>SEMESTRE: </b>" + _listaConfigurarSemestre.FirstOrDefault().Semestre.Descripcion.ToUpper() + " ( " + _fechaInicioSemestre.ToShortDateString() + " - " + _fechaFinSemestre.ToShortDateString() + " ) " + "</td>" +
-                                                            "<td colspan='2'><b>MÓDULO: </b>" + _fechasModulo.ConfigurarModuloDocente.Modulo.Descripcion.ToUpper() + " ( " + _fechasModulo.ConfigurarModuloDocente.FechaInicio.ToShortDateString() + " - " + _fechasModulo.ConfigurarModuloDocente.FechaFin.ToShortDateString() + " ) " + "</td>" +
-                                                            "<td colspan='2'><b>DOCENTE:</b> " + _objDocente.Persona.Nombres.ToUpper() + "</td>" +
-                                                        "</tr>" +
-                                                   "</table>" +
-                                                "</div>" +
-                                                  "<div class='card-body p-0'>" +
-                                                  
-                                                   "<table class='table table-striped'>" +
-                                                    _cabecera +
-                                                      "<tbody>" +
-                                                        _filasCuerpo +
-                                                      "</tbody> " +
-                                                    "</table> " +
-                                                  "</div> " +
-                                                "</div>";
-
-                                _mensaje = "";
-                                _validar = true;
-                                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
                             }
                         }
                     }
